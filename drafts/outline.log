@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.6.29)  29 JUN 2020 15:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.6.29)  29 JUN 2020 16:57
 entering extended mode
 **./outline.tex
 (outline.tex
@@ -144,10 +144,10 @@ Overfull \hbox (23.52274pt too wide) in paragraph at lines 15--15
  
 Here is how much of TeX's memory you used:
  1623 strings out of 480790
- 20277 string characters out of 2907055
+ 20275 string characters out of 2907055
  252257 words of memory out of 3000000
  17659 multiletter control sequences out of 15000+200000
- 538531 words of font info for 47 fonts, out of 3000000 for 9000
+ 538530 words of font info for 47 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  30i,6n,27p,226b,364s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\jwing\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm10
@@ -156,7 +156,7 @@ ogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/
 type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/
 amsfonts/cm/cmr17.pfb>
-Output written on outline.pdf (1 page, 56210 bytes).
+Output written on outline.pdf (1 page, 57024 bytes).
 PDF statistics:
  33 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
