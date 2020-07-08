@@ -1,3 +1,5 @@
+% This file should be compiled as such: PdfLatex -> Bibtex -> PdfLatex (x2)
+
 \documentclass[10pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -5,8 +7,11 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{outlines}
+
 \usepackage{graphicx}
 \graphicspath{{../pics/}}
+
+\usepackage{natbib}
 
 \author{Jordan Wingenroth, Candace Yee, Justin Nghiem, and Laurel Larsen}
 
@@ -37,14 +42,15 @@ Example figure:
 \begin{figure}[h]
 \includegraphics[width=10cm]{example.jpg}
 \centering
-\caption{yadda yadda}
+\caption{How quaint}
 \end{figure}
 
-Voila!
+Example citation \citep{Fauria_2015}.
 
 \section{Discussion}
 
-
+\bibliographystyle{apalike}
+\bibliography{refs}
 
 \end{document}
 
