@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  8 JUL 2020 12:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  9 JUL 2020 16:37
 entering extended mode
 **./outline.tex
 (outline.tex
@@ -101,12 +101,51 @@ Package: outlines 2012/1/23 1.1 Ch. Pecheur
 ("C:\Program Files\MiKTeX\tex/latex/base\ifthen.sty"
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ))
+("C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+("C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(C:\Users\jwing\AppData\Roaming\MiKTeX\tex/latex/lineno\lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count187
+\output=\toks22
+\linenoprevgraf=\count188
+\linenumbersep=\dimen144
+\linenumberwidth=\dimen145
+\c@linenumber=\count189
+\c@pagewiselinenumber=\count190
+\c@LN@truepage=\count191
+\c@internallinenumber=\count192
+\c@internallinenumbers=\count193
+\quotelinenumbersep=\dimen146
+\bframerule=\dimen147
+\bframesep=\dimen148
+\bframebox=\box47
+LaTeX Info: Redefining \\ on input line 3056.
+)
 ("C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty"
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks22
+\KV@toks@=\toks23
 )
 ("C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty"
 Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
@@ -118,103 +157,134 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
-
-("C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def"
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
-))
-\Gin@req@height=\dimen144
-\Gin@req@width=\dimen145
+)
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
 )
 (C:\Users\jwing\AppData\Roaming\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip52
 \bibsep=\skip53
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count187
+\c@NAT@ctr=\count194
 )
 ("C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdfmode.def"
 File: l3backend-pdfmode.def 2020-06-23 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count188
-\l__pdf_internal_box=\box47
+\l__kernel_color_stack_int=\count195
+\l__pdf_internal_box=\box48
 )
 (outline.aux)
 \openout1 = `outline.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
  ("C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count189
-\scratchdimen=\dimen146
-\scratchbox=\box48
-\nofMPsegments=\count190
-\nofMParguments=\count191
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count192
-\MPscratchDim=\dimen147
-\MPnumerator=\count193
-\makeMPintoPDFobject=\count194
-\everyMPtoPDFconversion=\toks24
+\scratchcounter=\count196
+\scratchdimen=\dimen151
+\scratchbox=\box49
+\nofMPsegments=\count197
+\nofMParguments=\count198
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count199
+\MPscratchDim=\dimen152
+\MPnumerator=\count266
+\makeMPintoPDFobject=\count267
+\everyMPtoPDFconversion=\toks25
 ) ("C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty"
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (23.52274pt too wide) in paragraph at lines 22--22
+Overfull \hbox (23.52274pt too wide) in paragraph at lines 38--38
  [][] 
  []
 
-<../pics/example.jpg, id=1, 3854.4pt x 2168.1pt>
-File: ../pics/example.jpg Graphic file (type jpg)
-<use ../pics/example.jpg>
-Package pdftex.def Info: ../pics/example.jpg  used on input line 43.
-(pdftex.def)             Requested size: 284.52756pt x 160.02005pt.
-(outline.bbl [1
+<../pics/wf5-200sizedist.png, id=1, 658.46pt x 306.14375pt>
+File: ../pics/wf5-200sizedist.png Graphic file (type png)
+<use ../pics/wf5-200sizedist.png>
+Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 59.
+(pdftex.def)             Requested size: 284.52756pt x 132.28856pt.
 
-{C:/Users/jwing/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <../pics/example
-.jpg>]) [2] (outline.aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 83--83
+\OT1/cmr/m/n/10 sub-sec-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--83
+\OT1/cmr/m/n/10 ria 2015.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--83
+\OT1/cmr/m/n/10 Should we
+ []
+
+[1
+
+{C:/Users/jwing/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <../pics/wf5-200
+sizedist.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
+\OT1/cmr/m/n/10 sub-sec-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
+\OT1/cmr/m/n/10 ria 2015.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
+\OT1/cmr/m/n/10 Should we
+ []
+
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+(outline.bbl) [2] (outline.aux) ) 
 Here is how much of TeX's memory you used:
- 2734 strings out of 480790
- 34676 string characters out of 2907056
- 271647 words of memory out of 3000000
- 18728 multiletter control sequences out of 15000+200000
- 538876 words of font info for 48 fonts, out of 3000000 for 9000
+ 3413 strings out of 480790
+ 43129 string characters out of 2907056
+ 285199 words of memory out of 3000000
+ 19395 multiletter control sequences out of 15000+200000
+ 539788 words of font info for 51 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,27p,226b,364s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\jwing\AppData\Local\MiKTeX\fonts/pk/ljfou
-r/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-bx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/
-Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on outline.pdf (2 pages, 534772 bytes).
+ 30i,6n,37p,252b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\jwing\AppData\Local\MiKTeX\fonts/pk
+/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program
+ Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmss9.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmti10.pfb>
+Output written on outline.pdf (2 pages, 139233 bytes).
 PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
+ 43 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
