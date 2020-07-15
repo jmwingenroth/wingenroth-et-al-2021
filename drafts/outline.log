@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  10 JUL 2020 00:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  14 JUL 2020 15:53
 entering extended mode
 **./outline.tex
 (outline.tex
@@ -176,20 +176,20 @@ File: l3backend-pdfmode.def 2020-06-23 L3 backend support: PDF mode
 (outline.aux)
 \openout1 = `outline.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
  ("C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count196
@@ -208,79 +208,79 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 41.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 41.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (23.52274pt too wide) in paragraph at lines 41--41
+Overfull \hbox (23.52274pt too wide) in paragraph at lines 30--30
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
-[]\OT1/cmr/m/n/10 Borrrowed
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]\OT1/cmr/m/n/10 Figure bor-
  []
 
 
-Underfull \hbox (badness 3428) in paragraph at lines 59--59
-\OT1/cmr/m/n/10 from Fau-ria
+Underfull \hbox (badness 1242) in paragraph at lines 44--44
+\OT1/cmr/m/n/10 rrowed from
  []
 
 
-Underfull \hbox (badness 3199) in paragraph at lines 59--59
-\OT1/cmr/m/n/10 2015. We
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+\OT1/cmr/m/n/10 We should
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
-\OT1/cmr/m/n/10 should ask
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+\OT1/cmr/m/n/10 ask her
  []
 
 
-Underfull \hbox (badness 7944) in paragraph at lines 59--59
-\OT1/cmr/m/n/10 her per-mis-
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+\OT1/cmr/m/n/10 per-mis-sion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
-\OT1/cmr/m/n/10 sion be-fore
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+\OT1/cmr/m/n/10 be-fore sub-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
-\OT1/cmr/m/n/10 sub-mit-ting,
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+\OT1/cmr/m/n/10 mit-ting,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 cor-rect?
  []
 
 
-Underfull \hbox (badness 2600) in paragraph at lines 59--59
+Underfull \hbox (badness 2600) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 Also, if we
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 our own
  []
 
 
-Underfull \hbox (badness 4254) in paragraph at lines 59--59
+Underfull \hbox (badness 4254) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 or swap in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 a dif-fer-ent
  []
 
@@ -290,83 +290,77 @@ File: ../pics/fauria particle capture efficiency diagram.jpg Graphic file (type
  jpg)
 <use ../pics/fauria particle capture efficiency diagram.jpg>
 Package pdftex.def Info: ../pics/fauria particle capture efficiency diagram.jpg
-  used on input line 62.
+  used on input line 47.
 (pdftex.def)             Requested size: 284.52756pt x 94.54443pt.
-<../pics/wf5-200sizedist.png, id=2, 658.46pt x 306.14375pt>
-File: ../pics/wf5-200sizedist.png Graphic file (type png)
-<use ../pics/wf5-200sizedist.png>
-Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 70.
-(pdftex.def)             Requested size: 284.52756pt x 132.28856pt.
 [1
 
 {C:/Users/jwing/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <../pics/fauria 
-particle capture efficiency diagram.jpg> <../pics/wf5-200sizedist.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 85--88
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+particle capture efficiency diagram.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
 \OT1/cmr/m/n/10 sub-sec-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
 \OT1/cmr/m/n/10 ria 2015.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
 \OT1/cmr/m/n/10 Should we
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--106
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 \OT1/cmr/m/n/10 sub-sec-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--106
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 \OT1/cmr/m/n/10 ria 2015.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--106
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 \OT1/cmr/m/n/10 Should we
  []
 
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 136--139
+<../pics/wf5-200sizedist.png, id=14, 658.46pt x 306.14375pt>
+File: ../pics/wf5-200sizedist.png Graphic file (type png)
+<use ../pics/wf5-200sizedist.png>
+Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 71.
+(pdftex.def)             Requested size: 284.52756pt x 132.28856pt.
+[2 <../pics/wf5-200sizedist.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 88--91
 
  []
 
 (outline.bbl) [3] (outline.aux) ) 
 Here is how much of TeX's memory you used:
- 3431 strings out of 480790
- 43569 string characters out of 2907056
- 289206 words of memory out of 3000000
- 19409 multiletter control sequences out of 15000+200000
- 541487 words of font info for 59 fonts, out of 3000000 for 9000
+ 3429 strings out of 480790
+ 43557 string characters out of 2907056
+ 288206 words of memory out of 3000000
+ 19408 multiletter control sequences out of 15000+200000
+ 541152 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,37p,829b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\jwing\AppData\Local\MiKTeX\fonts/pk
-/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Progra
-m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.p
-fb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progr
-am Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on outline.pdf (3 pages, 215740 bytes).
+ 30i,6n,37p,832b,239s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+bx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/font
+s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.pfb><C
+:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on outline.pdf (3 pages, 220611 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
