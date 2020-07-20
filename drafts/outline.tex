@@ -51,7 +51,7 @@
 %
 %TODO
 %
-%The assumption that probability of retention ($p_r$) is 100\% when stems are coated with grease might be questionable based on our result that biofilm increased $\eta\prime$ in comparison to greased dowels. The only other effect of biofilm that is readily apparent to me is perhaps increasing effective stem diameter ($d_c$). However, with our model for Reynolds number ($\Rey_c \propto d_c$), and both us and \citet{Fauria_2015} finding $\eta\prime \sim -\Rey_c$, increasing stem diameter would be expected to have the opposite effect, unless I'm missing something.
+%The assumption that probability of retention ($p_r$) is 100\% when stems are coated with grease might be questionable based on our result that biofilm increased $\eta\prime$ in comparison to greased dowels. The only other effect of biofilm that is readily apparent to me is perhaps increasing effective stem diameter ($d_c$). However, with our model for Reynolds number ($\Rey_c \propto d_c$), and both us and \cite{Fauria_2015} finding $\eta\prime \sim -\Rey_c$, increasing stem diameter would be expected to have the opposite effect, unless I'm missing something.
 
 \setcounter{chapter}{1}
 
@@ -59,22 +59,27 @@
 
 \section{Theoretical Background}
 
-In this study, we focus on direct interception of suspended particles by submerged vegetation. Direct interception is the adhesion of particles traveling along streamlines to the surfaces of collectors (e.g., plants). This is just one of several fluid dynamics mechanisms that act on suspended particles. Others include gravitational settling, inertial impaction, and diffusional deposition. Gravitational settling is the process of particles denser than water being drawn towards and coming to rest on the channel bottom. Inertial impaction and diffusional deposition are other means by which suspended particles can adhere to collectors. Inertial impaction occurs when particles possess momentum relative to streamlines, and diffusional deposition arises due to some combination of turbulence and Brownian motion.
+In this study, we focus on direct interception of suspended particles by emergent vegetation (i.e., collectors). Direct interception is the adhesion of particles traveling along streamlines to the surfaces of collectors (e.g., plants). This is just one of several fluid dynamics mechanisms that can remove particles from suspension. Others include gravitational settling, inertial impaction, and diffusional deposition. Gravitational settling is the process of particles denser than water being drawn towards and coming to rest on the channel bottom. Inertial impaction and diffusional deposition are other means by which suspended particles can adhere to collectors. Inertial impaction occurs when particles possess momentum relative to streamlines, and diffusional deposition arises due to some combination of turbulence and Brownian motion.
 
 Capture efficiency ($\eta=\frac{b}{d_c}$) is defined as the ratio between the upstream width ($b$) of the streamlines that encounter a collector and the collector's own diameter ($d_c$) (Figure \ref{fig:capeff}). Effective capture efficiency ($\eta\prime=p_r\frac{b}{d_c}$) takes into account the fact that not all particles coming into contact with a collector will adhere to it, thus including probability of retention ($p_r$) as a multiplicand in its calculation. This parameter, as opposed to theoretical capture efficiency $\eta$, corresponds to the empirical estimates made by our study, and presumably any others that involve $p_r$ as an implicit factor.
 
 \begin{figure}[htbp]
 \includegraphics[width=10cm]{collectorefficiency.png}
 \centering
-\caption{A diagram illustrating capture efficiency for a cylindrical collector. $b$ is the horizontal width of upstream flow and $d_c$ is collector diameter. Adapted from \citet{Palmer_2004}.}
+\caption{A diagram illustrating capture efficiency for a cylindrical collector. $b$ is the horizontal width of upstream flow and $d_c$ is collector diameter. Adapted from \cite{Palmer_2004}.}
 \label{fig:capeff}
 \end{figure}
 
-Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping flow. Hence, empirical estimates must be used. \citet{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form \[\eta=C{\Rey_c}^{a}R^{b}\,,\] where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients, the sign and magnitude of which may both vary depending on number of stems, stem surface properties, and other experimental parameters \citep[e.g.,][]{Palmer_2004, Fauria_2015}. It is worth noting that \citet{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta\prime$ because their experiment involved an isolated single cylinder, coated with grease for which retention was assumed to be complete ($p_r = 1$).
+Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping flow. Hence, empirical estimates must be used. \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form \[\eta=C{\Rey_c}^{a}R^{b}\,,\] where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients, the sign and magnitude of which may both vary depending on number of stems, stem surface properties, and other experimental parameters \citep[e.g.,][]{Palmer_2004, Fauria_2015}. It is worth noting that \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta\prime$ because their experiment involved an isolated single cylinder, coated with grease for which retention was assumed to be complete ($p_r = 1$).
+
+As is the case with capture efficiency, turbulence is also theorized and empirically confirmed to affect the settling velocity of heavy, fine particles \citep{Nielsen_1993, Wang_2018}. Increasing turbulence is is one mechanism by which collectors could affect settling rates.
 
 \section{Suspended Particle Concentration Model}
 
-\[\frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c]\bar{\phi} = -k\bar{\phi}\] % \[ is necessary instead of $$ because it preserves line numbers
+For a fluid with a Rouse.
+
+We used a treatment-control model to estimate effective collector efficiency at various densities of emergent collectors and various Reynold's numbers. Our model was based on that used in \cite{Fauria_2015}, where a more complete derivation can be found. To summarize, collection rate of a single cylinder is modeled, assuming steady, unidirectional flow, as $\bar{\phi}ud_ch_c$, where $\bar{\phi}$ is depth-averaged suspended particle concentration, and $h_c$ is collector height. For emergent collectors, all collectors have effective heights equal to water depth. \[\frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c]\bar{\phi} = -k\bar{\phi}\], % \[ is necessary instead of $$ because it preserves line numbers
+and its which 
 
 %TODO
 

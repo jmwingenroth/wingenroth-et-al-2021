@@ -6,10 +6,21 @@ Fauria, K.~E., Kerwin, R.~E., Nover, D., and Schladow, S.~G. (2015).
   flume.
 \newblock {\em Water Resources Research}, 51(11):9112--9126.
 
+\bibitem[Nielsen, 1993]{Nielsen_1993}
+Nielsen, P. (1993).
+\newblock Turbulence effects on the settling of suspended particles.
+\newblock {\em Journal of Sedimentary Research}, 63(5):835--838.
+
 \bibitem[Palmer et~al., 2004]{Palmer_2004}
 Palmer, M.~R., Nepf, H.~M., Pettersson, T.~J., and Ackerman, J.~D. (2004).
 \newblock Observations of particle capture on a cylindrical collector:
   Implications for particle accumulation and removal in aquatic systems.
 \newblock {\em Limnology and Oceanography}, 49(1):76--85.
+
+\bibitem[Wang et~al., 2018]{Wang_2018}
+Wang, Y., Lam, K.~M., and Lu, Y. (2018).
+\newblock Settling velocity of fine heavy particles in turbulent open channel
+  flow.
+\newblock {\em Physics of Fluids}, 30(9):095106.
 
 \end{thebibliography}
