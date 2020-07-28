@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  20 JUL 2020 15:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  27 JUL 2020 08:21
 entering extended mode
 **./outline.tex
 (outline.tex
@@ -371,23 +371,23 @@ LaTeX Info: Redefining \cite on input line 694.
 (outline.aux)
 \openout1 = `outline.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-Package scrbase Info: activating english \contentsname on input line 38.
-Package scrbase Info: activating english \listfigurename on input line 38.
-Package scrbase Info: activating english \listtablename on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+Package scrbase Info: activating english \contentsname on input line 39.
+Package scrbase Info: activating english \listfigurename on input line 39.
+Package scrbase Info: activating english \listtablename on input line 39.
  ("C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count289
@@ -449,18 +449,18 @@ Dictionary: translator-basic-dictionary, Language: English
 cfg
 File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
 
  ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (21.57266pt too wide) in paragraph at lines 41--41
+Overfull \hbox (21.57266pt too wide) in paragraph at lines 42--42
  [][] 
  []
 
@@ -473,7 +473,7 @@ chapter 2.
 <../pics/collectorefficiency.png, id=8, 871.45575pt x 278.84175pt>
 File: ../pics/collectorefficiency.png Graphic file (type png)
 <use ../pics/collectorefficiency.png>
-Package pdftex.def Info: ../pics/collectorefficiency.png  used on input line 67
+Package pdftex.def Info: ../pics/collectorefficiency.png  used on input line 68
 .
 (pdftex.def)             Requested size: 284.52756pt x 91.03944pt.
 [2
@@ -482,21 +482,21 @@ Package pdftex.def Info: ../pics/collectorefficiency.png  used on input line 67
 <../pics/wf5-200sizedist.png, id=23, 658.46pt x 306.14375pt>
 File: ../pics/wf5-200sizedist.png Graphic file (type png)
 <use ../pics/wf5-200sizedist.png>
-Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 106.
+Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 116.
 (pdftex.def)             Requested size: 426.79134pt x 143.10796pt.
 
-Overfull \hbox (8.53761pt too wide) in paragraph at lines 106--108
+Overfull \hbox (8.53761pt too wide) in paragraph at lines 116--118
  [][] 
  []
 
-(outline.bbl [4 <../pics/wf5-200sizedist.png>] [5]) [6
+[4] (outline.bbl [5 <../pics/wf5-200sizedist.png>]) [6
 
 ] (outline.aux) ) 
 Here is how much of TeX's memory you used:
- 9556 strings out of 480790
- 194886 string characters out of 2907056
- 547689 words of memory out of 3000000
- 25462 multiletter control sequences out of 15000+200000
+ 9561 strings out of 480790
+ 194966 string characters out of 2907056
+ 548724 words of memory out of 3000000
+ 25467 multiletter control sequences out of 15000+200000
  546661 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,8n,72p,10104b,789s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -510,7 +510,7 @@ ic/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmssbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.
 pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Progr
 am Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on outline.pdf (6 pages, 240277 bytes).
+Output written on outline.pdf (6 pages, 245280 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
