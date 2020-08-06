@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  27 JUL 2020 20:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  6 AUG 2020 13:47
 entering extended mode
 **./outline.tex
 (outline.tex
@@ -479,38 +479,49 @@ Package pdftex.def Info: ../pics/collectorefficiency.png  used on input line 58
 [2
 
  <../pics/collectorefficiency.png>] [3]
-<../pics/wf5-200sizedist.png, id=23, 658.46pt x 306.14375pt>
+<../pics/flume.png, id=23, 659.46375pt x 355.3275pt>
+File: ../pics/flume.png Graphic file (type png)
+<use ../pics/flume.png>
+Package pdftex.def Info: ../pics/flume.png  used on input line 102.
+(pdftex.def)             Requested size: 426.79134pt x 229.96793pt.
+
+Overfull \hbox (8.53761pt too wide) in paragraph at lines 102--104
+ [][] 
+ []
+
+[4 <../pics/flume.png>]
+<../pics/wf5-200sizedist.png, id=28, 658.46pt x 306.14375pt>
 File: ../pics/wf5-200sizedist.png Graphic file (type png)
 <use ../pics/wf5-200sizedist.png>
-Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 106.
+Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 116.
 (pdftex.def)             Requested size: 426.79134pt x 143.10796pt.
 
-Overfull \hbox (8.53761pt too wide) in paragraph at lines 106--108
+Overfull \hbox (8.53761pt too wide) in paragraph at lines 116--118
  [][] 
  []
 
-[4] [5 <../pics/wf5-200sizedist.png>]
+[5 <../pics/wf5-200sizedist.png>] [6] [7]
 chapter 3.
-<../pics/vectrino.png, id=33, 505.89pt x 289.08pt>
+<../pics/vectrino.png, id=44, 505.89pt x 289.08pt>
 File: ../pics/vectrino.png Graphic file (type png)
 <use ../pics/vectrino.png>
-Package pdftex.def Info: ../pics/vectrino.png  used on input line 136.
+Package pdftex.def Info: ../pics/vectrino.png  used on input line 155.
 (pdftex.def)             Requested size: 433.62pt x 247.7879pt.
 
-Overfull \hbox (15.36627pt too wide) in paragraph at lines 136--138
+Overfull \hbox (15.36627pt too wide) in paragraph at lines 155--157
  [][] 
  []
 
-(outline.bbl [6
+(outline.bbl [8
 
- <../pics/vectrino.png>]) [7
+ <../pics/vectrino.png>]) [9
 
 ] (outline.aux) ) 
 Here is how much of TeX's memory you used:
- 9568 strings out of 480790
- 195103 string characters out of 2907056
- 548732 words of memory out of 3000000
- 25473 multiletter control sequences out of 15000+200000
+ 9576 strings out of 480790
+ 195233 string characters out of 2907056
+ 548748 words of memory out of 3000000
+ 25480 multiletter control sequences out of 15000+200000
  546661 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,8n,72p,10104b,789s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -520,13 +531,15 @@ cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C
 :/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fil
 es/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmssbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Progr
-am Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on outline.pdf (7 pages, 283875 bytes).
+ic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmss10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pf
+b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progra
+m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmti10.pfb>
+Output written on outline.pdf (9 pages, 333326 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 22 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 27 words of extra memory for PDF output out of 10000 (max. 10000000)
 
