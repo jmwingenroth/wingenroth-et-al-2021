@@ -68,7 +68,7 @@ Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur 
 \end{equation}
 where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder, coated with grease for which retention was assumed to be complete ($p_r = 1$).
 
-Turbulence is also theorized and empirically confirmed to affect the settling velocity of heavy, fine particles \citep{Nielsen_1993, Jacobs_2016, Wang_2018}. Increasing turbulence is is one mechanism by which collectors could affect settling rates.
+Turbulence is also theorized and empirically confirmed to affect the settling velocity of heavy, fine particles \citep{Nielsen_1993, Jacobs_2016, Wang_2018}. Increasing turbulence is one mechanism by which collectors could affect settling rates.
 
 \section{Suspended Particle Concentration Model}
 
@@ -98,7 +98,8 @@ TODO
 
 We used 1/8" wooden dowels ($d_c = \SI{.3175}{\centi\metre}$) as collector stems, which were installed in a removable array that filled a recessed well in the bottom of the rectangular channel. The perforated top of the array was covered with aluminum foil, and the gap between the array and the upstream edge of the well was covered with an attached, flat, rectangular piece of aluminum in order to streamline the channel. 
 
-Holes measuring approximately 2.5 cm in diameter were drilled in the array to hold the sediment traps. %TODO sed trap paragraph
+Holes measuring approximately 2.5 cm in diameter were drilled in the array to hold the sediment traps, which were placed within the test section in order to estimate the mass of sediment settled due to gravity throughout the flume. To create these sediment traps, the bottom of 50 mL cylindrical plastic syringes were lined flush with microfiber filter paper; the sediment traps were then labelled (A-I) and placed in their respective holes in the test section array before every flume experiment. 
+%TODO sed trap paragraph
 
 We chose to use granular walnut shell flour to simulate sediment for our experiments because of the availability of homogeneous, sieve-measured grain sizes in suitable quantities. We performed preliminary experiments with a range of grain sizes but settled on WF5-200 as an appropriate match for sediment sizes in natural floodplains. We measured the distribution of particle size using a LISST-Portable XR laser interferometer (Sequoia Scientific Inc, Bellevue, WA). Median particle size was determined to be approximately \SI{25}{\micro\metre} (Figure \ref{fig:sedsize}).
 
@@ -122,12 +123,21 @@ The model described in section 2.2 includes only the effects of interest, which 
 
 
 \subsection{Turbulence Characterization Protocols}
-
+Continuous velocity measurements were taken with an acoustic doppler velocimeter (ADV) at all points within our parameter space. At each point, velocity measurements were taken at 6.7, 14.8, 24.9 and 36.1 cm above the flume bed, with each measurement lasting for at least 300 seconds. The ADV measured velocity, along with other data such as autocorrelation and signal-to-noise ratio, at a frequency of 10 Hz in the $x$, $y$, and two independent measures of data in the $z$ direction. Significant differences between these two measurements help inform data quality during post processing. The instrument was positioned within the flume so that with respect to flow, $x$ denoted the longitudinal direction, $y$ the transverse direction, and $z$ the vertical direction. Before each measurement, a mixture of walnut shell flour and tap water was released into the running flume, as the particulates were needed to act as a tracer in order for the ADV to accurately detect flow velocity.
 %TODO
 
 \section{Statistical Analysis}
 
-%TODO
+\subsection{Turbulence and Bed Shear Stress}
+%not sure what to call this subsection 
+Measurements taken by the ADV were filtered and despiked. Points in the time series that had low autocorrelation and points where there were large discrepancies between the two velocity measurements in the $z$ direction were excluded from analysis. Furthermore, we utilized the threshold ADV despiking algorithm detailed in Goring and Nikora (2002) in order to detect spikes in the data, as well as replace these spikes using cubic interpolation.
+%need to cite this
+
+Turbulence kinetic energy (TKE) was then calculated from the cleaned data using the equation 
+\[\frac{1}{2}(<u^{'2}> + <v^{'2}> + <w^{'2}>)\,,\]
+in which, with respect to flow, $u$ denotes velocity in the longitudinal direction, $v$ in the transverse direction, and $w$ in the vertical direction. This calculation was done for each of the four heights we took measurements at in the flume, and for each Reynolds number and collector density in our parameter space. Because the velocimeter recorded three measurements simultaneously at each timepoint, TKE was calculated separately for these three measurements. 
+
+Velocity measurements were also used to estimate bed shear stress. Biron et al. (2004) describes three different methods of estimating bed shear stress from Reynolds stress, TKE, and a modified turbulence kinetic energy, in which only fluctuations in the vertical direction are taken into account.%TODO
 
 
 \chapter{Results}
