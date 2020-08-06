@@ -63,8 +63,8 @@ Capture efficiency ($\eta=\frac{b}{d_c}$) is defined as the ratio between the up
 
 Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping flow. Hence, empirical estimates must be used. \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form 
 \begin{equation}
-\eta=C{\Rey_c}^{a}R^{b}\,,
-\label{eq:powerlaw}
+    \eta=C{\Rey_c}^{a}R^{b}\,,
+    \label{eq:powerlaw}
 \end{equation}
 where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder, coated with grease for which retention was assumed to be complete ($p_r = 1$).
 
@@ -74,14 +74,23 @@ Turbulence is also theorized and empirically confirmed to affect the settling ve
 
 We used a model adapted from \cite{Fauria_2015} to estimate collection efficiency based on exponential decay of suspended sediment concentration, after introducing sediment in a single, initial dose. The key equation in the exponential decay model is
 \begin{equation}
-\frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + u\eta^{\prime}d_cI_c]\bar{\phi}(t) = -k\bar{\phi}(t)\,.
-\label{eq:model}    
+    \frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + u\eta^{\prime}d_cI_c]\bar{\phi}(t) = -k\bar{\phi}(t)\,.
+    \label{eq:model}    
 \end{equation}
 The left and right summands in brackets represent the decay rate of average suspended settlement concentration ($\bar{\phi}$) due to settling ($k_s$) and collection ($k_c$) respectively. $k = k_s + k_c$ is the total decay rate of suspended sediment.  $C$ is a constant based on the shape of the vertical sediment profile, which is assumed to follow the Rouse equation; $v_s$ is the settling velocity; $h$ is water depth; and $E_r$ is the rate of entrainment (i.e., uptake of particle from the channel bed). Refer to \cite{Fauria_2015} for a detailed derivation of the formula for $k_s$ from established fluid dynamics principles. As for $k_c$, it is derived from flow velocity ($u$), previously described properties of individual collectors ($\eta^\prime$ and $d_c$), and collector density ($I_c$), which is expressed as a count of collector stems per unit of horizontal area. 
 
 The derivation of $k_c$ is quite straightforward. %TODO not straightforward to write though! I'll give it another shot soon. Take $N = \bar{\phi}u$ to represent the particle flux through a lateral cross-section of the channel. With $bI_c = \eta d_c I_c$
 
-Because we assume the shape of the sediment profile follows the Rouse equation, which is time-invariant, proportionality between the average concentration and the concentration at a given height ($\phi_a$) can be assumed to remain constant: $\bar{\phi}=\frac{\phi_a}{C}$. The solution of the above differential equation, \[\bar{\phi}(t) = \bar{\phi}(0)e^{-kt}\,,\] relates $\bar{\phi}$ to its starting value, thus the proportionality constant is eliminated when $\phi_a$ is substituted: \[\phi_a(t) = \phi_a(0)e^{-kt}\,.\]
+Because we assume the shape of the sediment profile follows the Rouse equation, which is time-invariant, proportionality between the average concentration and the concentration at a given height ($\phi_a$) can be assumed to remain constant: $\bar{\phi}=\frac{\phi_a}{C}$. The solution of the above differential equation, 
+\begin{equation}
+    \bar{\phi}(t) = \bar{\phi}(0)e^{-kt}\,,
+    \label{eq:avgconc}
+\end{equation} 
+relates $\bar{\phi}$ to its starting value, thus the proportionality constant $C$ is eliminated when $\phi_a$ is substituted: 
+\begin{equation}
+    \phi_a(t) = \phi_a(0)e^{-kt}\,.
+    \label{eq:specconc}
+\end{equation}
 
 \section{Experimental Methods}
 
@@ -123,7 +132,7 @@ The model described in section 2.2 includes only the effects of interest, which 
 
 
 \subsection{Turbulence Characterization Protocols}
-Continuous velocity measurements were taken with an acoustic doppler velocimeter (ADV) at all points within our parameter space. At each point, velocity measurements were taken at 6.7, 14.8, 24.9 and 36.1 cm above the flume bed, with each measurement lasting for at least 300 seconds. The ADV measured velocity, along with other data such as autocorrelation and signal-to-noise ratio, at a frequency of 10 Hz in the $x$, $y$, and two independent measures of data in the $z$ direction. Significant differences between these two measurements help inform data quality during post processing. The instrument was positioned within the flume so that with respect to flow, $x$ denoted the longitudinal direction, $y$ the transverse direction, and $z$ the vertical direction. Before each measurement, a mixture of walnut shell flour and tap water was released into the running flume, as the particulates were needed to act as a tracer in order for the ADV to accurately detect flow velocity.
+Continuous velocity measurements were taken with an acoustic Doppler velocimeter (ADV) at all points within our parameter space. At each point, velocity measurements were taken at 6.7, 14.8, 24.9 and 36.1 cm above the flume bed, with each measurement lasting for at least 300 seconds. The ADV measured velocity, along with other data such as autocorrelation and signal-to-noise ratio, at a frequency of 10 Hz in the $x$, $y$, and two independent measures of data in the $z$ direction. Significant differences between these two measurements help inform data quality during post processing. The instrument was positioned within the flume so that with respect to flow, $x$ denoted the longitudinal direction, $y$ the transverse direction, and $z$ the vertical direction. Before each measurement, a mixture of walnut shell flour and tap water was released into the running flume, as the particulates were needed to act as a tracer in order for the ADV to accurately detect flow velocity.
 %TODO
 
 \section{Statistical Analysis}
