@@ -72,21 +72,19 @@ Turbulence is also theorized and empirically confirmed to affect the settling ve
 
 \section{Suspended Particle Concentration Model}
 
-We used a model adapted from \cite{Fauria_2015} to estimate collection efficiency based on exponential decay of suspended sediment concentration, after introducing sediment in a single, initial dose. The key equation in the exponential decay model is
+We used a model adapted from \cite{Fauria_2015} to estimate collection efficiency based on exponential decay of suspended sediment concentration. The key equation in the exponential decay model is
 \begin{equation}
-    \frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + u\eta^{\prime}d_cI_c]\bar{\phi}(t) = -k\bar{\phi}(t)\,.
+    \frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c]\bar{\phi}(t) = -k\bar{\phi}(t)\,.
     \label{eq:model}    
 \end{equation}
-The left and right summands in brackets represent the decay rate of average suspended settlement concentration ($\bar{\phi}$) due to settling ($k_s$) and collection ($k_c$) respectively. $k = k_s + k_c$ is the total decay rate of suspended sediment.  $C$ is a constant based on the shape of the vertical sediment profile, which is assumed to follow the Rouse equation; $v_s$ is the settling velocity; $h$ is water depth; and $E_r$ is the rate of entrainment (i.e., uptake of particle from the channel bed). Refer to \cite{Fauria_2015} for a detailed derivation of the formula for $k_s$ from established fluid dynamics principles. As for $k_c$, it is derived from flow velocity ($u$), previously described properties of individual collectors ($\eta^\prime$ and $d_c$), and collector density ($I_c$), which is expressed as a count of collector stems per unit of horizontal area. 
-
-The derivation of $k_c$ is quite straightforward. %TODO not straightforward to write though! I'll give it another shot soon. Take $N = \bar{\phi}u$ to represent the particle flux through a lateral cross-section of the channel. With $bI_c = \eta d_c I_c$
-
-Because we assume the shape of the sediment profile follows the Rouse equation, which is time-invariant, proportionality between the average concentration and the concentration at a given height ($\phi_a$) can be assumed to remain constant: $\bar{\phi}=\frac{\phi_a}{C}$. The solution of the above differential equation, 
+The left and right summands in brackets represent the decay rate of depth-averaged suspended sediment concentration ($\bar{\phi} = \frac{1}{h} \int_0^h\phi(z)dz$) due to settling ($k_s$) and collection ($k_c$) respectively, where $z$ represents position along the vertical axis. $k = k_s + k_c$ is the total decay rate of suspended sediment.  $C$ is a constant based on the shape of the vertical sediment profile, which is assumed to follow the Rouse equation; $v_s$ is the settling velocity; $h$ is water depth; and $E_r$ is the rate of entrainment (i.e., uptake of particle from the channel bed). As for $k_c$, it is derived from flow velocity ($u$), previously described properties of collectors ($\eta^\prime$ and $d_c$), and collector density ($I_c = \frac{N_ch}{V}$), where $N_c$ is number of collectors and $V$ is the bed area times the water depth. The volumetric rate at which water passes through a given collector's frontal area is calculated as $ud_ch$. The number of particles passing through this area is found by multiplying by depth-averaged concentration ($N_p = ud_ch\bar{\phi}$). The rate at which particles are removed from suspension by this particular collector is $\frac{dN_p}{dt}=\eta^{\prime}ud_ch\bar{\phi}$. By scaling up to the suite of collectors, modeled identically to one another, the change in concentration due to collection can be derived:
 \begin{equation}
-    \bar{\phi}(t) = \bar{\phi}(0)e^{-kt}\,,
-    \label{eq:avgconc}
-\end{equation} 
-relates $\bar{\phi}$ to its starting value, thus the proportionality constant $C$ is eliminated when $\phi_a$ is substituted: 
+\frac{d\bar{\phi}}{dt} = \frac{N_c}{V}\frac{dN_p}{dt} = \frac{N_c}{V}\eta^{\prime}ud_ch\bar{\phi} = \eta^{\prime}ud_cI_c\bar{\phi}\,.
+\label{eq:collection}
+\end{equation}
+Please refer to \cite{Fauria_2015} for the full derivation of this model
+
+Because we assume the vertical profile of sediment concentration maintains a constant shape through time, governed by the Rouse equation, concentration at any height ($\phi_a$) can be assumed to be proportional to average concentration ($\phi_a=\frac{\bar{\phi}}{C}$). The solution of the above differential equation ($\bar{\phi}(t) = \bar{\phi}(0)e^{-kt}$) can thus be freely interchanged with an equation of identical form for concentration at a specific height,
 \begin{equation}
     \phi_a(t) = \phi_a(0)e^{-kt}\,.
     \label{eq:specconc}
@@ -101,7 +99,7 @@ Our experiment was conducted in a recirculating flume. Water was propelled by an
 \begin{figure}[htbp]
 \includegraphics[width=15cm]{flume.png}
 \centering
-\caption{Conceptual diagram of the laboratory flume. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. Dimensions not to scale.}
+\caption{Conceptual diagram of the laboratory flume. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. A side view of the open-channel part of the system is included. Dimensions not to scale.}
 \label{fig:floorplan}
 \end{figure}
 
