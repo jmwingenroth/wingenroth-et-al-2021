@@ -96,9 +96,9 @@ Because we assume the vertical profile of sediment concentration maintains a con
 Our experiment was conducted in a recirculating flume. Water was propelled by an electric pump through a pipe of gradually increasing hydraulic diameter with a rectangular cross-section, through a honeycomb flow collimator, into a rectangular open channel containing our test section, then through another similar pipe feeding back to the pump (Figure \ref{fig:floorplan}). In the upper part of our pump's span (span: 0-100 Hz), cavitation (i.e., taking on bubbles of air) occurred, which was accompanied by a distinct noise. This leads to greater variance in the pump's volumetric output, which translates to uncontrolled irregularity in flow velocity in the test section. To eliminate this as a confounding factor, we found the point at which it began by gradually increasing the pump's velocity while monitoring for sound. We determined that the pump ran quietly and presumably free of cavitation up to a rotation frequency greater than 30 Hz, so this value which was chosen as the maximum for our experimental treatments.
 
 \begin{figure}[htbp]
-\includegraphics[width=15cm]{flume.png}
+\includegraphics[width=15cm]{pics/flume_with_sedtraps.png}
 \centering
-\caption{Conceptual diagram of the laboratory flume. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. A side view of the open-channel part of the system is included. Some dimensions not to scale.}
+\caption{Conceptual diagram of the laboratory flume. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. A side view of the open-channel part of the system is included. Some dimensions not to scale. The locations of the sediment traps are marked on the top view of the diagram with red circles and on the side view with black cylinders.}
 \label{fig:floorplan}
 \end{figure}
 
@@ -111,7 +111,7 @@ We chose to use granular walnut shell flour to simulate sediment for our experim
 \begin{figure}[htbp]
 \includegraphics[width=15cm] {wf5-200sizedist.png}
 \centering
-\caption{Particle size distribution of WF5-200 walnut shell flour used as sediment in experiments, expressed as a probability density function (left) and cumulative density function (right). The mode of the distribution (left) and the 50th and 84th percentiles (right) are labeled.} %TODO get rid of red X's and make a clean, high-res version of figure
+\caption{Particle size distribution of WF5-200 walnut shell flour used as sediment in experiments, expressed as a probability density function (left) and cumulative density function (right). The mode of the distribution (left) and the 50th and 84th percentiles (right) are labeled.} 
 \label{fig:sedsize}
 \end{figure}
 
@@ -126,23 +126,27 @@ The model described in section 2.2 includes only the effects of interest, which 
 %Additionally, runs were required to estimate the entrainment rate. These were performed by adding sediment with the flume running as usual to distribute it uniformly, then turning the flume off and letting all sediment settle. At this point, a sample blank was taken. Then, the flume was turned back on and set to 30 Hz, corresponding to the highest Reynolds number of our experimental runs. 
 %Not sure whether we'll dig into the constituent parts of k_s but if so, we might want to consider using the LISST since it presumably has a far lower detection limit
 
-
 \subsection{Turbulence Characterization Protocols}
 Continuous velocity measurements were taken with an acoustic Doppler velocimeter (ADV) at all points within our parameter space. At each point, velocity measurements were taken at 6.7, 14.8, 24.9 and 36.1 cm above the flume bed, with each measurement lasting for at least 300 seconds. The ADV measured velocity, along with other data such as autocorrelation and signal-to-noise ratio, at a frequency of 10 Hz in the $x$, $y$, and two independent measures of data in the $z$ direction. Significant differences between these two measurements help inform data quality during post processing. The instrument was positioned within the flume so that with respect to flow, $x$ denoted the longitudinal direction, $y$ the transverse direction, and $z$ the vertical direction. Before each measurement, a mixture of walnut shell flour and tap water was released into the running flume, as the particulates were needed to act as a tracer in order for the ADV to accurately detect flow velocity.
 %TODO
 
 \section{Statistical Analysis}
 
+\subsection{Settling and Capture}
+The mass of sediment settled due to gravity was estimated by weighing oven-dried sediment trap microfiber filter papers before and after each experiment and scaling the mass of sediment by the area of the sediment trap. As there were no significant differences between sediment mass collected laterally and longitudinally with respect to flow throughout the test section, the mass settled per sediment trap area was then averaged across all nine traps. Settling outside of the test section was calculated using this process on sediment traps taken from only our control experiments in which no dowels were installed, and scaling the average mass settled per trap area by the area of the flume without the test section ($1.98\, m^{2}$). Settling inside the test section was calculated using the same process on sediment traps taken from each experiment with dowels, and scaling the average mass settled per trap area by the area of the test section ($1.17\, m^{2}$). Total mass of sediment settled throughout the flume is the sum of settling inside and outside the test section.
+% i'm not sure if this should go here. help!! also something about rate of settling should probably be here
+
 \subsection{Turbulence and Bed Shear Stress}
-%not sure what to call this subsection 
 Measurements taken by the ADV were filtered and despiked. Points in the time series that had low autocorrelation and points where there were large discrepancies between the two velocity measurements in the $z$ direction were excluded from analysis. Furthermore, we utilized the threshold ADV despiking algorithm detailed in Goring and Nikora (2002) in order to detect spikes in the data, as well as replace these spikes using cubic interpolation.
 %need to cite this
 
 Turbulence kinetic energy (TKE) was then calculated from the cleaned data using the equation 
-\[\frac{1}{2}(<u^{'2}> + <v^{'2}> + <w^{'2}>)\,,\]
-in which, with respect to flow, $u$ denotes velocity in the longitudinal direction, $v$ in the transverse direction, and $w$ in the vertical direction. This calculation was done for each of the four heights we took measurements at in the flume, and for each Reynolds number and collector density in our parameter space. Because the velocimeter recorded three measurements simultaneously at each timepoint, TKE was calculated separately for these three measurements. 
+\[\frac{1}{2}(<u^{'2}> + <v^{'2}> + <w^{'2}>),\]
+in which, with respect to flow, $u'$ denotes velocity fluctuations in the longitudinal direction, $v'$ in the transverse direction, and $w'$ in the vertical direction. This calculation was done for each of the four heights we took measurements at in the flume, and for each Reynolds number and collector density in our parameter space. Because the velocimeter recorded three measurements simultaneously at each timepoint, TKE was calculated separately for these three measurements. 
 
-Velocity measurements were also used to estimate bed shear stress. Biron et al. (2004) describes three different methods of estimating bed shear stress from Reynolds stress, TKE, and a modified turbulence kinetic energy, in which only fluctuations in the vertical direction are taken into account.%TODO
+Turbulence calculated only from the bottom-most velocity measurements taken by the ADV was multiplied by a proportionality constant $C_{1}$ (0.19) and the density of water $\rho$ in order to estimate bed shear stress ($\tau_{0}$).
+\[\tau_{0} = C_{1}[\frac{1}{2}\rho(<u^{'2}> + <v^{'2}> + <w^{'2}>)]\]
+Reynolds stress and a modified TKE, in which only fluctuations in the vertical direction with respect to flow are taken into account, can also be used to estimate bed shear stress; these three methods of generating bed shear stress profiles are described in Biron et al. (2004), and the method that produced the smoothest profiles, in our case bed shear stress estimated using TKE, was ultimately chosen.  
 
 
 \chapter{Results}
