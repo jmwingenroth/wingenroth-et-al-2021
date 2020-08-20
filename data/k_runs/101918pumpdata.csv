@@ -1,4 +1,4 @@
-Sample Time,time series,Location,Height,Volume (mL),Initials,Filter Weight (mg),Initials,Filter+Sediment Weight (mg),Initials,sediment weight,mass volume concentration (ppm)
+Time (s),time series,Location,Height,Volume (mL),Initials,Filter Weight (mg),Initials,Filter+Sediment Weight (mg),Initials,sed mass,mass volume concentration (ppm)
 300,1,U,5,142,,130.24,,137.28,,7.04,49.57746479
 300,1,U,14,144,,131.04,,138.43,,7.39,51.31944444
 300,1,U,27,144,,134.11,,141.20,,7.09,49.23611111
