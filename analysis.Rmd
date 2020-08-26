@@ -1,0 +1,40 @@
+---
+title: "Particle Interception as a Function of Reynolds Number and Collector Density"
+author: "Jordan Wingenroth"
+date: "8/26/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Objective(s)
+
+In the interest of documenting our analytic methods, I've decided to make one comprehensive, hopefully lay-readable document including all steps.
+
+## Data sourcing
+
+We entered data into Google Sheets as we processed samples in the lab. I downloaded .csv versions of these data in 2019, then made a few modifications as I explored confounders. Today, I added data from runs done in my absence to this dataset. Field names, date syntax, and other conventions weren't kept consistent, so some data wrangling is necessary.
+
+```{r, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+
+```
+
+
+```{r}
+
+pumpfiles <- list.files("data/peristaltic pumps/")
+trapfiles <- list.files("data/sediment traps/")
+
+length(pumpfiles)
+length(trapfiles)
+
+```
+
