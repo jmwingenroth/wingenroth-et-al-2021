@@ -401,7 +401,7 @@ fitdata
 
 $$ m_s = \frac{k_s}{k_{tot}}(1-e^{-kT})m_0 $$
 
-Or, expressed for $k_s$, $$k_s = \frac{m_s}{m_0}(1-e^{-kT})k_{tot}$$
+Or, expressed for $k_s$, $$k_s = \frac{m_s}{m_0}(\frac{1}{1-e^{-kT}})k_{tot}$$
 
 where $m_s$ is mass settled in the test section (estimated from sediment traps), $m_0$ is starting sediment mass (200 g for this study), and $T$ is the total exposure time of the sediment traps (100 min, i.e., 6000 s, for this study).
 
@@ -420,7 +420,7 @@ final <- trapfinal %>%
   summarise(m_trap = mean(sed)/1000) %>% #average sediment in trap converted from mg to g
   mutate(m_s = m_trap*1.95*.6/(pi*.0127^2)) %>% #times test section area divided by area of 1 trap
   left_join(fitdata, by = "date") %>%
-  mutate(k_s = m_s/200*(1-exp(t*6000))*(-t))
+  mutate(k_s = m_s/200/(1-exp(t*6000))*(-t))
 
 final %>%
   ggplot(aes(x = dowel_density, y = pump_freq, fill = k_s, label = round(k_s,7))) +
