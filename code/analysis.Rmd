@@ -1,0 +1,245 @@
+---
+title: "Particle Interception as a Function of Reynolds Number and Collector Density"
+author: "Jordan Wingenroth"
+date: "8/26/2020"
+toc: TRUE
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Objective(s)
+
+In the interest of documenting our analytic methods, I've decided to make one comprehensive, hopefully lay-readable document including all steps from our raw laboratory data to the model results. I won't be able to include the turbulence analyses in time for our meeting (8/27), but that required Laurel's Matlab script anyways.
+
+## Data sourcing and tidying
+
+We entered data into Google Sheets as we processed samples in the lab. I downloaded .csv versions of these data in 2019, then made a few modifications as I explored confounders. Today, I added data from runs done in my absence to this dataset. Field names, date syntax, and other conventions weren't kept consistent, so some data wrangling is necessary. I also removed the blank data at the beginning of some files manually.
+
+```{r, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+
+```
+
+
+```{r}
+
+pumpfiles <- list.files("../data/peristaltic pumps/")
+trapfiles <- list.files("../data/sediment traps/")
+
+length(pumpfiles)
+length(trapfiles)
+
+```
+
+As you see, there are different numbers of files for sediment trap versus peristaltic pump data.
+
+```{r}
+
+pumpdate <- str_sub(pumpfiles,0,6)
+trapdate <- str_sub(trapfiles,0,6)
+
+tibble(pumpdate, pumpdate %in% trapdate)
+
+```
+
+In all, five runs are missing sediment trap data, meaning they won't be used in our final, published analyses.
+
+### Suspended sediment data
+
+Let's turn our attention to the suspended concentration data (i.e., pump data).
+
+```{r, message=FALSE, warning=FALSE}
+
+pumpdata <- lapply(pumpfiles, function(x) read_csv(paste0("../data/peristaltic pumps/",x)))
+
+names(pumpdata) <- pumpdate
+
+x <- pumpdata
+
+tidypump <- lapply(seq_along(x), function(i) {
+  select(x[[i]], 
+         loc = Location, 
+         ht = Height,
+         t = `time series`,
+         mvc = contains("(ppm)")) %>%
+    filter(t < 21) %>% #filter a few timepoints outside the normal window 
+    mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
+           mvc = as.numeric(mvc), 
+           date = as.numeric(names(x)[[i]])) %>%
+    filter(mvc < 80) #filter out a few early-timestep anomalies
+  }
+  )
+
+pump <- bind_rows(tidypump)
+
+pump
+
+```
+
+So now we have a long table of our pump data (time $\times$ concentration) stratified by run (i.e., treatment), height, and upstream/downstream location.
+
+Let's plot the decay curves separately to see what the data looks like qualitatively. 
+
+```{r}
+
+pump %>%
+  ggplot(aes(x = t, y = mvc)) +
+  geom_point(alpha = .5, size = .75) +
+  facet_wrap(~date)
+
+
+```
+
+Aside from a few runs where **part** or **all** of the data don't follow the decay pattern, the results look pretty good! If we repeated runs as necessary to replace those with erroneous data, that shouldn't be a problem. Here I'll narrow down our dataset by knocking out runs with clear issues.
+
+```{r}
+
+pump <- pump %>%
+
+#first 3 runs had starting sediment mass of 100g rather than 200g
+
+    filter(date > 181005) %>%
+  
+#we can't use runs without sediment mass
+  
+    filter(as.character(date) %in% trapdate)
+  
+length(unique(pump$date))
+
+```
+
+So this leaves 20 rows. Let's join this to our run metadata table.
+
+```{r}
+
+metadata <- read_csv("../data/run_metadata.csv")
+
+sum(unique(pump$date) %in% metadata$date)
+
+```
+
+Hoorah! We have metadata for all of our runs of interest.
+
+```{r}
+
+pump <- left_join(pump, metadata, by = "date")
+
+```
+
+Now then, let's remove the biofouled runs, which won't be used in assessing our primary hypothesis about Reynolds number and collector density, and we'll see what we're left with.
+
+```{r}
+
+pump %>%
+  filter(growth_days==0) %>%
+  ggplot(aes(x = t, y = mvc)) +
+  geom_point(alpha = .5, size = .75) +
+  geom_rect(data = filter(pump, date == 190417), 
+                          fill = NA, colour = "red", xmin = -Inf,xmax = Inf,
+            ymin = -Inf,ymax = Inf) +
+  facet_wrap(~date) +
+  scale_x_continuous(breaks = c(0,3000,6000), limits = c(0,6000))
+
+```
+
+These runs do look quite familiar to me because I think this is about my 10th time through this analysis. `190417` is the run with clear issues, in the early timesteps more specifically. During one of those previous analyses, I found that there were several runs where **part** of the timespan was clearly out of line with the expected decay pattern. Fortunately we tracked metadata about the logistics of laboratory analysis, and it just so happens that the clearly erroneous data were all from samples processed by one researcher in particular. `190417` is the only run out of these 13 where they were involved in processing samples, at least since we started recording initials on our work. We repeated that run on `190506` and got results more in line with exponential decay.
+
+So that leaves 13 runs. Aside from one run at 232 collectors/$\text m^2$, the result of a miscalculation during dowel installation, the 12 remaining are a perfect match for our parameter space of 4 densities (including 0 control) and 3 velocities/Re values.
+
+```{r}
+
+pumpfinal <- pump %>%
+  filter(growth_days==0, date != 190417, dowel_density != "0232")
+
+pumpfinal %>%
+  ggplot(aes(x = t, y = mvc)) +
+  geom_point(alpha = .5, size = .75) +
+  facet_grid(pump_freq~dowel_density) +
+  scale_x_continuous(breaks = c(0,3000,6000), limits = c(0,6000))
+  
+
+```
+
+There are certainly no trends jumping out immediately, which isn't necessarily worrisome since exponential decay is hard to compare by eye. More on that later though. 
+
+### Sediment trap data
+
+Data import and wrangling follows a similar structure to the pump data.
+
+```{r, message=FALSE, warning=FALSE}
+
+trapdata <- lapply(trapfiles, function(x) read_csv(paste0("../data/sediment traps/",x)))
+
+names(trapdata) <- trapdate
+
+x <- trapdata
+
+tidytrap <- lapply(seq_along(x), function(i) {
+  select(x[[i]], station = 1, pre = contains("pre"), post = contains("post"), sed = contains("sed")) %>%
+  mutate(date = names(x)[i]) %>%
+  mutate_at(vars(pre,post,sed,date), as.numeric)
+  }
+  )
+
+trap <- bind_rows(tidytrap) %>%
+  filter(!is.na(sed))
+
+trap
+```
+
+So, across 21 runs, we had 186 samples. We were set up to collect 9 per run, but traps broke, filters slipped and spilled sediment, et cetera. $186/21 =$ `r 186/21`, so our success rate was actually pretty good, although some of those measurements were probably erroneous despite being measured. Let's see what we're working with and then we can maybe try to remove outliers.
+
+```{r}
+
+lm(sed~station, data = trap) %>% summary()
+
+```
+
+So, downstream traps tended to have less settling. This challenges our assumption of uniformity throughout the test section and might justify the use of a spline, as Justin and Candace had suggested.
+
+```{r}
+
+trap %>%
+  group_by(date) %>%
+  mutate(mean = mean(sed)) %>%
+  arrange(mean) %>%
+  ggplot(aes(x = factor(date, levels = unique(date)), y = sed)) +
+  geom_boxplot() +
+  labs(x = "date", y = "average sediment mass (g)") +
+  scale_x_discrete(guide = guide_axis(n.dodge = 2))
+
+```
+
+On the whole, the sediment data seems pretty normal and independent. Let's zoom in to just the 12 runs used in the main analysis.
+
+```{r}
+
+left_join(trap, metadata, by = "date") %>%
+  filter(date %in% pumpfinal$date) %>%
+  group_by(date) %>%
+  mutate(mean = mean(sed)) %>%
+  arrange(mean) %>%
+  ggplot(aes(x = factor(date, levels = unique(date)), y = sed)) +
+  geom_boxplot() +
+  labs(x = "date", y = "average sediment mass (g)") +
+  scale_x_discrete(guide = guide_axis(n.dodge = 2))
+
+```
+
+A pretty broad range, without any clear outliers to knock out, at least by my sense of it. The whiskers are limited to $1.5 \cdot \text{IQR}$ each (both up and down), so while there are 4 points outside that range for their respective runs, they're definitely all within the range of the dataset as a whole.
+
+### Velocity
+
+We estimated Reynolds number from a flow velocity experiment in the open channel conducted in early 2019.
+
+![Flow Velocity Regression](../pics/frequency_velocity_boxplots.jpeg)
+
+The data and code for this analysis is MIA at the moment, but should turn up soon.
