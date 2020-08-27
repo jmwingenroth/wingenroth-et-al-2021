@@ -1,10 +1,4 @@
 Time (s),time series,Location,Height,Volume (mL),Initials ,Filter Weight (mg),Initials,Filter+Sediment Weight (mg),Initials,sed mass,mass volume concentration (ppm)
-blank,1,U,5,137,CY,130.37,CY,130.39,JW,0.02,0.1459854015
-blank,1,U,14,142,CY,130.23,CY,130.22,JW,-0.01,-0.07042253521
-blank,1,U,27,142,CY,129.5,CY,129.5,JW,0,0
-blank,1,D,5,141,CY,132.32,CY,132.26,JW,-0.06,-0.4255319149
-blank,1,D,14,144,CY,128.75,CY,128.68,JW,-0.07,-0.4861111111
-blank,1,D,27,141,CY,128.06,CY,128.15,JW,0.09,0.6382978723
 300,2,U,5,135,CY,127.8,CY,137.34,JW,9.54,70.66666667
 300,2,U,14,142,CY,127.9,CY,136.64,CY,8.74,61.54929577
 300,2,U,27,143,CY,130.59,CY,139.79,CY,9.2,64.33566434

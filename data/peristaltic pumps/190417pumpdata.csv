@@ -1,10 +1,4 @@
-Time (s),time series,Location,Height,Volume (mL),Initials ,Filter Weight (mg),Initials,Filter+Sediment Weight (mg),Initials,sed mass,mass volume concentration (ppm),Anomalous? 
-,1,U,5,127,CY,129.29,YS,129.2,DS,-0.09,-0.7086614173,blank
-,1,U,14,131,CY,129.2,YS,129.05,DS,-0.15,-1.145038168,blank
-,1,U,27,133,CY,128.93,YS,128.8,DS,-0.13,-0.977443609,blank
-,1,D,5,143,CY,129.11,YS,129.02,DS,-0.09,-0.6293706294,blank
-,1,D,14,144,CY,130.95,YS,130.87,DS,-0.08,-0.5555555556,blank
-,1,D,27,137,CY,129.57,YS,129.5,DS,-0.07,-0.5109489051,blank
+Time (s),time series,Location,Height,Volume (mL),Initials ,Filter Weight (mg),Initials,Filter+Sediment Weight (mg),Initials,sed mass,mass volume concentration (ppm),Anomalous?
 ,2,U,5,116,YS,129.86,YS,133.84,DS,3.98,34.31034483,no (dark/ normal)
 ,2,U,14,129,YS,129.3,YS,131.05,DS,1.75,13.56589147,yes (light)
 ,2,U,27,131,YS,129.33,YS,130.04,DS,0.71,5.419847328,yes (light)
