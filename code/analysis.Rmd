@@ -74,7 +74,7 @@ tidypump <- lapply(seq_along(x), function(i) {
     mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
            mvc = as.numeric(mvc), 
            date = as.numeric(names(x)[[i]])) %>%
-    filter(mvc < 80) #filter out a few early-timestep anomalies
+    filter(!is.na(mvc))
   }
   )
 
@@ -310,14 +310,6 @@ I rounded off to 2.43 $\text m^3$. The test section has been measured as $1.95 \
 
 So at this point, we really only need `pumpfinal`, `trapfinal`, maybe `metadata` for good measure, the frequency-to-velocity regression coefficients, and individual constants about the physical setup such as dowel diameter, flume volume, starting sediment mass, dynamic viscosity etc.
 
-Let's clean up for the sake of sanity (if you're reading the .pdf, this is unimportant):
-
-```{r}
-
-rm(fits, pump, pumpdata, tidypump, tidytrap, trap, trapdata, x, estimates, flow, pumpdate, pumpfiles, t_0, t_b, t_f, time, trapdate, trapfiles, poly_fin_integr)
-
-```
-
 I'll also mention here that our model is based on the general equation: $$k_{tot} = k_s + k_c + k_{bg}$$ where the k's represent total decay rate and portions of it due to settling, collection, and (background) settling in the rest of the flume outside the test section, respectively.
 
 ### k_tot (total time-decay rate)
@@ -386,6 +378,7 @@ fitdata %>%
 Mixed feelings. On the one hand it's reassuring that aside from the switcharoo at 20 Hz, all runs with dowels had greater k_t than runs without. However, it seems like there's some serious variance. **What confounders could we be missing???**
 
 ### THE PROBLEM IN A NUTSHELL
+
 Having a greater decay rate for the control run than the dowel run, by an amount greater than the difference in $k_s$ between the two runs, implies a negative $k_c$. This seems unrealistic, or at least very out of step with our operating theory. For the rest of this analysis, I'll do what I slipped into my past code and then forgot about: leave out that control run and estimate its values as the mean of the other controls (it does lie at the mean of their independent vars. so weighting the average seems unnecessary). Not ideal! Maybe we should give this set of parameters another shot? But I don't feel great about cherrypicking experimental results that way either.
 
 ```{r}
