@@ -1,7 +1,8 @@
 ---
 title: "Particle Interception as a Function of Reynolds Number and Collector Density"
+subtitle: "Version 2.0"
 author: "Jordan Wingenroth"
-date: "8/26/2020"
+date: "8/28/2020"
 toc: TRUE
 output:
   pdf_document: default
@@ -20,6 +21,12 @@ In the interest of documenting our analytic methods, I've decided to make one co
 
 ## Data sourcing and tidying
 
+### Changes from Version 1 (8/26)
+
+I pared back this section to reduce the page count. Please refer to the original version to see visualizations and more detailed steps and notes.
+
+### Data background
+
 We entered data into Google Sheets as we processed samples in the lab. I downloaded .csv versions of these data in 2019, then made a few modifications as I explored confounders. Today, I added data from runs done in my absence to this dataset. Field names, date syntax, and other conventions weren't kept consistent, so some data wrangling is necessary. I also removed the blank data at the beginning of some files manually.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -34,19 +41,12 @@ library(tidyverse)
 pumpfiles <- list.files("../data/peristaltic pumps/")
 trapfiles <- list.files("../data/sediment traps/")
 
-length(pumpfiles)
-length(trapfiles)
-
 ```
-
-As you see, there are different numbers of files for sediment trap versus peristaltic pump data.
 
 ```{r}
 
 pumpdate <- str_sub(pumpfiles,0,6)
 trapdate <- str_sub(trapfiles,0,6)
-
-tibble(pumpdate, pumpdate %in% trapdate)
 
 ```
 
@@ -74,29 +74,15 @@ tidypump <- lapply(seq_along(x), function(i) {
     mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
            mvc = as.numeric(mvc), 
            date = as.numeric(names(x)[[i]])) %>%
-    filter(!is.na(mvc))
+    filter(mvc<80, mvc>8) #outliers were removed based on the residual graph
   }
   )
 
 pump <- bind_rows(tidypump)
 
-pump
-
 ```
 
 So now we have a long table of our pump data (time $\times$ concentration) stratified by run (i.e., treatment), height, and upstream/downstream location.
-
-Let's plot the decay curves separately to see what the data looks like qualitatively. 
-
-```{r}
-
-pump %>%
-  ggplot(aes(x = t, y = mvc)) +
-  geom_point(alpha = .5, size = .75) +
-  facet_wrap(~date)
-
-
-```
 
 Aside from a few runs where **part** or **all** of the data don't follow the decay pattern, the results look pretty good! If we repeated runs as necessary to replace those with erroneous data, that shouldn't be a problem. Here I'll narrow down our dataset by knocking out runs with clear issues.
 
@@ -112,59 +98,24 @@ pump <- pump %>%
   
     filter(as.character(date) %in% trapdate)
   
-length(unique(pump$date))
-
 ```
 
 So this leaves 20 rows. Let's join this to our run metadata table.
 
-```{r}
+```{r message=FALSE}
 
 metadata <- read_csv("../data/run_metadata.csv")
-
-sum(unique(pump$date) %in% metadata$date)
-
-```
-
-Hoorah! We have metadata for all of our runs of interest.
-
-```{r}
 
 pump <- left_join(pump, metadata, by = "date")
 
 ```
 
-Now then, let's remove the biofouled runs, which won't be used in assessing our primary hypothesis about Reynolds number and collector density, and we'll see what we're left with.
-
-```{r}
-
-pump %>%
-  filter(growth_days==0) %>%
-  ggplot(aes(x = t, y = mvc)) +
-  geom_point(alpha = .5, size = .75) +
-  geom_rect(data = filter(pump, date == 190417), 
-                          fill = NA, colour = "red", xmin = -Inf,xmax = Inf,
-            ymin = -Inf,ymax = Inf) +
-  facet_wrap(~date) +
-  scale_x_continuous(breaks = c(0,3000,6000), limits = c(0,6000))
-
-```
-
-These runs do look quite familiar to me because I think this is about my 10th time through this analysis. `190417` is the run with clear issues, in the early timesteps more specifically. During one of those previous analyses, I found that there were several runs where **part** of the timespan was clearly out of line with the expected decay pattern. Fortunately we tracked metadata about the logistics of laboratory analysis, and it just so happens that the clearly erroneous data were all from samples processed by one researcher in particular. `190417` is the only run out of these 13 where they were involved in processing samples, at least since we started recording initials on our work. We repeated that run on `190506` and got results more in line with exponential decay.
-
-So that leaves 13 runs. Aside from one run at 232 collectors/$\text m^2$, the result of a miscalculation during dowel installation, the 12 remaining are a perfect match for our parameter space of 4 densities (including 0 control) and 3 velocities/Re values.
+Now then, let's remove the biofouled runs and a couple runs with other issues, which won't be used in assessing our primary hypothesis about Reynolds number and collector density, and we'll see what we're left with.
 
 ```{r}
 
 pumpfinal <- pump %>%
   filter(growth_days==0, date != 190417, dowel_density != "0232")
-
-pumpfinal %>%
-  ggplot(aes(x = t, y = mvc)) +
-  geom_point(alpha = .5, size = .75) +
-  facet_grid(pump_freq~dowel_density) +
-  scale_x_continuous(breaks = c(0,3000,6000), limits = c(0,6000))
-  
 
 ```
 
@@ -192,51 +143,16 @@ tidytrap <- lapply(seq_along(x), function(i) {
 trap <- bind_rows(tidytrap) %>%
   filter(!is.na(sed))
 
-trap
 ```
 
-So, across 21 runs, we had 186 samples. We were set up to collect 9 per run, but traps broke, filters slipped and spilled sediment, et cetera. $186/21 =$ `r 186/21`, so our success rate was actually pretty good, although some of those measurements were probably erroneous despite being measured. Let's see what we're working with and then we can maybe try to remove outliers.
-
-```{r}
-
-lm(sed~station, data = trap) %>% summary()
-
-```
-
-So, downstream traps tended to have less settling. This challenges our assumption of uniformity throughout the test section and might justify the use of a spline, as Justin and Candace had suggested.
-
-```{r}
-
-trap %>%
-  group_by(date) %>%
-  mutate(mean = mean(sed)) %>%
-  arrange(mean) %>%
-  ggplot(aes(x = factor(date, levels = unique(date)), y = sed)) +
-  geom_boxplot() +
-  labs(x = "date", y = "sediment mass (mg/trap)") +
-  scale_x_discrete(guide = guide_axis(n.dodge = 2))
-
-```
-
-On the whole, the sediment data seems pretty normal and independent. Let's zoom in to just the 12 runs used in the main analysis.
+So, across 21 runs, we had 186 samples. We were set up to collect 9 per run, but traps broke, filters slipped and spilled sediment, et cetera. $186/21 =$ `r 186/21`, so our success rate was actually pretty good, although some of those measurements were probably erroneous despite being measured. 
 
 ```{r}
 
 trapfinal <- left_join(trap, metadata, by = "date") %>%
   filter(date %in% pumpfinal$date)
 
-trapfinal %>%
-  group_by(date) %>%
-  mutate(mean = mean(sed)) %>%
-  arrange(mean) %>%
-  ggplot(aes(x = factor(date, levels = unique(date)), y = sed)) +
-  geom_boxplot() +
-  labs(x = "date", y = "sediment mass (mg/trap)") +
-  scale_x_discrete(guide = guide_axis(n.dodge = 2))
-
 ```
-
-A pretty broad range, without any clear outliers to knock out, at least by my sense of it. The whiskers are limited to $1.5 \cdot \text{IQR}$ each (both up and down), so while there are 4 points outside that range for their respective runs, they're definitely all within the range of the dataset as a whole.
 
 ### Velocity
 
@@ -312,6 +228,38 @@ So at this point, we really only need `pumpfinal`, `trapfinal`, maybe `metadata`
 
 I'll also mention here that our model is based on the general equation: $$k_{tot} = k_s + k_c + k_{bg}$$ where the k's represent total decay rate and portions of it due to settling, collection, and (background) settling in the rest of the flume outside the test section, respectively.
 
+### NEW ADDITION: Uncertainty propogation
+
+Here is a nice function found on StackExchange.com, which performs error propogation in R using derivatives:
+
+```{r}
+
+mutate_with_error = function(.data, f) {
+  exprs = list(
+    # expression to compute new variable values
+    deparse(f[[3]]),
+    
+    # expression to compute new variable errors
+    sapply(all.vars(f[[3]]), function(v) {
+      dfdp = deparse(D(f[[3]], v))
+      sprintf('(d%s*(%s))^2', v, dfdp)
+    }) %>%
+      paste(collapse='+') %>%
+      sprintf('sqrt(%s)', .)
+  )
+  names(exprs) = c(
+    deparse(f[[2]]),
+    sprintf('d%s', deparse(f[[2]]))
+  )
+  
+  .data %>%
+    # the standard evaluation alternative of mutate()
+    mutate_(.dots=exprs)
+}
+
+```
+
+
 ### k_tot (total time-decay rate)
 
 We estimate k_tot from our pump data by linear regression of `log(mvc)`:
@@ -359,7 +307,7 @@ Whatever the explanation is, we (and other researchers using the exponential mod
 
 Aside from that U-curve, the fit seems reasonably good. Though there are high **absolute** measurements at the beginning, on the **log-scale** they are far less influential than the lower values (`mvc < 10`) at the end. Removing the lower outliers towards the end (`t > 3000`) might be worth trying later if our results don't satisfy.
 
-So then, k_s as a function of our independent vars:
+So then, k_tot as a function of our independent vars:
 
 ```{r}
 
@@ -383,10 +331,14 @@ Having a greater decay rate for the control run than the dowel run, by an amount
 
 ```{r}
 
-fitdata[fitdata$date==190802,"t"] <- (fitdata[fitdata$date==190729,"t"] + 
-                                        fitdata[fitdata$date==190321,"t"])/2
+# THIS CODE WAS USED IN THE FIRST VERSION BUT SHOULD BE LEFT OUT OF ERROR PROPOGATION VERSION
 
-fitdata
+# 
+# fitdata[fitdata$date==190802,"t"] <- (fitdata[fitdata$date==190729,"t"] + 
+#                                         fitdata[fitdata$date==190321,"t"])/2
+# 
+# fitdata
+
 ```
 
 
@@ -427,8 +379,10 @@ If we're not using the $k_{tot}$ from the 20 Hz control, I think we should proba
 
 ```{r}
 
-final[final$date==190802,"k_s"] <- (final[final$date==190729,"k_s"] + 
-                                      final[final$date==190321,"k_s"])/2
+# THIS CODE WAS USED IN THE FIRST VERSION BUT SHOULD BE LEFT OUT OF ERROR PROPOGATION VERSION
+
+# final[final$date==190802,"k_s"] <- (final[final$date==190729,"k_s"] + 
+#                                       final[final$date==190321,"k_s"])/2
 
 ```
 
@@ -513,9 +467,4 @@ final %>%
 - Turbulence data
     - The calculations are done 
     - But it might be good to include here for the sake of comprehensiveness
-
-- i did find a way to propogate error through these calculations quite easily
-    - I think including error bars on our main graph (eta over Rey) might be a good idea?
-    - Is it irresponsible to do so with `n = 1` per treatment?
-
 
