@@ -263,7 +263,7 @@ fitdata %>%
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point(position = position_dodge(width = 3)) +
   geom_errorbar(width = 3, position = "dodge") +
-  scale_color_hue(h.start = 0) +
+  scale_color_manual(values = c("black","blue","green","red")) +
   theme_minimal()
   
 ```
@@ -294,7 +294,7 @@ final %>%
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point(position = position_dodge(width = 3)) +
   geom_errorbar(width = 3, position = "dodge") +
-  scale_color_hue(h.start = 0) +
+  scale_color_manual(values = c("black","blue","green","red")) +
   theme_minimal()
   
 ```
@@ -342,7 +342,7 @@ final %>%
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point(position = position_dodge(width = 3)) +
   geom_errorbar(width = 3, position = "dodge") +
-  scale_color_hue(h.start = 0) +
+  scale_color_manual(values = c("blue","green","red")) +
   theme_minimal()
 ```
 
@@ -375,7 +375,7 @@ final %>%
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point(position = position_dodge(width = 3)) +
   geom_errorbar(width = 3, position = "dodge") +
-  scale_color_hue(h.start = 0) +
+  scale_color_manual(values = c("blue","green","red")) +
   theme_minimal()
 
 ```
