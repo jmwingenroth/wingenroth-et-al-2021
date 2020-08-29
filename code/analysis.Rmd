@@ -15,17 +15,17 @@ knitr::opts_chunk$set(echo = TRUE, fig.pos = "!H", out.extra = "")
 
 ```
 
-## Objective(s)
+**Objective(s)**
 
 In the interest of documenting our analytic methods, I've decided to make one comprehensive, hopefully lay-readable document including all steps from our raw laboratory data to the model results. I won't be able to include the turbulence analyses in time for our meeting (8/27), but that required Laurel's Matlab script anyways.
 
 ## Data Tidying
 
-### CHANGES FROM VERSION 1 (8/26)
+**CHANGES FROM VERSION 1 (8/26)**
 
 I pared back this section to reduce the page count. Please refer to the original version to see visualizations and more detailed steps and notes.
 
-### Time-decay runs
+**Time-decay runs:**
 
 We entered data into Google Sheets as we processed samples in the lab. I downloaded .csv versions of these data in 2019, then made a few modifications as I explored confounders. Today, I added data from runs done in my absence to this dataset. Field names, date syntax, and other conventions weren't kept consistent, so some data wrangling is necessary. I also removed the blank data at the beginning of some files manually.
 
@@ -150,7 +150,7 @@ trapfinal <- left_join(trap, metadata, by = "date") %>%
 
 ```
 
-### Velocity experiment
+**Velocity experiment:**
 
 We estimated Reynolds number from a flow velocity experiment in the open channel conducted on Jan 28, 2019. The Vectrino data is in commit `e78357` and the R code for the regression in commit `17c8af` in the esdlflume Github repo (Thanks Candace!).
 
@@ -158,7 +158,7 @@ There's an image in version 1 (and in /pics) but the linear regression is simply
 
 It should be noted that the back-of-envelope estimate of $v = f / 500$ is very close for our range, probably by design. For the regression, $R^2 > .99$.
 
-### Flume volume experiment
+**Flume volume experiment:**
 
 The test section is modeled as a rectangular prism, making calculation of volume trivial. However, the water in the flume is in an irregular form. In order to correct for the time water spends flowing outside the test section, where collectors are not acting on particles, we must estimate the total volume of water. We did so using a simple integration of the volumetric flow rate at the drain. We ran an experiment previously in 2018 or 2019, but my physics common sense lapsed: We picked the drain hose up off the ground to take measurements, then stuck it back down in the drain for most of the flow time. This led to an underestimate of about 5-10%. I re-did the analysis. 1st through 4th degree polynomial regression all yield the same volume +/- <0.5% (code in this repo, under /code)
 
@@ -172,7 +172,7 @@ I'll also mention here that our model is based on the general equation: $$k_{tot
 
 ### NEW ADDITION: Uncertainty propogation
 
-Here is a function found on StackExchange.com, which performs error propogation in R using derivatives:
+Here is a function found on StackExchange.com, which performs error propogation in R using derivatives. Error values should be named "dx", with x being the corresponding variable name.
 
 ```{r}
 
@@ -247,42 +247,28 @@ I think this is simply an artifact of nonlinear processes not accounted for in t
 
 Whatever the explanation is, we (and other researchers using the exponential model) assume it is uniform across our independent variables. I don't know how safe that assumption is, but that'll have to wait for a future paper. It might be testable from our data but `n = 12` seems a bit of a small sample. Then again, we've probably done more like `n = 100` runs over the entire history of the project.
 
-Aside from that U-curve, the fit seems reasonably good. Though there are high **absolute** measurements at the beginning, on the **log-scale** they are far less influential than the lower values (`mvc < 10`) at the end. Removing the lower outliers towards the end (`t > 3000`) might be worth trying later if our results don't satisfy.
+Aside from that U-curve, the fit seems reasonably good. **This residual plot was used to remove the most obvious outliers**, though those in the bottom right (say, those satisfying $(y + 0.4) < (0.1/1000)(x-3500)$) might reasonably be considered outliers too. We might be in the gray area in terms of data-massaging at that point. Any formal outlier removal included in the manuscript will have to follow a *de rigueur*, citable method of course.
 
 So then, k_tot as a function of our independent vars:
 
 ```{r}
 
 fitdata <- coefficients(fits) %>%
-cbind(date = as.numeric(row.names(coefficients(fits)))) %>%
+  mutate(k_t = -t) %>%
+  cbind(dk_t = summary(fits)[[4]][,,'t'][,2], date = as.numeric(row.names(coefficients(fits)))) %>%
   left_join(metadata, by = "date")
 
 fitdata %>%
-  ggplot(aes(x = dowel_density, y = pump_freq, fill = -t, label = round(-t,7))) +
-    geom_tile() + 
-    geom_text() +
-  scale_fill_gradient(low = "red", high = "white")
-
+  ggplot(aes(x = pump_freq, y = k_t, ymin = k_t - 1.96*dk_t, ymax = k_t + 1.96*dk_t, color = dowel_density)) +
+  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  geom_point(position = position_dodge(width = 3)) +
+  geom_errorbar(width = 3, position = "dodge") +
+  scale_color_hue(h.start = 0) +
+  theme_minimal()
+  
 ```
 
 Mixed feelings. On the one hand it's reassuring that aside from the switcharoo at 20 Hz, all runs with dowels had greater k_t than runs without. However, it seems like there's some serious variance. **What confounders could we be missing???**
-
-### THE PROBLEM IN A NUTSHELL
-
-Having a greater decay rate for the control run than the dowel run, by an amount greater than the difference in $k_s$ between the two runs, implies a negative $k_c$. This seems unrealistic, or at least very out of step with our operating theory. For the rest of this analysis, I'll do what I slipped into my past code and then forgot about: leave out that control run and estimate its values as the mean of the other controls (it does lie at the mean of their independent vars. so weighting the average seems unnecessary). Not ideal! Maybe we should give this set of parameters another shot? But I don't feel great about cherrypicking experimental results that way either.
-
-```{r}
-
-# THIS CODE WAS USED IN THE FIRST VERSION BUT SHOULD BE LEFT OUT OF ERROR PROPOGATION VERSION
-
-# 
-# fitdata[fitdata$date==190802,"t"] <- (fitdata[fitdata$date==190729,"t"] + 
-#                                         fitdata[fitdata$date==190321,"t"])/2
-# 
-# fitdata
-
-```
-
 
 ### k_s (time-decay due to settling)
 
@@ -294,41 +280,28 @@ where $m_s$ is mass settled in the test section (estimated from sediment traps),
 
 ```{r}
 
-hist(trapfinal$sed, breaks = 10, density = 10)
-
-```
-
-There aren't really any clear outliers, as we established in the boxplots above. While splines might be our final tool, for now an average will do.
-
-```{r}
-
 final <- trapfinal %>%
   group_by(date) %>%
-  summarise(m_trap = mean(sed)/1000) %>% #average sediment in trap converted from mg to g
-  mutate(m_s = m_trap*1.95*.6/(pi*.0127^2)) %>% #times test section area divided by area of 1 trap
+  summarise(m_trap = mean(sed)/1000,
+            dm_trap = sd(sed)/1000) %>% #average sediment in trap converted from mg to g
+  mutate_with_error(m_s ~ m_trap*1.95*.6/(3.14159*.0127^2)) %>% #*A_TS/a_trap
   left_join(fitdata, by = "date") %>%
-  mutate(k_s = m_s/200/(1-exp(t*6000))*(-t))
+  mutate_with_error(c_s ~ m_s/200/(1-exp(-k_t*6000))) %>% #intermediate step to squash error 
+  mutate_with_error(k_s ~ c_s*k_t)
 
 final %>%
-  ggplot(aes(x = dowel_density, y = pump_freq, fill = k_s, label = round(k_s,7))) +
-    geom_tile() + 
-    geom_text() +
-  scale_fill_gradient(low = "red", high = "white")
-
+  ggplot(aes(x = pump_freq, y = k_s, ymin = k_s - 1.96*dk_s, ymax = k_s + 1.96*dk_s, color = dowel_density)) +
+  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  geom_point(position = position_dodge(width = 3)) +
+  geom_errorbar(width = 3, position = "dodge") +
+  scale_color_hue(h.start = 0) +
+  theme_minimal()
+  
 ```
 
 If we're not using the $k_{tot}$ from the 20 Hz control, I think we should probably do the same with k_s, not least because it gives us linear $k_{bg}$ values, though this all still feels a little iffy.
 
-```{r}
-
-# THIS CODE WAS USED IN THE FIRST VERSION BUT SHOULD BE LEFT OUT OF ERROR PROPOGATION VERSION
-
-# final[final$date==190802,"k_s"] <- (final[final$date==190729,"k_s"] + 
-#                                       final[final$date==190321,"k_s"])/2
-
-```
-
-Gladly, settling across the dowel treatments does seem to decrease, with a less clear pattern across flow velocity.
+Settling across the dowel treatments does seem to decrease, with a less clear pattern across flow velocity.
 
 ### k_bg (time-decay due to settling in the rest of the flume)
 
@@ -338,7 +311,8 @@ In control runs, $k_c = 0$, so we can estimate the decay rate in the rest of the
 
 bgvals <- final %>%
   filter(dowel_density=="0000") %>%
-  transmute(pump_freq, k_bg = -t - k_s) %>%
+  mutate_with_error(k_bg ~ k_t - k_s) %>%
+  select(pump_freq, k_bg, dk_bg) %>%
   arrange(pump_freq)
 
 bgvals
@@ -360,20 +334,16 @@ So, now that we have our values in the table, k_c is just a subtraction away:
 ```{r}
 
 final <- final %>%
-  mutate(k_c = -t - k_s - k_bg)
-
-final %>%
-  ggplot(aes(x = dowel_density, y = pump_freq, fill = k_c, label = round(k_c,7))) +
-    geom_tile() + 
-    geom_text() +
-  scale_fill_gradient(low = "red", high = "white")
+  mutate_with_error(k_c ~ k_t - k_s - k_bg)
 
 final %>%
   filter(dowel_density != "0000") %>%
-  ggplot(aes(x = as.numeric(pump_freq), y = k_c, color = dowel_density)) +
-  geom_line() +
-  geom_point()
-
+  ggplot(aes(x = pump_freq, y = k_c, ymin = k_c - 1.96*dk_c, ymax = k_c + 1.96*dk_c, color = dowel_density)) +
+  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  geom_point(position = position_dodge(width = 3)) +
+  geom_errorbar(width = 3, position = "dodge") +
+  scale_color_hue(h.start = 0) +
+  theme_minimal()
 ```
 
 Unlike the calculation with the measured values at the 20 Hz control, all k_c are in the green, but the pattern is still quite odd.
@@ -389,19 +359,24 @@ visc = 9.509e-7 #kinematic viscosity, m2/s
 d = .003175 #dowel diameter
 
 final <- final %>%
-  transmute(frontal_area = as.numeric(dowel_density)*.003175, 
+  mutate(frontal_area = as.numeric(dowel_density)*.003175, 
             u = as.numeric(pump_freq)/500, #velocity 
             Re = u*.003175/visc, #Reynolds #
             k_t = -t, 
             k_c, k_s, k_bg) %>%
-  mutate(eta = k_c/u/frontal_area) %>%
-  mutate(eta = eta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
+  mutate(eta = k_c/u/frontal_area,
+         deta = dk_c/u/frontal_area) %>%
+  mutate(eta = eta * 2.43/(1.95*.4*.6),
+         deta = deta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
 
 final %>%
-  filter(frontal_area != 0) %>%
-  ggplot(aes(x = Re, y = eta, color = factor(frontal_area))) +
-  geom_line() +
-  geom_point()
+  filter(dowel_density != "0000") %>%
+  ggplot(aes(x = pump_freq, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = dowel_density)) +
+  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  geom_point(position = position_dodge(width = 3)) +
+  geom_errorbar(width = 3, position = "dodge") +
+  scale_color_hue(h.start = 0) +
+  theme_minimal()
 
 ```
 
