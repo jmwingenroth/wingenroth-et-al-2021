@@ -19,13 +19,13 @@ knitr::opts_chunk$set(echo = TRUE, fig.pos = "!H", out.extra = "")
 
 In the interest of documenting our analytic methods, I've decided to make one comprehensive, hopefully lay-readable document including all steps from our raw laboratory data to the model results. I won't be able to include the turbulence analyses in time for our meeting (8/27), but that required Laurel's Matlab script anyways.
 
-## Data sourcing and tidying
+## Data Tidying
 
-### Changes from Version 1 (8/26)
+### CHANGES FROM VERSION 1 (8/26)
 
 I pared back this section to reduce the page count. Please refer to the original version to see visualizations and more detailed steps and notes.
 
-### Data background
+### Time-decay runs
 
 We entered data into Google Sheets as we processed samples in the lab. I downloaded .csv versions of these data in 2019, then made a few modifications as I explored confounders. Today, I added data from runs done in my absence to this dataset. Field names, date syntax, and other conventions weren't kept consistent, so some data wrangling is necessary. I also removed the blank data at the beginning of some files manually.
 
@@ -51,8 +51,6 @@ trapdate <- str_sub(trapfiles,0,6)
 ```
 
 In all, five runs are missing sediment trap data, meaning they won't be used in our final, published analyses.
-
-### Suspended sediment data
 
 Let's turn our attention to the suspended concentration data (i.e., pump data).
 
@@ -121,9 +119,7 @@ pumpfinal <- pump %>%
 
 There are certainly no trends jumping out immediately, which isn't necessarily worrisome since exponential decay is hard to compare by eye. More on that later though. 
 
-### Sediment trap data
-
-Data import and wrangling follows a similar structure to the pump data.
+For the sediment traps, data import and wrangling follows a similar structure to the pump data.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -154,75 +150,21 @@ trapfinal <- left_join(trap, metadata, by = "date") %>%
 
 ```
 
-### Velocity
+### Velocity experiment
 
-We estimated Reynolds number from a flow velocity experiment in the open channel conducted in early 2019.
+We estimated Reynolds number from a flow velocity experiment in the open channel conducted on Jan 28, 2019. The Vectrino data is in commit `e78357` and the R code for the regression in commit `17c8af` in the esdlflume Github repo (Thanks Candace!).
 
-![](../pics/frequency_velocity_boxplots.jpeg)
+There's an image in version 1 (and in /pics) but the linear regression is simply $u = 0.00081282 + 0.00195723f$, where $u$ is flow velocity (m/s) and $f$ is pump frequency (Hz). Hence our velocities at 10, 20, and 30 Hz, were `r 0.00081282 + 0.00195723*10`, `r 0.00081282 + 0.00195723*20`, and `r 0.00081282 + 0.00195723*30` respectively.
 
-It looks like there are a lot of outliers, but that's because there are simply a ton of Vectrino points and the distribution clearly has long tails. See how tiny the IQR boxes are, which by definition encompass 50% of points. 
+It should be noted that the back-of-envelope estimate of $v = f / 500$ is very close for our range, probably by design. For the regression, $R^2 > .99$.
 
-It should also be noted that the back-of-envelope estimate of $v = f / 500$ is extremely close, probably by design.
+### Flume volume experiment
 
-The data and code for this analysis is MIA at the moment, but should turn up soon.
-
-### Flume volume
-
-The test section is modeled as a rectangular prism, making calculation of volume trivial. However, the water in the flume is in an irregular form. In order to correct for the time water spends flowing outside the test section, where collectors are not acting on particles, we must estimate the total volume of water. We did so using a simple integration of the volumetric flow rate at the drain. We ran an experiment previously in 2018 or 2019, but my physics common sense lapsed: We picked the drain hose up off the ground to take measurements, then stuck it back down in the drain for most of the flow time. This led to an underestimate of about 5-10%. I re-did the analysis. 1st through 4th degree polynomial regression all yield the same volume +/- <0.5%:
-
-```{r}
-# flows in ml/s: 
-flow <- c(131, 132, 132, 131, 134, 129, 130, 129, 130, 129, 130, 127, 127, 127, 126, 
-          123, 126, 125, 124, 125, 127, 125, 123, 122, 125, 124, 118, 123, 125, 125, 
-          120, 122, 124, 126, 122, 117, 123, 118, 120, 120, 121, 118, 118, 118, 119, 
-          118, 120, 117, 117, 114, 115, 115, 116, 112, 112, 110, 111, 108, 105, 105, 
-          102, 100, 100, 102)
-
-# times in fractional hrs of day:  
-time <- c(12.13333, 12.21667, 12.28333, 12.41667, 12.5, 12.56667, 12.6, 13.11667,
-          13.15, 13.18333, 13.58333, 13.61667, 13.65, 14.25, 14.28333, 14.31667, 
-          14.35, 14.38333, 14.68333, 14.71667, 14.75, 14.78333, 14.81667, 14.85, 
-          14.88333, 14.93333, 15.35, 15.38333, 15.41667, 15.45, 15.48333, 15.76667, 
-          15.8, 15.86667, 15.9, 15.93333, 15.96667, 16.18333, 16.23333, 16.28333, 
-          16.31667, 16.33333, 16.36667, 16.55, 16.58333, 16.61667, 16.81667, 16.85, 
-          16.9, 16.93333, 16.98333, 17.03333, 17.06667, 17.2, 17.23333, 17.35, 
-          17.36667, 17.53333, 17.58333, 17.61667, 17.73333, 17.75, 17.78333, 17.8)
-
-#flow start time:
-t_0 <- 11.59166667
-
-#time at which flume was drained to top of test-array holding basin
-t_b <- 16.96666667
-
-#time at which basin was drained
-t_f <- 17.825
-
-#polynomial model fits:
-fits <- lapply(1:4, function(x) {lm(flow ~ poly(time, x, raw = TRUE))})
-
-#finite integral calculator
-poly_fin_integr <- function(model,lim1,lim2) {
-  sum(coefficients(model)/(1:length(coefficients(model)))*
-        lim2^(1:length(coefficients(model))))-
-  sum(coefficients(model)/(1:length(coefficients(model)))*
-        lim1^(1:length(coefficients(model))))
-}
-
-estimates <- lapply(fits, function(x) poly_fin_integr(x, lim1 = t_0, lim2 = t_b))
-
-#convert from mL/s*h to cubic m: 1 mL/s*h = 3600 mL = 3.6 L = 0.0036 cubic m
-
-estimates <- unlist(estimates)*.0036
-
-names(estimates) <- c("linear", "quadratic", "cubic", "4th order")
-
-estimates
-
-```
+The test section is modeled as a rectangular prism, making calculation of volume trivial. However, the water in the flume is in an irregular form. In order to correct for the time water spends flowing outside the test section, where collectors are not acting on particles, we must estimate the total volume of water. We did so using a simple integration of the volumetric flow rate at the drain. We ran an experiment previously in 2018 or 2019, but my physics common sense lapsed: We picked the drain hose up off the ground to take measurements, then stuck it back down in the drain for most of the flow time. This led to an underestimate of about 5-10%. I re-did the analysis. 1st through 4th degree polynomial regression all yield the same volume +/- <0.5% (code in this repo, under /code)
 
 I rounded off to 2.43 $\text m^3$. The test section has been measured as $1.95 \times .6 \times .4 =$ `r 1.95*.6*.4` $\text m^3$. Hence the corrective factor is `r 2.43/0.468`.
 
-## Modelling for eta (and all the other vars of interest)
+## Modelling for ECE%
 
 So at this point, we really only need `pumpfinal`, `trapfinal`, maybe `metadata` for good measure, the frequency-to-velocity regression coefficients, and individual constants about the physical setup such as dowel diameter, flume volume, starting sediment mass, dynamic viscosity etc.
 
@@ -230,7 +172,7 @@ I'll also mention here that our model is based on the general equation: $$k_{tot
 
 ### NEW ADDITION: Uncertainty propogation
 
-Here is a nice function found on StackExchange.com, which performs error propogation in R using derivatives:
+Here is a function found on StackExchange.com, which performs error propogation in R using derivatives:
 
 ```{r}
 
@@ -262,9 +204,9 @@ mutate_with_error = function(.data, f) {
 
 ### k_tot (total time-decay rate)
 
-We estimate k_tot from our pump data by linear regression of `log(mvc)`:
+We estimate `k_tot` from our pump data by linear regression of `log(mvc)`:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 
 library(lme4)
 
@@ -427,8 +369,10 @@ final %>%
   scale_fill_gradient(low = "red", high = "white")
 
 final %>%
+  filter(dowel_density != "0000") %>%
   ggplot(aes(x = as.numeric(pump_freq), y = k_c, color = dowel_density)) +
-  geom_line()
+  geom_line() +
+  geom_point()
 
 ```
 
