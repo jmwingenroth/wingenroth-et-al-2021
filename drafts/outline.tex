@@ -44,6 +44,60 @@
 %
 %TODO
 
+Outline last edited: Aug 31, 2020, JN
+
+Feel free to add and edit the outline as necessary, and discuss with larger group so that everyone is on the same page with writing structure. I also wrote my personal comments about things to add or edit; I don't want to be overly prescriptive, so please get in touch if you have conflicting thoughts.
+
+\begin{enumerate}
+    \item Introduction
+    \begin{itemize}
+        \item Broader motivation of needing to understand wetland sediment budgets to predict and deal with relative sea level rise, contaminant routing and capture, ecological management and restoration, etc. (cite relevant background literature)
+        \item Scientific background of previous work. This part could probably have a separate section if it turns out to be long. Discuss experiments of Nepf, Palmer, and Fauria (e.g. single collector, array types). Then point out the current knowledge gap, that sediment capture is not well understood for transitional flows and previous experiments have not studied relevant setting of emergent vegetation arrays in shallow wetlands where you expect major impacts with broader motivation (RSLR, etc).
+    \end{itemize}
+    
+    \item Methods
+    \begin{itemize}
+        \item The current structure looks okay right now.
+        \item Theoretical Background: Explain different mechanisms of sediment capture. This section could use more references, especially for the definitions of the capture mechanisms. The effect of turbulence should be explained more (why and how do particles respond to the turbulent eddies?).
+        \item Suspended Particle Concentration Model. Looks good
+        \item Experimental Methods: Materials, Particle Concentration Run Protocols, Turbulence Characterization Protocols. It would be good to have a summary table of the flume instrumentation and what we get out of each (e.g. sediment traps = mass of settled sediment). Also, the computational workflow is a little disjointed because of how we've arranged the subsections. If we keep this structure, we can stick the detailed workflow into the supplement and simplify the main text (and refer instead to the supplement).
+        \item Statistical Analysis: Settling and Capture, Turbulence and Bed Shear Stress
+    \end{itemize}
+    
+    \item Results
+    \begin{itemize}
+        \item We should have a table showing all of our experiment treatments with their experimental conditions, number of replicates, and calculated parameters (the k values and effective capture efficiency).
+        \item I think it would be helpful to split results into key variables (Reynolds number, collector density, TKE) and explain those results to first-order.
+        \item This isn't directly related, but something that occurred to me was that apparent misfit between the data and model near the start of the runs could be due to disequilibrium sediment settling. That is, the Fauria model assumes a constant Rouse profile shape. Importantly, the Rouse model assumes a balance between gravitational settling and turbulent upward flux of particles. That assumption could be violated near the start of an experiment because the initial sediment mass added to the flume could be too large. That could explain the rapid drop in concentration near the beginning of experiments that is poorly captured by the model.
+    \end{itemize}
+    
+    \item Discussion
+    \begin{itemize}
+        \item Structure depends partly on data analysis results, but my speculation is
+        \item First-Order Controls on Sediment Capture by Dowels/vegetation: Here, we can discuss the major relationships that emerged in the results between the key variables and capture rate/efficiency. This will echo a little bit of Results, but we can offer physical interpretations of trends esp with the support of turbulence data.
+        \item Proposed model: We can propose a new model to predict capture efficiency (a la Palmer and Fauria). We can compare the different models (ours, Palmer, and Fauria) to see how well they predict capture efficiency. Explain the terms in the model.
+        \item Future work: explain limitations of current study, and directions that could be undertaken in the future. I think one possible new direction of study is experiments with different grain sizes. And of course real biofilms.
+    \end{itemize}
+    
+    \item Conclusion
+    \begin{itemize}
+        \item usual conclusion stuff, summarize
+    \end{itemize}
+    
+    \item References
+    \begin{itemize}
+        \item We're going to use the LaTeX template of the journal we submit to (currently aiming for MDPI Geosciences), which will take care of the reference format. Probably APA or something like it.
+    \end{itemize}
+    
+    \item Supplement
+    \begin{itemize}
+        \item Detailed workflow: Should describe how we went from data to calculated k and capture efficiency. Include finer details that were left out of the main text.
+        \item Supplemental figures/tables: extra figures and tables that did not fit in the main text
+        \item We should also format our data nicely to share as a supplementary data file.
+    \end{itemize}
+    
+\end{enumerate}
+
 \setcounter{chapter}{1}
 
 \chapter{Methods}
@@ -74,10 +128,10 @@ Turbulence is also theorized and empirically confirmed to affect the settling ve
 
 We used a model adapted from \cite{Fauria_2015} to estimate collection efficiency based on exponential decay of suspended sediment concentration. The key equation in the exponential decay model is
 \begin{equation}
-    \frac{d\bar{\phi}}{dt} = -[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c]\bar{\phi}(t) = -k\bar{\phi}(t)\,.
+    \frac{d\bar{\phi}}{dt} = -\left[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c\right]\bar{\phi}(t) = -k\bar{\phi}(t)\,.
     \label{eq:model}    
 \end{equation}
-The left and right summands in brackets represent the decay rate of depth-averaged suspended sediment concentration ($\bar{\phi} = \frac{1}{h} \int_0^h\phi(z)dz$) due to settling ($k_s$) and collection ($k_c$) respectively, where $z$ represents position along the vertical axis. $k = k_s + k_c$ is the total decay rate of suspended sediment.  $C$ is a constant based on the shape of the vertical sediment profile, which is assumed to follow the Rouse equation; $v_s$ is the settling velocity; $h$ is water depth; and $E_r$ is the rate of entrainment (i.e., uptake of particle from the channel bed). Please refer to \cite{Fauria_2015} for a detailed derivation of the formula for $k_s$ from established fluid dynamics principles. As for $k_c$, it is derived from flow velocity ($u$), previously described properties of collectors ($\eta^\prime$ and $d_c$), and collector density ($I_c = \frac{N_ch}{V}$), where $N_c$ is number of collectors and $V$ is the fluid volume (i.e., channel bed area times water depth). The volumetric rate at which water passes through a lateral cross-section with area equal to the frontal area of one collector is calculated as $ud_ch$. The number of particles passing through this area is found by multiplying by depth-averaged concentration ($N_p = ud_ch\bar{\phi}$). The rate at which particles are removed from suspension by this single collector is $\frac{dN_p}{dt}=\eta^{\prime}ud_ch\bar{\phi}$. By scaling up to the suite of collectors, modeled identically to one another, the change in concentration due to collection can be derived:
+The left and right summands in brackets represent the decay rate of depth-averaged suspended sediment concentration ($\bar{\phi} = \frac{1}{h} \int_0^h\phi(z)dz$) due to settling ($k_s$) and collection ($k_c$) respectively, where $z$ represents position along the vertical axis. $k = k_s + k_c$ is the total decay rate of suspended sediment.  $C$ is a constant based on the shape of the vertical sediment profile, which is assumed to follow the Rouse equation; $v_s$ is the settling velocity; $h$ is water depth; and $E_r$ is the rate of entrainment (i.e., uptake of particle from the channel bed). Please refer to \cite{Fauria_2015} for a detailed derivation of the formula for $k_s$ from established fluid dynamics principles. As for $k_c$, it is derived from flow velocity ($u$), previously described properties of collectors ($\eta^\prime$ and $d_c$), and collector density ($I_c = \frac{N_ch}{V}$), where $N_c$ is number of collectors and $V$ is the fluid volume (i.e., channel bed area times water depth). The volumetric rate at which water passes through a lateral cross-section with area equal to the frontal area of one collector is calculated as $ud_ch$. The particulate mass passing through this area is found by multiplying this volume by the average mass-volume concentration ($m_p = ud_ch\bar{\phi}$). The rate at which particles are removed from suspension by this single collector is $\frac{dm_p}{dt}=\eta^{\prime}ud_ch\bar{\phi}$. By scaling up to the suite of collectors, modeled identically to one another, the change in concentration due to collection can be derived:
 \begin{equation}
 \frac{d\bar{\phi}}{dt} = \frac{N_c}{V}\frac{dN_p}{dt} = \frac{N_c}{V}\eta^{\prime}ud_ch\bar{\phi} = \eta^{\prime}ud_cI_c\bar{\phi}\,.
 \label{eq:collection}
