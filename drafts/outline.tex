@@ -44,15 +44,18 @@
 %
 %TODO
 
-Outline last edited: Aug 31, 2020, JN
+Outline last edited: Sept 6, 2020, JN
 
 Feel free to add and edit the outline as necessary, and discuss with larger group so that everyone is on the same page with writing structure. I also wrote my personal comments about things to add or edit; I don't want to be overly prescriptive, so please get in touch if you have conflicting thoughts.
+
+REMINDER: Put paper references in refs.bib file and cite in the outline.
 
 \begin{enumerate}
     \item Introduction
     \begin{itemize}
-        \item Broader motivation of needing to understand wetland sediment budgets to predict and deal with relative sea level rise, contaminant routing and capture, ecological management and restoration, etc. (cite relevant background literature)
-        \item Scientific background of previous work. This part could probably have a separate section if it turns out to be long. Discuss experiments of Nepf, Palmer, and Fauria (e.g. single collector, array types). Then point out the current knowledge gap, that sediment capture is not well understood for transitional flows and previous experiments have not studied relevant setting of emergent vegetation arrays in shallow wetlands where you expect major impacts with broader motivation (RSLR, etc).
+        \item Broader motivation of needing to understand wetland sediment budgets to predict and deal with relative sea level rise, contaminant routing and capture, ecological management and restoration, etc. (cite relevant background literature) [assigned to Jordan]
+        \item Scientific background of previous work. This part could probably have a separate section if it turns out to be long. Discuss experiments of Nepf, Palmer, and Fauria (e.g. single collector, array types). Then point out the current knowledge gap, that sediment capture is not well understood for transitional flows and previous experiments have not studied relevant setting of emergent vegetation arrays in shallow wetlands where you expect major impacts with broader motivation (RSLR, etc). [assigned to Candace and Justin]
+        \item Knowledge gap and hypothesis.
     \end{itemize}
     
     \item Methods
@@ -98,7 +101,20 @@ Feel free to add and edit the outline as necessary, and discuss with larger grou
     
 \end{enumerate}
 
-\setcounter{chapter}{1}
+%\setcounter{chapter}{1}
+
+\chapter{Introduction}
+
+\section{Environmental Significance}
+
+\section{Previous Work}
+
+Many previous studies on sediment capture through vegetated reaches have used laboratory flume experiments to examine the effects of different flow and vegetation conditions on the rate and efficiency of sediment removal from the water column (\cite{Fauria_2015, Palmer_2004, Purich_2007,  Zhang_reconfiguration_2020, Zhang_turbulence_2020}). Laboratory flume experiments are valuable because interaction between vegetation and flow can produce complex mixing patterns and turbulence structures that require experiments to validate and describe hypotheses and theory (\cite{Nepf_2012, Nepf_2008}). Sediment capture is defined as as one of the mechanisms by which sediment is removed from suspended load by vegetation stems, also referred to as collectors; Capture efficiency is defined as the efficiency of collectors in removing sediment particles from suspension in water. 
+
+Might need some more exposition about different quantities considered and basic definitions (ex. sediment capture, what a collector is, efficiency, etc)
+
+Researchers have shown that vegetation stem dimensions, spatial density, and Reynolds number are important predictors of sediment transport and deposition behavior in flow through vegetated regions, particularly because of the dual effect of vegetation on increasing turbulence and drag (\cite{Fauria_2015, nepf_drag_1999, Palmer_2004}). Thus, flow intensity has considerable significance in this context because its interaction with vegetation elements affect flow conditions, which in turn affect the ability of flow to entrain sediment. Sediment capture in creeping flow can be derived analytically (look up references), and many experiments have been done at the limits of laminar and fully turbulent flows to characterize sediment capture with vegetation (\cite{Shan_turbulence_2020, Wu_2011, Yang_2016}). However, experiments at transitional flows are more sparse (\cite{Fauria_2015, Palmer_2004, Purich_2007}). These types of flows have real-world importance because they can be typical of shallow, low-sloping wetland environments where dense vegetation cover makes vegetation-flow interactions common. Existing predictive models of sediment capture in transitional flows generally do not agree well with each other, and do not separate effects of direct capture on vegetation versus gravitational settling (\cite{Fauria_2015, Palmer_2004}). In this study, we follow the strategy of previous work by using laboratory flume experiments to quantify sediment capture in vegetated reaches but build on existing studies of transitional flows by partitioning sediment capture into contributions by vegetation and gravitational settling for multiple vegetation densities and flow velocities 
+
 
 \chapter{Methods}
 
@@ -120,7 +136,7 @@ Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur 
     \eta=C{\Rey_c}^{a}R^{b}\,,
     \label{eq:powerlaw}
 \end{equation}
-where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder, coated with grease for which retention was assumed to be complete ($p_r = 1$).
+where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder coated with grease, for which retention was assumed to be complete ($p_r = 1$).
 
 Turbulence is also theorized and empirically confirmed to affect the settling velocity of heavy, fine particles \citep{Nielsen_1993, Jacobs_2016, Wang_2018}. Increasing turbulence is one mechanism by which collectors could affect settling rates.
 
