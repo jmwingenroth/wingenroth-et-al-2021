@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  13 SEP 2020 16:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6) (preloaded format=pdflatex 2020.7.8)  14 SEP 2020 23:57
 entering extended mode
 **./outline.tex
 (outline.tex
@@ -471,138 +471,138 @@ Overfull \hbox (21.57266pt too wide) in paragraph at lines 42--42
 {C:/Users/jwing/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3]
 chapter 1.
 
-Overfull \hbox (1.37509pt too wide) in paragraph at lines 114--115
+Overfull \hbox (1.37509pt too wide) in paragraph at lines 121--122
 []\OT1/cmr/m/n/10.95 Researchers have shown that veg-e-ta-tion stem di-men-sion
 s, spa-tial den-sity, and Reynolds
  []
 
 [4
 
-]
+] [5]
 chapter 2.
-<../pics/collectorefficiency.png, id=19, 871.45575pt x 278.84175pt>
+<../pics/collectorefficiency.png, id=22, 871.45575pt x 278.84175pt>
 File: ../pics/collectorefficiency.png Graphic file (type png)
 <use ../pics/collectorefficiency.png>
-Package pdftex.def Info: ../pics/collectorefficiency.png  used on input line 12
-6.
+Package pdftex.def Info: ../pics/collectorefficiency.png  used on input line 13
+3.
 (pdftex.def)             Requested size: 284.52756pt x 91.03944pt.
-[5
+[6
 
- <../pics/collectorefficiency.png>] [6]
-<../pics/flume_with_sedtraps.png, id=35, 510.4671pt x 289.5618pt>
+ <../pics/collectorefficiency.png>] [7]
+<../pics/flume_with_sedtraps.png, id=39, 510.4671pt x 289.5618pt>
 File: ../pics/flume_with_sedtraps.png Graphic file (type png)
 <use ../pics/flume_with_sedtraps.png>
-Package pdftex.def Info: ../pics/flume_with_sedtraps.png  used on input line 16
-7.
+Package pdftex.def Info: ../pics/flume_with_sedtraps.png  used on input line 17
+4.
 (pdftex.def)             Requested size: 426.79134pt x 242.10797pt.
 
-Overfull \hbox (8.53761pt too wide) in paragraph at lines 167--169
+Overfull \hbox (8.53761pt too wide) in paragraph at lines 174--176
  [][] 
  []
 
-<../pics/wf5-200sizedist.png, id=36, 472.164pt x 161.6439pt>
+<../pics/wf5-200sizedist.png, id=40, 472.164pt x 161.6439pt>
 File: ../pics/wf5-200sizedist.png Graphic file (type png)
 <use ../pics/wf5-200sizedist.png>
-Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 180.
+Package pdftex.def Info: ../pics/wf5-200sizedist.png  used on input line 187.
 (pdftex.def)             Requested size: 426.79134pt x 146.11205pt.
 
-Overfull \hbox (8.53761pt too wide) in paragraph at lines 180--182
+Overfull \hbox (8.53761pt too wide) in paragraph at lines 187--189
  [][] 
  []
 
-[7] [8 <../pics/flume_with_sedtraps.png (PNG copy)> <../pics/wf5-200sizedist.pn
-g>] [9] [10] [11]
+[8] [9 <../pics/flume_with_sedtraps.png (PNG copy)> <../pics/wf5-200sizedist.pn
+g>] [10] [11] [12]
 chapter 3.
-<../pics/etafig.png, id=55, 505.89pt x 361.35pt>
+<../pics/etafig.png, id=58, 505.89pt x 361.35pt>
 File: ../pics/etafig.png Graphic file (type png)
 <use ../pics/etafig.png>
-Package pdftex.def Info: ../pics/etafig.png  used on input line 223.
+Package pdftex.def Info: ../pics/etafig.png  used on input line 230.
 (pdftex.def)             Requested size: 433.62pt x 309.7349pt.
-
-Overfull \hbox (15.36627pt too wide) in paragraph at lines 223--225
- [][] 
- []
-
-<../pics/vectrino.png, id=56, 505.89pt x 289.08pt>
-File: ../pics/vectrino.png Graphic file (type png)
-<use ../pics/vectrino.png>
-Package pdftex.def Info: ../pics/vectrino.png  used on input line 230.
-(pdftex.def)             Requested size: 433.62pt x 247.7879pt.
 
 Overfull \hbox (15.36627pt too wide) in paragraph at lines 230--232
  [][] 
  []
 
-(outline.bbl [12
+<../pics/vectrino.png, id=59, 505.89pt x 289.08pt>
+File: ../pics/vectrino.png Graphic file (type png)
+<use ../pics/vectrino.png>
+Package pdftex.def Info: ../pics/vectrino.png  used on input line 237.
+(pdftex.def)             Requested size: 433.62pt x 247.7879pt.
 
- <../pics/etafig.png>] [13 <../pics/vectrino.png>]
-Underfull \hbox (badness 6364) in paragraph at lines 22--27
+Overfull \hbox (15.36627pt too wide) in paragraph at lines 237--239
+ [][] 
+ []
+
+(outline.bbl [13
+
+ <../pics/etafig.png>] [14 <../pics/vectrino.png>]
+Underfull \hbox (badness 6364) in paragraph at lines 28--33
 []\OT1/cmr/m/n/10.95 Nepf, H. M. (1999).  Drag, tur-bu-lence, and dif-fu-sion i
 n flow through
  []
 
 
-Underfull \hbox (badness 3657) in paragraph at lines 22--27
+Underfull \hbox (badness 3657) in paragraph at lines 28--33
 \OT1/cmr/m/n/10.95 emer-gent veg-e-ta-tion.  \OT1/cmr/m/it/10.95 Wa-ter Re-sour
 ces Re-search\OT1/cmr/m/n/10.95 , 35(2):479--489.  []eprint:
  []
 
 
-Underfull \hbox (badness 1924) in paragraph at lines 50--56
+Underfull \hbox (badness 1924) in paragraph at lines 56--62
 \OT1/cmr/m/n/10.95 trans-port in chan-nels with ran-domly dis-tributed emer-gen
 t patches of model
  []
 
 
-Underfull \hbox (badness 3428) in paragraph at lines 50--56
+Underfull \hbox (badness 3428) in paragraph at lines 56--62
 \OT1/cmr/m/n/10.95 veg-e-ta-tion.  \OT1/cmr/m/it/10.95 Geo-phys-i-cal Re-search
  Let-ters\OT1/cmr/m/n/10.95 , 47(12):e2020GL087055.  []eprint:
  []
 
+[15
 
-Underfull \hbox (badness 3579) in paragraph at lines 71--77
+]
+Underfull \hbox (badness 3579) in paragraph at lines 90--96
 []\OT1/cmr/m/n/10.95 Yang, J. Q., Chung, H., and Nepf, H. M. (2016).  The on-se
 t of sed-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--77
+Underfull \hbox (badness 10000) in paragraph at lines 90--96
 \OT1/cmr/m/n/10.95 i-ment trans-port in veg-e-tated chan-nels pre-dicted by tur
 -bu-lent ki-netic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--77
+Underfull \hbox (badness 10000) in paragraph at lines 90--96
 \OT1/cmr/m/n/10.95 en-ergy.  \OT1/cmr/m/it/10.95 Geo-phys-i-cal Re-search Let-t
 ers\OT1/cmr/m/n/10.95 , 43(21):11,261--11,268.  []eprint:
  []
 
-[14
 
-]
-Underfull \hbox (badness 5274) in paragraph at lines 79--85
+Underfull \hbox (badness 5274) in paragraph at lines 98--104
 []\OT1/cmr/m/n/10.95 Zhang, J., Lei, J., Huai, W., and Nepf, H. (2020).  Tur-bu
 -lence and
  []
 
 
-Underfull \hbox (badness 2772) in paragraph at lines 79--85
+Underfull \hbox (badness 2772) in paragraph at lines 98--104
 \OT1/cmr/m/n/10.95 par-ti-cle de-po-si-tion un-der steady flow along a sub-merg
 ed sea-grass meadow.
  []
 
 
-Underfull \hbox (badness 3815) in paragraph at lines 79--85
+Underfull \hbox (badness 3815) in paragraph at lines 98--104
 \OT1/cmr/m/it/10.95 Jour-nal of Geo-phys-i-cal Re-search: Oceans\OT1/cmr/m/n/10
 .95 , 125(5):e2019JC015985.  []eprint:
  []
 
-) [15] (outline.aux) ) 
+) [16] (outline.aux) ) 
 Here is how much of TeX's memory you used:
- 9612 strings out of 480790
- 196074 string characters out of 2907056
- 550025 words of memory out of 3000000
- 25515 multiletter control sequences out of 15000+200000
+ 9621 strings out of 480790
+ 196254 string characters out of 2907056
+ 550125 words of memory out of 3000000
+ 25524 multiletter control sequences out of 15000+200000
  546661 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,8n,72p,10104b,789s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -619,9 +619,9 @@ rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmti10.pfb>
-Output written on outline.pdf (15 pages, 475264 bytes).
+Output written on outline.pdf (16 pages, 476394 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
