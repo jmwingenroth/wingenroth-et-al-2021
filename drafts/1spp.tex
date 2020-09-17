@@ -1,0 +1,68 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\newcommand\Rey{\mathrm{Re}}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{outlines}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{siunitx}
+
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\color{red}\sffamily}
+
+\usepackage{lineno}
+\renewcommand\linenumberfont{\normalfont\small\sffamily}
+%\linenumbers
+
+\usepackage{graphicx}
+\graphicspath{{../pics/}}
+
+\usepackage{natbib}
+
+\begin{document}
+
+\section{Introduction}
+
+\begin{itemize}
+
+\item Riverine and estuarine sediment budgets play an important role in shaping aquatic and riparian geomorphology and plant communities, thereby influencing ecosystems throughout watersheds, not least in low-gradient coastal landforms (e.g., river deltas) where the predominant deposition often generates a complex mosaic of plant communities, flow patterns, and topography. 
+
+\item In turn, plants can affect patterns of erosion and deposition via several mechanisms, one of the less well-understood being direct particle capture by submerged stems, leaves, and other surfaces. 
+
+\item Many previous studies on sediment capture occurring in vegetated reaches have used laboratory flume experiments to examine the effects of different flow and vegetation conditions on the rate and efficiency of sediment removal from the water column.
+
+\item Researchers have shown that vegetation stem dimensions, spatial density, and Reynolds number are important predictors of sediment transport and deposition behavior in flow through vegetated regions. Past work has derived analytical expressions for these terms in the case of creeping flow but there is not yet a consensus on the nature of these relationships in transitionally turbulent flows. 
+
+\item Turbulence affects particle capture rates and efficiency, and is also theorized and empirically confirmed to affect other elements of sediment transport behavior, with one particularly important example being its effect on settling velocity.
+
+\item \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors in transitional turbulence, which takes the form 
+\begin{equation}
+    \eta=C{\Rey_c}^{a}R^{b}\,.
+    \label{eq:powerlaw}
+\end{equation}
+
+\item \cite{Fauria_2015} used the same equation form but estimated coefficients using an array of many collectors as opposed to a single one, thereby arriving at a negative relationship between $\eta$ and $\Rey$ in contrast to \cite{Palmer_2004}; providing further empirical data on this disagreement is one of several motivators for our study. 
+
+\item Other motivators include expanding the parameter space to lower collector density, incorporating direct measurement of settling rates to refine capture estimates, and testing replicability and robustness of previous results across different laboratory environments.
+
+\item \textcolor{violet}{Do you think we should add a paragraph formally stating "we hypothesize...", or are the prior two paragraphs on motivation sufficient?}
+
+\end{itemize}
+
+\section{Methods}
+
+\subsection{yaya}
+
+\section{Results}
+
+\section{Discussion}
+
+\bibliographystyle{apalike}
+\bibliography{refs}
+
+\end{document}
