@@ -41,7 +41,7 @@
         \end{equation}
     \item \cite{Fauria_2015} used the same equation form but estimated coefficients using an array of many collectors as opposed to a single one, thereby arriving at a negative relationship between $\eta^\prime$ and $\Rey$ in contrast to the positive relationship between $eta$ and $\Rey$ found by \cite{Palmer_2004}; this is a major motivator for our study. 
     \item Other motivators include expanding the parameter space to lower collector density, incorporating direct measurement of settling rates to refine capture estimates, and testing replicability and robustness of previous results across different laboratory environments.
-    \item \textcolor{violet}{Do you think we should add a paragraph formally stating "we hypothesize...", or are the prior two paragraphs on motivation sufficient?}
+    \item \textcolor{violet}{Do you think we should add a paragraph formally stating "we hypothesize...", or would that be redundant with the previous two paragraphs on motivations?}
 \end{itemize}
 
 \section{Methods}
@@ -52,18 +52,13 @@
 
 \subsubsection{Materials}
 
-\subsubsection{Time-Decay Run Protocols}
+\subsubsection{Suspended Concentration Run Protocols}
 
 \subsubsection{Turbulence Estimate Protocols}
 
 \subsubsection{Flume Volume Estimate Protocol}
 
 \subsubsection{Biofouled Runs}
-
-\begin{itemize}
-    \item Flume volume estimate
-    \item Biofilm runs
-\end{itemize}
 
 \subsection{Statistical Analyses}
 
@@ -73,14 +68,21 @@
 
 \section{Results}
 
-\subsection{Settling and Collection Rates}
+\subsection{Effects of Collector Density and Reynolds Number}
 
-\subsection{Turbulence}
+\subsection{Effects of Turbulence}
+
+\subsection{Effects of Biofilm}
 
 \section{Discussion}
 
 \begin{itemize}
-    \item \textcolor{violet}{It's important to bear in mind that, in agreement with the power law regression ($\eta^\prime = C\Rey^{-1.14}R^{0.65}$) presented by \cite{Fauria_2015}, capture efficiency ($\eta$) has an approximately inverse relationship with Reynolds number, which is in turn directly proportional to velocity ($u$). Looking at the decay model, $\eta \propto k_c/u$, which means that if $k_c$ were constant across treatments, we'd still expect the relationship $\eta \propto Re^{-1}$. Collector density shares the same proportionality ($\eta \propto k_c/I_c$). Based on our error propogation, the uncertainty in our measurements far outweighs any pattern among our $k_c$ estimates. Most of the magnitude of the observed negative trend in effective collector efficiency, over both $\Rey$ and $I_c$, is an artifact of the algebra involved in its calculation rather than actual measured differences between our treatments. [Note: I think it's important for everyone to be aware of this...I'm surprised it wasn't discussed in \cite{Fauria_2015}. It seems like such a simple but important fact]}
+    \item In agreement with the power law regression ($\eta^\prime = C\Rey^{-1.14}R^{0.65}$) presented by \cite{Fauria_2015}, capture efficiency ($\eta$) has an approximately inverse relationship with Reynolds number, which is in turn directly proportional to velocity ($u$). Looking at the decay model, $\eta \propto k_c/u$, which means that if $k_c$ were constant across treatments, we'd still expect the relationship $\eta \propto Re^{-1}$. Collector density shares the same proportionality ($\eta \propto k_c/I_c$). Based on our error propogation, the uncertainty in our measurements far outweighs any pattern among our $k_c$ estimates. \textcolor{violet}{Most of the magnitude of the observed negative trend in $\eta^\prime$, over both $\Rey$ and $I_c$, is an artifact of the algebra involved in its calculation rather than actual measured differences between our treatments.} 
+        \begin{itemize}
+            \item  \textcolor{violet}{I think it's important for everyone to be aware of the simple fact described above...I'm surprised it wasn't discussed in \cite{Fauria_2015}, whose results follow the same pattern, though across fewer treatment levels. As a side note, \cite{Purich_2007} had a low-density treatment that defied this pattern (i.e., had lower $\eta$ than higher densities).} 
+        \end{itemize}
+    \item We found that biofilm increased $k_c$ in comparison to greased dowels, which as I see it presently, challenges the assumption of \cite{Palmer_2004} and \cite{Fauria_2015} that greased dowels have perfect retention.
+    \item At our lowest collector density, we got a measurement of collector efficiency ($\approx2\%$) far greater than any from \cite{Fauria_2015} or \cite{Purich_2007}, suggesting that sheltering of collectors probably plays a large role in limiting $\eta^\prime$ for most densities previously tested, especially at low Re ($\approx60$). Maybe to the point that $k_c$ is minimally affected by density above some threshold (maybe below our lowest treatment).
 \end{itemize}
 
 \bibliographystyle{apalike}
