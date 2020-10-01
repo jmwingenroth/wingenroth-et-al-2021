@@ -119,11 +119,11 @@ fitdata <- coefficients(fits) %>%
   mutate(k_t = -t) %>%
   cbind(dk_t = summary(fits)[[4]][,,'t'][,2], date = as.numeric(row.names(coefficients(fits)))) %>%
   left_join(metadata, by = "date") %>%
-  mutate(ad = as.numeric(dowel_density)*.003175^2, Re = pump_freq/500*.003175/9.509e-7)
+  mutate(ad = as.numeric(dowel_density)*.003175^2*2/1.95, Re = pump_freq/500*.003175/9.509e-7) #DOWEL DENSITY CORRECTION INCLUDED HERE
 
 fitdata %>%
   filter(pump_freq == 30, dowel_density!="0000") %>%
-  ggplot(aes(x = growth_days, y = k_t, ymin = k_t - 1.96*dk_t, ymax = k_t + 1.96*dk_t, color = as.character(round(ad,4)))) +
+  ggplot(aes(x = growth_days, y = k_t, ymin = k_t - 1.96*dk_t, ymax = k_t + 1.96*dk_t, color = as.character(round(ad,5)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point() +
   geom_errorbar() +  
@@ -145,7 +145,7 @@ final <- trapfinal %>%
 
 final %>%
   filter(pump_freq == 30, dowel_density!="0000") %>%
-  ggplot(aes(x = growth_days, y = k_s, ymin = k_s - 1.96*dk_s, ymax = k_s + 1.96*dk_s, color = as.character(round(ad,4)))) +
+  ggplot(aes(x = growth_days, y = k_s, ymin = k_s - 1.96*dk_s, ymax = k_s + 1.96*dk_s, color = as.character(round(ad,5)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point() +
   geom_errorbar() +  
@@ -204,11 +204,11 @@ final <- final %>%
 
 final %>%
   filter(pump_freq == 30, dowel_density!="0000",growth_days!=30) %>%
-  ggplot(aes(x = growth_days, y = eta, ymin = eta - deta, ymax = eta + deta, color = as.character(round(ad,4)))) +
+  ggplot(aes(x = growth_days, y = eta, ymin = eta - deta, ymax = eta + deta, color = as.character(round(ad,5)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point() +
   geom_errorbar() +
   scale_color_manual(values = c("blue","green","red")) +
   scale_y_continuous(labels = scales::percent) +
   labs(y = "Effective capture efficiency", x = "Biofilm growth (days)", color = expression(italic(ad))) +
-  theme_minimal()
+  theme_bw()

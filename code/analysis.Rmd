@@ -258,7 +258,7 @@ fitdata <- coefficients(fits) %>%
   mutate(k_t = -t) %>%
   cbind(dk_t = summary(fits)[[4]][,,'t'][,2], date = as.numeric(row.names(coefficients(fits)))) %>%
   left_join(metadata, by = "date") %>%
-  mutate(ad = as.numeric(dowel_density)*.003175^2, Re = pump_freq/500*.003175/9.509e-7)
+  mutate(ad = as.numeric(dowel_density)*.003175^2*2/1.95, Re = pump_freq/500*.003175/9.509e-7) # DOWEL DENSITY CORRECTION INCLUDED HERE
 
 fitdata %>%
   ggplot(aes(x = Re, y = k_t, ymin = k_t - dk_t, ymax = k_t + dk_t, color = as.character(round(ad,4)))) +
@@ -375,7 +375,7 @@ final <- final %>%
 final %>%
   filter(dowel_density != "0000") %>%
   mutate(Refac = factor(Re, labels = c("Re = 66.78", "Re = 133.56", "Re = 200.34"))) %>%
-  ggplot(aes(x = ad, y = eta, ymin = eta - deta, ymax = eta + deta, color = as.character(round(ad,4)))) +
+  ggplot(aes(x = ad, y = eta, ymin = eta - deta, ymax = eta + deta, color = as.character(round(ad,5)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point() +
   geom_errorbar() +  
