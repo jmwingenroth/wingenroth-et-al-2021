@@ -32,6 +32,7 @@ We entered data into Google Sheets as we processed samples in the lab. I downloa
 ```{r, message=FALSE, warning=FALSE}
 
 library(tidyverse)
+library(tikzDevice)
 
 ```
 
@@ -113,7 +114,8 @@ Now then, let's remove the biofouled runs and a couple runs with other issues, w
 ```{r}
 
 pumpfinal <- pump %>%
-  filter(growth_days==0, date != 190417, dowel_density != "0232")
+  filter(growth_days==0, date != 190417, date != 190802, # leaving out old control 
+         dowel_density != "0232")
 
 ```
 
@@ -170,7 +172,7 @@ So at this point, we really only need `pumpfinal`, `trapfinal`, maybe `metadata`
 
 I'll also mention here that our model is based on the general equation: $$k_{tot} = k_s + k_c + k_{bg}$$ where the k's represent total decay rate and portions of it due to settling, collection, and (background) settling in the rest of the flume outside the test section, respectively.
 
-### NEW ADDITION: Uncertainty propogation
+### Uncertainty propogation function: mutate_with_error
 
 Here is a function found on StackExchange.com, which performs error propogation in R using derivatives. Error values should be named "dx", with x being the corresponding variable name.
 
@@ -256,19 +258,21 @@ So then, k_tot as a function of our independent vars:
 fitdata <- coefficients(fits) %>%
   mutate(k_t = -t) %>%
   cbind(dk_t = summary(fits)[[4]][,,'t'][,2], date = as.numeric(row.names(coefficients(fits)))) %>%
-  left_join(metadata, by = "date")
+  left_join(metadata, by = "date") %>%
+  mutate(ad = as.numeric(dowel_density)*.003175^2, Re = pump_freq/500*.003175/9.509e-7)
 
 fitdata %>%
-  ggplot(aes(x = pump_freq, y = k_t, ymin = k_t - 1.96*dk_t, ymax = k_t + 1.96*dk_t, color = dowel_density)) +
+  ggplot(aes(x = Re, y = k_t, ymin = k_t - 1.96*dk_t, ymax = k_t + 1.96*dk_t, color = as.character(round(ad,4)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
+  geom_point(position = position_dodge(width = 10)) +
+  geom_errorbar(width = 10, position = "dodge") +  
   scale_color_manual(values = c("black","blue","green","red")) +
+  scale_y_continuous(labels = function(x) format(x, scientific = TRUE)) +
+  labs(y = expression(paste(italic(k[t])," (",s^{-1},")")), x = expression(Re[c]), color = expression(italic(ad))) +
   theme_minimal()
   
 ```
 
-Mixed feelings. On the one hand it's reassuring that aside from the switcharoo at 20 Hz, all runs with dowels had greater k_t than runs without. However, it seems like there's some serious variance. **What confounders could we be missing???**
 
 ### k_s (time-decay due to settling)
 
@@ -290,16 +294,18 @@ final <- trapfinal %>%
   mutate_with_error(k_s ~ c_s*k_t)
 
 final %>%
-  ggplot(aes(x = pump_freq, y = k_s, ymin = k_s - 1.96*dk_s, ymax = k_s + 1.96*dk_s, color = dowel_density)) +
+  ggplot(aes(x = Re, y = k_s, ymin = k_s - 1.96*dk_s, ymax = k_s + 1.96*dk_s, color = as.character(round(ad,4)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
+  geom_point(position = position_dodge(width = 10)) +
+  geom_errorbar(width = 10, position = "dodge") +  
   scale_color_manual(values = c("black","blue","green","red")) +
+  scale_y_continuous(labels = function(x) format(x, scientific = TRUE)) +
+  labs(y = expression(paste(italic(k[s])," (",s^{-1},")")), x = expression(Re[c]), color = expression(italic(ad))) +
   theme_minimal()
   
 ```
 
-ettling across the dowel treatments does seem to decrease, with a less clear pattern across flow velocity.
+$k_s$ seems negatively related to both dowel density and flow velocity.
 
 ### k_bg (time-decay due to settling in the rest of the flume)
 
@@ -336,15 +342,15 @@ final <- final %>%
 
 final %>%
   filter(dowel_density != "0000") %>%
-  ggplot(aes(x = pump_freq, y = k_c, ymin = k_c - 1.96*dk_c, ymax = k_c + 1.96*dk_c, color = dowel_density)) +
+  ggplot(aes(x = Re, y = k_c, ymin = k_c - 1.96*dk_c, ymax = k_c + 1.96*dk_c, color = as.character(round(ad,4)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
+  geom_point(position = position_dodge(width = 10)) +
+  geom_errorbar(width = 10, position = "dodge") +  
   scale_color_manual(values = c("blue","green","red")) +
+  scale_y_continuous(labels = function(x) format(x, scientific = TRUE)) +
+  labs(y = expression(paste(italic(k[c])," (",s^{-1},")")), x = expression(Re[c]), color = expression(italic(ad))) +
   theme_minimal()
 ```
-
-Unlike the calculation with the measured values at the 20 Hz control, all k_c are in the green, but the pattern is still quite odd.
 
 ### eta
 
@@ -369,88 +375,12 @@ final <- final %>%
 
 final %>%
   filter(dowel_density != "0000") %>%
-  ggplot(aes(x = pump_freq, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = dowel_density)) +
+  ggplot(aes(x = Re, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = as.character(round(ad,4)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
-  scale_color_manual(values = c("blue","green","red")) +
+  geom_point(position = position_dodge(width = 10)) +
+  geom_errorbar(width = 10, position = "dodge") +  scale_color_manual(values = c("blue","green","red")) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(y = "Effective capture efficiency", x = expression(Re[c]), color = expression(italic(ad))) +
   theme_minimal()
-
 ```
-
-For strictly exploratory purposes, I'll run it again with the problematic 20 Hz control's $k_{tot}$ and $m_s$ values and error bars replaced with the average of the 10 and 30 Hz ones. This is the best guess we have at what we'll get if we redo the run. Though if we redo the control and get values similar to our previous ones, that would be strange but not strictly unpredicted.
-
-```{r}
-
-final[final$date=="190802","k_t"] <- (final[final$date=="190321","k_t"] + final[final$date=="190729","k_t"])/2
-final[final$date=="190802","dk_t"] <- (final[final$date=="190321","dk_t"] + final[final$date=="190729","dk_t"])/2
-
-final[final$date=="190802","m_s"] <- (final[final$date=="190321","m_s"] + final[final$date=="190729","m_s"])/2
-final[final$date=="190802","dm_s"] <- (final[final$date=="190321","dm_s"] + final[final$date=="190729","dm_s"])/2
-
-
-final <- final %>%
-  mutate_with_error(c_s ~ m_s/200/(1-exp(-k_t*6000))) %>% #intermediate step to squash error 
-  mutate_with_error(k_s ~ c_s*k_t) %>%
-  select(-k_bg, -dk_bg)
-
-bgvals <- final %>%
-  filter(dowel_density=="0000") %>%
-  mutate_with_error(k_bg ~ k_t - k_s) %>%
-  select(pump_freq, k_bg, dk_bg) %>%
-  arrange(pump_freq)
-
-bgvals
-
-final <- left_join(final, bgvals, by = "pump_freq")
-
-final %>%  
-  ggplot(aes(x = pump_freq, y = k_s, ymin = k_s - 1.96*dk_s, ymax = k_s + 1.96*dk_s, color = dowel_density)) +
-  geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
-  scale_color_manual(values = c("black","blue","green","red")) +
-  theme_minimal()
-
-final <- final %>%
-  mutate_with_error(k_c ~ k_t - k_s - k_bg)
-
-final %>%
-  filter(dowel_density != "0000") %>%
-  ggplot(aes(x = pump_freq, y = k_c, ymin = k_c - 1.96*dk_c, ymax = k_c + 1.96*dk_c, color = dowel_density)) +
-  geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
-  scale_color_manual(values = c("blue","green","red")) +
-  theme_minimal()
-
-final <- final %>%
-  mutate(frontal_area = as.numeric(dowel_density)*.003175, 
-            u = as.numeric(pump_freq)/500, #velocity 
-            Re = u*.003175/visc, #Reynolds #
-            k_t = -t, 
-            k_c, k_s, k_bg) %>%
-  mutate(eta = k_c/u/frontal_area,
-         deta = dk_c/u/frontal_area) %>%
-  mutate(eta = eta * 2.43/(1.95*.4*.6),
-         deta = deta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
-
-final %>%
-  filter(dowel_density != "0000") %>%
-  ggplot(aes(x = pump_freq, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = dowel_density)) +
-  geom_line(lty = "dotted", size = 2, alpha = .3) + 
-  geom_point(position = position_dodge(width = 3)) +
-  geom_errorbar(width = 3, position = "dodge") +
-  scale_color_manual(values = c("blue","green","red")) +
-  theme_minimal()
-
-
-```
-
-
-## Possible additions
-
-- Turbulence data
-    - The calculations are done 
-    - But it might be good to include here for the sake of comprehensiveness
 
