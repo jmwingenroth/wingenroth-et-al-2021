@@ -1,6 +1,6 @@
 ---
 title: "Particle Interception as a Function of Reynolds Number and Collector Density"
-subtitle: "Version 2.0"
+subtitle: "Version 3.0"
 author: "Jordan Wingenroth"
 date: "8/28/2020"
 toc: TRUE
@@ -457,7 +457,10 @@ c_over_phi <- rbind(c_over_phi, fauria)
 c_over_phi %>%
   ggplot(aes(x = phi, y = C, color = lab)) +
   geom_point() +
-  theme_bw()
+  theme_bw() +
+  labs(title = "Comparison of power-law constant to Fauria et al. data",
+       x = expression(phi))
+  
 
 ```
 
@@ -488,7 +491,149 @@ final %>%
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ as.character(round(phi,5))) +
   labs(y = "Effective capture efficiency", x = expression(Re), color = expression(phi)) +
+  theme_bw() +
+  ggtitle("Comparison of experiments and power-law model based on experiments")
+
+```
+
+### 3: Monte Carlo approach
+
+**COMMENT:**
+
+Each data point has a normal distribution associated with the estimate of eta (defined by the estimate value and the associated standard deviation, i.e., the error bars). For each stem density, you can do Monte Carlo sampling in which you draw a different value of eta from each of the three Re by sampling from the underlying distributions. For each realization of the three eta estimates, you would then do a log transformation, fit a straight line, and save the slope of that line. The result is a distribution of slopes over 1000 or more realizations. If the 95% confidence interval for those slopes includes zero, we cannot say with statistical certainty that there is a negative trend with Re. You would do this for each stem density. Then, you would evaluate whether there is a significant trend in eta with stem density by holding Re constant and doing the same thing for each Re. You could show the results as box plots, where you use some symbol (such as an asterisk) to denote those boxes whose 95% confidence interval does not include zero.
+
+**ADDRESSED:**
+
+Grouped by stem density:
+
+```{r message=FALSE, warning=FALSE}
+
+skeleton_eta <- final %>%
+  filter(frontal_area > 0) %>%
+  select(phi, Re, eta, deta) %>%
+  arrange(phi, Re)
+
+monte <- list()
+
+for (i in 1:nrow(skeleton_eta)) {
+  monte[[i]] <- tibble(phi = skeleton_eta$phi[i],
+                       Re = skeleton_eta$Re[i],
+                       eta = rnorm(1000, mean = skeleton_eta$eta[i], sd = skeleton_eta$deta[i]))
+}
+
+lmsphi <- bind_rows(monte) %>%
+  mutate(ID = paste0(phi, 1:1000)) %>%
+  lmList(log(eta) ~ Re|ID, data = .) %>%
+  coefficients()
+
+lmsphi <- tibble(phi = str_sub(rownames(lmsphi),0,6),lmsphi)
+
+
+lmsphi <- lmsphi %>%
+  group_by(phi) %>%
+  summarise(avg = mean(Re, na.rm = TRUE), sd = sd(Re, na.rm = TRUE)) %>%
+  mutate(ymax = avg + 1.96*sd)
+
+lmsphi
+  
+lmsphi %>%
+  ggplot(aes(x = phi, y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
+  geom_point() +
+  geom_errorbar() +
   theme_bw()
+
+```
+
+Grouped by Re:
+
+```{r message=FALSE, warning=FALSE}
+
+monte2 <- list()
+
+for (i in 1:nrow(skeleton_eta)) {
+  monte2[[i]] <- tibble(phi = skeleton_eta$phi[i],
+                       Re = skeleton_eta$Re[i],
+                       eta = rnorm(1000, mean = skeleton_eta$eta[i], sd = skeleton_eta$deta[i]))
+}
+
+lmsre <- bind_rows(monte2) %>%
+  mutate(ID = paste0(Re, 1:1000)) %>%
+  lmList(log(eta) ~ phi|ID, data = .) %>%
+  coefficients()
+
+lmsre <- tibble(Re = str_sub(rownames(lmsre),0,6),lmsre)
+
+
+lmsre <- lmsre %>%
+  group_by(Re) %>%
+  summarise(avg = mean(phi, na.rm = TRUE), sd = sd(phi, na.rm = TRUE)) %>%
+  mutate(ymax = avg + 1.96*sd)
+
+lmsre
+
+lmsre %>%
+  ggplot(aes(x = as.numeric(Re), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
+  geom_point() +
+  geom_errorbar() +
+  theme_bw()
+
+```
+
+### 3 addendum: Safety check on null result (assuming no effect of treatments on k_c)
+
+**ALL DATA IN THIS SECTION IS IMAGINARY!!!!**
+
+Let's see what results we'd get with these same analyses if we detected no effects of Re or $\phi$ on k_c.
+
+```{r}
+
+imaginary_eta <- final %>%
+  filter(frontal_area > 0) %>%
+  mutate(imagk_c = mean(k_c), 
+         imagdk_c = mean(dk_c),
+         imageta = imagk_c/u/frontal_area,
+         imagdeta = imagdk_c/u/frontal_area) %>%
+  mutate(imageta = imageta * 2.43/(1.95*.4*.6),
+         imagdeta = imagdeta * 2.43/(1.95*.4*.6)) %>%
+  select(phi, Re, eta = imageta, imagdeta)
+
+
+
+```
+
+Grouped by stem density:
+
+```{r warning=FALSE}
+
+monte <- list()
+
+for (i in 1:nrow(imaginary_eta)) {
+  monte[[i]] <- tibble(phi = imaginary_eta$phi[i],
+                       Re = imaginary_eta$Re[i],
+                       eta = rnorm(1000, mean = imaginary_eta$eta[i], sd = imaginary_eta$imagdeta[i]))
+}
+
+lmsphi <- bind_rows(monte) %>%
+  mutate(ID = paste0(phi, 1:1000)) %>%
+  lmList(log(eta) ~ Re|ID, data = .) %>%
+  coefficients()
+
+lmsphi <- tibble(phi = str_sub(rownames(lmsphi),0,6),lmsphi)
+
+
+lmsphi <- lmsphi %>%
+  group_by(phi) %>%
+  summarise(avg = mean(Re, na.rm = TRUE), sd = sd(Re, na.rm = TRUE)) %>%
+  mutate(ymax = avg + 1.96*sd)
+
+lmsphi
+  
+lmsphi %>%
+  ggplot(aes(x = phi, y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
+  geom_point() +
+  geom_errorbar() +
+  theme_bw()
+
 
 ```
 
