@@ -113,7 +113,7 @@ Now then, let's remove the biofouled runs and a couple runs with other issues, w
 ```{r}
 
 pumpfinal <- pump %>%
-  filter(growth_days==0, date != 190417, date != 190802, # leaving out old control 
+  filter(growth_days==0, !date %in% c(190417, 190802, 190926), # leaving out old control and 
          dowel_density != "0232")
 
 ```
@@ -210,6 +210,9 @@ We estimate `k_tot` from our pump data by linear regression of `log(mvc)`:
 ```{r, warning=FALSE, message=FALSE}
 
 library(lme4)
+
+pumpfinal <- pumpfinal %>%
+  mutate(date = as.factor(date))
 
 fits <- lmList(data = pumpfinal, log(mvc)~t | date)
 
