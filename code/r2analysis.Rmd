@@ -1,0 +1,312 @@
+---
+title: "Particle Interception as a Function of Reynolds Number and Collector Density"
+subtitle: "Version 3.0"
+author: "Jordan Wingenroth"
+date: "8/28/2020"
+toc: TRUE
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, fig.pos = "!H", out.extra = "")
+
+
+```
+
+**Objective(s)**
+
+In the interest of documenting our analytic methods, I've decided to make one comprehensive, hopefully lay-readable document including all steps from our raw laboratory data to the model results. I won't be able to include the turbulence analyses in time for our meeting (8/27), but that required Laurel's Matlab script anyways.
+
+## Data Tidying
+
+**CHANGES FROM VERSION 1 (8/26)**
+
+I pared back this section to reduce the page count. Please refer to the original version to see visualizations and more detailed steps and notes.
+
+**Time-decay runs:**
+
+We entered data into Google Sheets as we processed samples in the lab. I downloaded .csv versions of these data in 2019, then made a few modifications as I explored confounders. Today, I added data from runs done in my absence to this dataset. Field names, date syntax, and other conventions weren't kept consistent, so some data wrangling is necessary. I also removed the blank data at the beginning of some files manually.
+
+```{r, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+
+```
+
+
+```{r}
+
+pumpfiles <- list.files("../data/peristaltic pumps/")
+trapfiles <- list.files("../data/sediment traps/")
+
+```
+
+```{r}
+
+pumpdate <- str_sub(pumpfiles,0,6)
+trapdate <- str_sub(trapfiles,0,6)
+
+```
+
+In all, five runs are missing sediment trap data, meaning they won't be used in our final, published analyses.
+
+Let's turn our attention to the suspended concentration data (i.e., pump data).
+
+```{r, message=FALSE, warning=FALSE}
+
+pumpdata <- lapply(pumpfiles, function(x) read_csv(paste0("../data/peristaltic pumps/",x)))
+
+names(pumpdata) <- pumpdate
+
+x <- pumpdata
+
+tidypump <- lapply(seq_along(x), function(i) {
+  select(x[[i]], 
+         loc = Location, 
+         ht = Height,
+         t = `time series`,
+         mvc = contains("(ppm)")) %>%
+    filter(t < 21) %>% #filter a few timepoints outside the normal window 
+    mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
+           mvc = as.numeric(mvc), 
+           date = as.numeric(names(x)[[i]])) %>%
+    filter(mvc<80, mvc>8) #outliers were removed based on the residual graph
+  }
+  )
+
+pump <- bind_rows(tidypump)
+
+```
+
+So now we have a long table of our pump data (time $\times$ concentration) stratified by run (i.e., treatment), height, and upstream/downstream location.
+
+Aside from a few runs where **part** or **all** of the data don't follow the decay pattern, the results look pretty good! If we repeated runs as necessary to replace those with erroneous data, that shouldn't be a problem. Here I'll narrow down our dataset by knocking out runs with clear issues.
+
+```{r}
+
+pump <- pump %>%
+
+#first 3 runs had starting sediment mass of 100g rather than 200g
+
+    filter(date > 181005) %>%
+  
+#we can't use runs without sediment mass
+  
+    filter(as.character(date) %in% trapdate)
+  
+```
+
+So this leaves 20 rows. Let's join this to our run metadata table.
+
+```{r message=FALSE}
+
+metadata <- read_csv("../data/run_metadata.csv")
+
+pump <- left_join(pump, metadata, by = "date")
+
+```
+
+Now then, let's remove the biofouled runs and a couple runs with other issues, which won't be used in assessing our primary hypothesis about Reynolds number and collector density, and we'll see what we're left with.
+
+```{r}
+
+pumpfinal <- pump %>%
+  filter(growth_days==0, !date %in% c(190417, 190802, 190926), # leaving out old control and 
+         dowel_density != "0232")
+
+```
+
+There are certainly no trends jumping out immediately, which isn't necessarily worrisome since exponential decay is hard to compare by eye. More on that later though. 
+
+For the sediment traps, data import and wrangling follows a similar structure to the pump data.
+
+```{r, message=FALSE, warning=FALSE}
+
+trapdata <- lapply(trapfiles, function(x) read_csv(paste0("../data/sediment traps/",x)))
+
+names(trapdata) <- trapdate
+
+x <- trapdata
+
+tidytrap <- lapply(seq_along(x), function(i) {
+  select(x[[i]], station = 1, pre = contains("pre"), post = contains("post"), sed = contains("sed")) %>%
+  mutate(date = names(x)[i]) %>%
+  mutate_at(vars(pre,post,sed,date), as.numeric)
+  }
+  )
+
+trap <- bind_rows(tidytrap) %>%
+  filter(!is.na(sed))
+
+```
+
+So, across 21 runs, we had 186 samples. We were set up to collect 9 per run, but traps broke, filters slipped and spilled sediment, et cetera. $186/21 =$ `r 186/21`, so our success rate was actually pretty good, although some of those measurements were probably erroneous despite being measured. 
+
+```{r}
+
+trapfinal <- left_join(trap, metadata, by = "date") %>%
+  filter(date %in% pumpfinal$date)
+
+```
+
+**Velocity experiment:**
+
+We estimated Reynolds number from a flow velocity experiment in the open channel conducted on Jan 28, 2019. The Vectrino data is in commit `e78357` and the R code for the regression in commit `17c8af` in the esdlflume Github repo (Thanks Candace!).
+
+There's an image in version 1 (and in /pics) but the linear regression is simply $u = 0.00081282 + 0.00195723f$, where $u$ is flow velocity (m/s) and $f$ is pump frequency (Hz). Hence our velocities at 10, 20, and 30 Hz, were `r 0.00081282 + 0.00195723*10`, `r 0.00081282 + 0.00195723*20`, and `r 0.00081282 + 0.00195723*30` respectively.
+
+It should be noted that the back-of-envelope estimate of $v = f / 500$ is very close for our range, probably by design. For the regression, $R^2 > .99$.
+
+**Flume volume experiment:**
+
+The test section is modeled as a rectangular prism, making calculation of volume trivial. However, the water in the flume is in an irregular form. In order to correct for the time water spends flowing outside the test section, where collectors are not acting on particles, we must estimate the total volume of water. We did so using a simple integration of the volumetric flow rate at the drain. We ran an experiment previously in 2018 or 2019, but my physics common sense lapsed: We picked the drain hose up off the ground to take measurements, then stuck it back down in the drain for most of the flow time. This led to an underestimate of about 5-10%. I re-did the analysis. 1st through 4th degree polynomial regression all yield the same volume +/- <0.5% (code in this repo, under /code)
+
+I rounded off to 2.43 $\text m^3$. The test section has been measured as $1.95 \times .6 \times .4 =$ `r 1.95*.6*.4` $\text m^3$. Hence the corrective factor is `r 2.43/0.468`.
+
+So at this point, we really only need `pumpfinal`, `trapfinal`, maybe `metadata` for good measure, the frequency-to-velocity regression coefficients, and individual constants about the physical setup such as dowel diameter, flume volume, starting sediment mass, dynamic viscosity etc.
+
+I'll also mention here that our model is based on the general equation: $$k_{tot} = k_s + k_c + k_{bg}$$ where the k's represent total decay rate and portions of it due to settling, collection, and (background) settling in the rest of the flume outside the test section, respectively.
+
+### Uncertainty propogation function: mutate_with_error
+
+Here is a function found on StackExchange.com, which performs error propogation in R using derivatives. Error values should be named "dx", with x being the corresponding variable name.
+
+```{r}
+
+mutate_with_error = function(.data, f) {
+  exprs = list(
+    # expression to compute new variable values
+    deparse(f[[3]]),
+    
+    # expression to compute new variable errors
+    sapply(all.vars(f[[3]]), function(v) {
+      dfdp = deparse(D(f[[3]], v))
+      sprintf('(d%s*(%s))^2', v, dfdp)
+    }) %>%
+      paste(collapse='+') %>%
+      sprintf('sqrt(%s)', .)
+  )
+  names(exprs) = c(
+    deparse(f[[2]]),
+    sprintf('d%s', deparse(f[[2]]))
+  )
+  
+  .data %>%
+    # the standard evaluation alternative of mutate()
+    mutate_(.dots=exprs)
+}
+
+```
+
+## R2 Analysis
+
+We estimate `k_tot` from our pump data by linear regression of `log(mvc)`, across a matrix of start and stop points:
+
+```{r}
+
+pumpfinal %>%
+  group_by(date) %>%
+  summarize(n = n(),
+            stop_step = max(t)/300) # start always 1
+
+n_start = 8
+n_stop = 8
+
+r2mod <- list()
+r2val <- list()
+ktval <- list()
+
+for (i in 1:n_start) {
+  r2mod[[i]] <- list()
+  r2val[[i]] <- list()
+  ktval[[i]] <- list()
+  
+  for (j in 1:n_stop) {
+    r2mod[[i]][[j]] <- list()
+    r2val[[i]][[j]] <- list()
+    ktval[[i]][[j]] <- list()
+    
+    for (k in 1:length(unique(pumpfinal$date))) {
+      tempdata <- pumpfinal %>%
+        filter(t/300 > i-1, 
+               t/300 < 20 - j,
+               date == unique(pumpfinal$date)[k])
+      
+      r2mod[[i]][[j]][[k]] <- lm(data = tempdata, formula = log(mvc) ~ t)
+      r2val[[i]][[j]][[k]] <- summary(r2mod[[i]][[j]][[k]])$r.squared
+      ktval[[i]][[j]][[k]] <- -coef(r2mod[[i]][[j]][[k]])[2]
+      
+    }
+    
+    names(r2mod[[i]][[j]]) <- unique(pumpfinal$date)
+    names(r2val[[i]][[j]]) <- unique(pumpfinal$date)
+    names(ktval[[i]][[j]]) <- unique(pumpfinal$date)
+  }
+  
+  names(r2mod[[i]]) <- paste0('stop', 1:n_stop)
+  names(r2val[[i]]) <- paste0('stop', 1:n_stop)
+  names(ktval[[i]]) <- paste0('stop', 1:n_stop)
+}
+
+names(r2mod) <- paste0('start', 1:n_start)
+names(r2val) <- paste0('start', 1:n_start)
+names(ktval) <- paste0('start', 1:n_start)
+
+r2final <- tibble(unlist(r2val), names(unlist(r2val)), unlist(ktval)) %>% #requires single digit start and stop
+  transmute(r2 = .[[1]], 
+         kt = .[[3]],
+         start = str_sub(.[[2]], 6,6),
+         stop = str_sub(.[[2]], 12,12),
+         date = as.numeric(str_sub(.[[2]], 14,))) %>%
+  left_join(metadata, by = "date")
+
+```
+PLOTS: 
+```{r message=FALSE}
+
+r2final %>%
+  filter(stop == 1) %>%
+  ggplot(aes(x = start, y = r2, label = round(r2,3), group = paste0(dowel_density,pump_freq), color = dowel_density, lty = as.character(pump_freq))) +
+  geom_line() +
+  geom_point()
+
+r2final %>%
+  filter(start == 1) %>%
+  ggplot(aes(x = stop, y = r2, label = round(r2,3), group = paste0(dowel_density,pump_freq), color = dowel_density, lty = as.character(pump_freq))) +
+  geom_line() +
+  geom_point()
+
+r2final %>%
+  filter(stop == 1) %>%
+  ggplot(aes(x = start, y = kt, label = round(r2,3), group = paste0(dowel_density,pump_freq), color = dowel_density, lty = as.character(pump_freq))) +
+  geom_line() +
+  geom_point()
+
+r2final %>%
+  filter(start == 1) %>%
+  ggplot(aes(x = stop, y = kt, label = round(r2,3), group = paste0(dowel_density,pump_freq), color = dowel_density, lty = as.character(pump_freq))) +
+  geom_line() +
+  geom_point()
+
+r2final %>%
+  group_by(start, stop) %>%
+  summarise(mean_r2 = mean(r2)) %>%
+  ggplot(aes(x = start, y = stop, fill = mean_r2, label = round(mean_r2,3))) +
+  geom_tile() +
+  geom_text() +
+  scale_fill_viridis_c()
+
+r2final %>%
+  group_by(start, stop) %>%
+  summarise(min_r2 = min(r2)) %>%
+  ggplot(aes(x = start, y = stop, fill = min_r2, label = round(min_r2,3))) +
+  geom_tile() +
+  geom_text() +
+  scale_fill_viridis_c()
+
+
+
+```
+
