@@ -209,62 +209,51 @@ We estimate `k_tot` from our pump data by linear regression of `log(mvc)`:
 
 ```{r, warning=FALSE, message=FALSE}
 
-library(lme4)
+library(broom)
 
-pumpfinal <- pumpfinal %>%
-  mutate(date = as.factor(date))
+r2mod <- list()
+r2val <- list()
+ktval <- list()
 
-fits <- lmList(data = pumpfinal, log(mvc)~t | date)
+for (k in 1:length(unique(pumpfinal$date))) {
+  tempdata <- pumpfinal %>%
+    filter(date == unique(pumpfinal$date)[k])
+  
+  r2mod[[k]] <- lm(data = tempdata, formula = log(mvc) ~ t)
+  r2val[[k]] <- summary(r2mod[[k]])$r.squared
+  ktval[[k]] <- -coef(r2mod[[k]])[2]
+  
+}
 
-summary(fits)
+names(r2mod) <- unique(pumpfinal$date)
+names(r2val) <- unique(pumpfinal$date)
+names(ktval) <- unique(pumpfinal$date)
 
-```
+r2final <- tibble(unlist(r2val), names(unlist(r2val)), unlist(ktval)) %>% #requires single digit start and stop
+  transmute(r2 = .[[1]], 
+         kt = .[[3]],
+         start = str_sub(.[[2]], 6,6),
+         stop = str_sub(.[[2]], 12,12),
+         date = as.numeric(str_sub(.[[2]], 14,))) %>%
+  left_join(metadata, by = "date")
 
-The `t` coeffient estimates are the `k_tot` values in units $\text s^{-1}$, no transformation needed aside from a sign change ($\log(\bar{\phi})=\log(\phi_0e^{-kt}) = log(\phi_0)-kt$).
-
-All the t values are high, though the coefficient t-values are relative to 0, meaning they're really just expressing that we're very certain we did indeed add sediment (phew!). But let's see what the fits look like with the data:
-
-```{r}
-
-cbind(pumpfinal, pred = predict(fits)) %>%
-  ggplot() +
-  geom_point(aes(x = t, y = mvc), size = .75, alpha = .5) +
-  geom_line(aes(x = t, y = exp(pred)), color = "red") +
-  facet_grid(pump_freq~dowel_density) +
-  scale_x_continuous(breaks = c(0,3000,6000), limits = c(0,6000))
- 
-
-```
-
-As I noticed back in early 2019, these curves seem to hint at a U-shaped pattern in the residuals.
-
-```{r}
-
-cbind(pumpfinal, resid = residuals(fits)) %>%
-  ggplot(aes(x = t, y = resid, group = t)) +
-  geom_violin(alpha = .05) +
-  geom_smooth(inherit.aes = F, aes(x = t, y = resid))
+ktdata <- bind_rows(lapply(r2mod, tidy), .id = "date") %>%
+  filter(term == "t")
 
 ```
 
-I think this is simply an artifact of nonlinear processes not accounted for in the exponential model. As an example of what I mean, let's imagine there were a hidden variable called "stickiness" differentiating walnut shell particles from one another. If by way of accellerated settling due to floculation, or accellerated collection, those particles were disproportionately removed from suspension early in the timespan of the experiment, the average physical properties of the suspended sediment would change over its course. It also seems likely to me that as sediment adheres to collectors, their efficiency decreases on account of their having less open surface area.
-
-Whatever the explanation is, we (and other researchers using the exponential model) assume it is uniform across our independent variables. I don't know how safe that assumption is, but that'll have to wait for a future paper. It might be testable from our data but `n = 12` seems a bit of a small sample. Then again, we've probably done more like `n = 100` runs over the entire history of the project.
-
-Aside from that U-curve, the fit seems reasonably good. **This residual plot was used to remove the most obvious outliers**, though those in the bottom right (say, those satisfying $(y + 0.4) < (0.1/1000)(x-3500)$) might reasonably be considered outliers too. We might be in the gray area in terms of data-massaging at that point. Any formal outlier removal included in the manuscript will have to follow a *de rigueur*, citable method of course.
 
 So then, k_tot as a function of our independent vars:
 
 ```{r}
 
-fitdata <- coefficients(fits) %>%
-  mutate(k_t = -t) %>%
-  cbind(dk_t = summary(fits)[[4]][,,'t'][,2], date = as.numeric(row.names(coefficients(fits)))) %>%
+fitdata <- ktdata %>%
+  mutate(k_t = -estimate, dk_t = std.error, date = as.numeric(date)) %>%
   left_join(metadata, by = "date") %>%
   mutate(ad = as.numeric(dowel_density)*.003175^2*2/1.95, Re = pump_freq/500*.003175/9.509e-7) # DOWEL DENSITY CORRECTION INCLUDED HERE
 
 fitdata %>%
-  ggplot(aes(x = Re, y = k_t, ymin = k_t - dk_t, ymax = k_t + dk_t, color = as.character(round(ad,5)))) +
+  ggplot(aes(x = Re, y = k_t, ymin = k_t - 1.96*dk_t, ymax = k_t + 1.96*dk_t, color = as.character(round(ad,5)))) +
   geom_line(lty = "dotted", size = 2, alpha = .3) + 
   geom_point(position = position_dodge(width = 10)) +
   geom_errorbar(width = 10, position = "dodge") +  
@@ -368,7 +357,6 @@ final <- final %>%
   mutate(frontal_area = as.numeric(dowel_density)*.003175, 
             u = as.numeric(pump_freq)/500, #velocity 
             Re = u*.003175/visc, #Reynolds #
-            k_t = -t, 
             k_c, k_s, k_bg) %>%
   mutate(eta = k_c/u/frontal_area,
          deta = dk_c/u/frontal_area) %>%

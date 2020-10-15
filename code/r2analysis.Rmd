@@ -263,6 +263,36 @@ r2final <- tibble(unlist(r2val), names(unlist(r2val)), unlist(ktval)) %>% #requi
   left_join(metadata, by = "date")
 
 ```
+
+CURVATURE (CRUDE) ANALYSIS:
+```{r}
+
+modresid <- list()
+curvmod <- list()
+
+for (i in 1:length(r2mod)) {
+  modresid[[i]] <- list()
+  curvmod[[i]] <- list()
+  for (j in 1:length(r2mod[[i]])) {
+    modresid[[i]][[j]] <- list()
+    curvmod[[i]][[j]] <- list()
+    
+    for (k in 1:length(r2mod[[i]][[j]])){
+      
+      modresid[[i]][[j]][[k]] <- tibble(resid = resid(r2mod[[i]][[j]][[k]]),
+                                        index = 1:length(resid(r2mod[[i]][[j]][[k]])))
+      
+      curvmod[[i]][[j]][[k]] <- coef(lm(data = modresid[[i]][[j]][[k]], formula = resid ~ index + I(index^2)))
+      
+    }
+  }
+}
+
+
+
+```
+
+
 PLOTS: 
 ```{r message=FALSE}
 
@@ -305,8 +335,6 @@ r2final %>%
   geom_tile() +
   geom_text() +
   scale_fill_viridis_c()
-
-
 
 ```
 
