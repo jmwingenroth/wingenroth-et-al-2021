@@ -452,6 +452,7 @@ c_over_phi %>%
   labs(title = "Comparison of power-law constant to Fauria et al. data",
        x = expression(phi))
   
+lm(data = c_over_phi, formula = log10(C) ~ log10(phi)) %>% summary()
 
 ```
 
@@ -495,9 +496,13 @@ Each data point has a normal distribution associated with the estimate of eta (d
 
 **ADDRESSED:**
 
-Grouped by stem density:
+Models:
 
 ```{r message=FALSE, warning=FALSE}
+
+library(cowplot)
+
+reps = 10000
 
 skeleton_eta <- final %>%
   filter(frontal_area > 0) %>%
@@ -505,68 +510,63 @@ skeleton_eta <- final %>%
   arrange(phi, Re)
 
 monte <- list()
-
 for (i in 1:nrow(skeleton_eta)) {
   monte[[i]] <- tibble(phi = skeleton_eta$phi[i],
                        Re = skeleton_eta$Re[i],
-                       eta = rnorm(1000, mean = skeleton_eta$eta[i], sd = skeleton_eta$deta[i]))
+                       eta = rnorm(reps, mean = skeleton_eta$eta[i], sd = skeleton_eta$deta[i]))
 }
-
 lmsphi <- bind_rows(monte) %>%
-  mutate(ID = paste0(phi, 1:1000)) %>%
-  lmList(log(eta) ~ Re|ID, data = .) %>%
+  mutate(ID = paste0(phi, 1:reps),
+         logRe = log(Re)) %>%
+  lmList(log(eta) ~ logRe|ID, data = .) %>%
   coefficients()
-
 lmsphi <- tibble(phi = str_sub(rownames(lmsphi),0,6),lmsphi)
-
-
 lmsphi <- lmsphi %>%
   group_by(phi) %>%
-  summarise(avg = mean(Re, na.rm = TRUE), sd = sd(Re, na.rm = TRUE)) %>%
+  summarise(avg = mean(logRe, na.rm = TRUE), sd = sd(logRe, na.rm = TRUE)) %>%
   mutate(ymax = avg + 1.96*sd)
-
 lmsphi
   
-lmsphi %>%
-  ggplot(aes(x = phi, y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
-  geom_point() +
-  geom_errorbar() +
-  theme_bw()
-
-```
-
-Grouped by Re:
-
-```{r message=FALSE, warning=FALSE}
-
-monte2 <- list()
-
-for (i in 1:nrow(skeleton_eta)) {
-  monte2[[i]] <- tibble(phi = skeleton_eta$phi[i],
-                       Re = skeleton_eta$Re[i],
-                       eta = rnorm(1000, mean = skeleton_eta$eta[i], sd = skeleton_eta$deta[i]))
-}
-
-lmsre <- bind_rows(monte2) %>%
-  mutate(ID = paste0(Re, 1:1000)) %>%
-  lmList(log(eta) ~ phi|ID, data = .) %>%
+lmsre <- bind_rows(monte) %>%
+  mutate(ID = paste0(Re, 1:reps),
+         logphi = log(phi)) %>%
+  lmList(log(eta) ~ logphi|ID, data = .) %>%
   coefficients()
 
 lmsre <- tibble(Re = str_sub(rownames(lmsre),0,6),lmsre)
 
-
 lmsre <- lmsre %>%
   group_by(Re) %>%
-  summarise(avg = mean(phi, na.rm = TRUE), sd = sd(phi, na.rm = TRUE)) %>%
+  summarise(avg = mean(logphi, na.rm = TRUE), sd = sd(logphi, na.rm = TRUE)) %>%
   mutate(ymax = avg + 1.96*sd)
 
 lmsre
 
-lmsre %>%
-  ggplot(aes(x = as.numeric(Re), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
+```
+
+Plots:
+
+```{r message=FALSE, warning=FALSE}
+
+p_phi <- lmsphi %>%
+  ggplot(aes(x = paste0(100*as.numeric(phi),"%"), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
   geom_point() +
   geom_errorbar() +
-  theme_bw()
+  theme_bw() +
+  ylim(-3,1.5) +
+  xlab(expression(paste("Solid volume fraction (",phi,")"))) +
+  ylab(expression(paste("Effect size: ",beta[log(Re)])))
+
+p_re <- lmsre %>%
+  ggplot(aes(x = as.factor(round(as.numeric(Re),0)), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
+  geom_point() +
+  geom_errorbar() +
+  theme_bw() +
+  ylim(-3,1.5) +
+  xlab(expression(Re[c])) +
+  ylab(expression(paste("Effect size: ",beta[log(phi)])))
+
+plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
 
 ```
 
