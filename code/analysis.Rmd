@@ -502,7 +502,7 @@ Models:
 
 library(cowplot)
 
-reps = 10000
+reps = 30000
 
 skeleton_eta <- final %>%
   filter(frontal_area > 0) %>%
@@ -566,7 +566,9 @@ p_re <- lmsre %>%
   xlab(expression(Re[c])) +
   ylab(expression(paste("Effect size: ",beta[log(phi)])))
 
-plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
+monteplot <- plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
+
+save_plot("../pics/montecarlo.png", monteplot, dpi = 600)
 
 ```
 
