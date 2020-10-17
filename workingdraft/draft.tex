@@ -120,7 +120,14 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 
 \subsection{Effects of Collector Density and Reynolds Number}
 
-Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases \ref{figXXX}. One exception occurred at the lowest collector density ($\phi = 0.226\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 133$) had lower ECE than both the lower and higher $\Rey_c$ treatments. When compared to the other collector density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment. Repeating the suspended sediment experiment for this combination of parameter values yielded a ECE value very close to the estimate from the original experiment.
+Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases \ref{fig:ece}. One exception occurred at the lowest collector density ($\phi = 0.226\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 133$) had lower ECE than both the lower and higher $\Rey_c$ treatments. When compared to the other collector density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment. Repeating the suspended sediment experiment for this combination of parameter values yielded a ECE value very close to the estimate from the original experiment.
+
+\begin{figure}[H]
+\centering
+\includegraphics{../pics/ece_plot.png}
+\caption{Effect size estimates resulting from Monte Carlo regression analysis. Error bars represent 95\% confidence intervals. Asterisks mark the parameter values at which the effect size was found to be significant (\textbf{a}) Estimates of the effect of log-transformed collector solid volume fraction ($\beta_{\log(\phi)}$) on ECE, stratified by $\Rey_c$. (\textbf{b}) Estimates of the effect of log-transformed $\Rey_c$ ($\beta_{\log(\Rey)}$) on ECE, stratified by solid volume fraction.}
+\label{fig:ece}
+\end{figure}   
 
 Monte Carlo analysis determined that there is a significant (null hypothesis: $\mu = 0$) negative relationship between ECE and collector density for the low (p = 0.004) and high (p = 0.019) $\Rey_c$ treatments, but no significant effect was detected (p > 0.05) for the intermediate treatment (Figure \ref{fig:monte}a). This approach also found a significant negative relationship between ECE and $\Rey_c$ for the low (p = 0.026) and high (p = 0.046) collector density treatments, but an insignificant (p > 0.05) trend for the intermediate collector density treatment (Figure \ref{fig:monte}b). 
 
