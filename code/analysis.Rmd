@@ -375,8 +375,7 @@ plotece1 <- final %>%
   scale_y_continuous(labels = scales::percent) +
   labs(y = "ECE", x = expression(Re[c]), color = expression(phi)) +
   theme_bw() +
-  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
+  theme(legend.position = "bottom")
 
 plotece2 <- final %>%
   filter(dowel_density != "0000") %>%
@@ -387,12 +386,11 @@ plotece2 <- final %>%
   scale_y_continuous(labels = scales::percent) +
   labs(y = "ECE", color = expression(Re[c]), x = expression(phi)) +
   theme_bw() +
-  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
+  theme(legend.position = "bottom")
 
-plotece <- plot_grid(plotece1, plotece2, labels = c("(a)","(b)"), scale = .9)
+plotece <- plot_grid(plotece1, plotece2, labels = c("(a)","(b)"), scale = .9, align = "lrtb")
 
-save_plot("../pics/ece_plot.png",plotece, dpi = 600, base_asp = 2.4, base_width = 7)
+save_plot("../pics/ece_plot.png",plotece, dpi = 600)
 
 ```
 
