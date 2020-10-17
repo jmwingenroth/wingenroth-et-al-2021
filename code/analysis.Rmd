@@ -380,18 +380,19 @@ plotece1 <- final %>%
 plotece2 <- final %>%
   filter(dowel_density != "0000") %>%
   mutate(Refac = factor(Re, labels = c("Re = 66.78", "Re = 133.56", "Re = 200.34"))) %>%
-  ggplot(aes(color = factor(round(Re, 0)), y = eta, ymin = eta - deta, ymax = eta + deta, x = factor(ad, labels = c("0.22%","0.64%","1.17%")))) +
+  ggplot(aes(lty = factor(round(Re, 0)), y = eta, ymin = eta - deta, ymax = eta + deta, x = factor(ad, labels = c("0.22%","0.64%","1.17%")))) +
   geom_point(position = position_dodge(width = .55)) +
   geom_errorbar(width = 0.4, position = position_dodge(width = .55)) +  
   scale_y_continuous(labels = scales::percent) +
-  scale_color_hue(h.start = 180)
-  labs(y = "ECE", color = expression(Re[c]), x = expression(phi[c])) +
+  labs(y = "ECE", lty = expression(Re[c]), x = expression(phi[c])) +
   theme_bw() +
   theme(legend.position = "bottom")
 
 plotece <- plot_grid(plotece1, plotece2, labels = c("(a)","(b)"), scale = .9, align = "lrtb")
 
 save_plot("../pics/ece_plot.png",plotece, dpi = 600)
+
+plotece
 
 ```
 
