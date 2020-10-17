@@ -555,21 +555,27 @@ p_phi <- lmsphi %>%
   ggplot(aes(x = paste0(100*as.numeric(phi),"%"), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
   geom_point() +
   geom_errorbar() +
+  geom_hline(yintercept = 0, lty = 2) +
   theme_bw() +
+  geom_text(aes(y = avg + 1.96*sd + 1, label = c("*",NA,"*")), fontface = "bold", size = 5) +
   ylim(-3,1.5) +
   xlab(expression(paste("Solid volume fraction (",phi,")"))) +
-  ylab(expression(paste("Effect size: ",beta[log(Re)])))
+  ylab(expression(beta[log(Re)]))
 
 p_re <- lmsre %>%
   ggplot(aes(x = as.factor(round(as.numeric(Re),0)), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
   geom_point() +
   geom_errorbar() +
+  geom_hline(yintercept = 0, lty = 2) +
   theme_bw() +
+  geom_text(aes(y = avg + 1.96*sd + 1, label = c(NA,"*","*")), fontface = "bold", size = 5) +
   ylim(-3,1.5) +
   xlab(expression(Re[c])) +
-  ylab(expression(paste("Effect size: ",beta[log(phi)])))
+  ylab(expression(beta[log(phi)]))
 
 monteplot <- plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
+
+monteplot
 
 save_plot("../pics/montecarlo.png", monteplot, dpi = 600)
 
