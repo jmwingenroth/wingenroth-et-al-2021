@@ -373,7 +373,7 @@ plotece1 <- final %>%
   geom_point(position = position_dodge(width = .55)) +
   geom_errorbar(width = 0.4, position = position_dodge(width = .55)) +  
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "ECE", x = expression(Re[c]), color = expression(phi)) +
+  labs(y = "ECE", x = expression(Re[c]), color = expression(phi[c])) +
   theme_bw() +
   theme(legend.position = "bottom")
 
@@ -384,7 +384,7 @@ plotece2 <- final %>%
   geom_point(position = position_dodge(width = .55)) +
   geom_errorbar(width = 0.4, position = position_dodge(width = .55)) +  
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "ECE", color = expression(Re[c]), x = expression(phi)) +
+  labs(y = "ECE", color = expression(Re[c]), x = expression(phi[c])) +
   theme_bw() +
   theme(legend.position = "bottom")
 
@@ -573,8 +573,8 @@ p_phi <- lmsphi %>%
   theme_bw() +
   geom_text(aes(y = avg + 1.96*sd + 1, label = c("*",NA,"*")), fontface = "bold", size = 5) +
   ylim(-3,1.5) +
-  xlab(expression(paste("Solid volume fraction (",phi,")"))) +
-  ylab(expression(beta[log(Re)]))
+  xlab(expression(phi[c])) +
+  ylab(expression(beta[log(Re[c])]))
 
 p_re <- lmsre %>%
   ggplot(aes(x = as.factor(round(as.numeric(Re),0)), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
@@ -585,7 +585,7 @@ p_re <- lmsre %>%
   geom_text(aes(y = avg + 1.96*sd + 1, label = c(NA,"*","*")), fontface = "bold", size = 5) +
   ylim(-3,1.5) +
   xlab(expression(Re[c])) +
-  ylab(expression(beta[log(phi)]))
+  ylab(expression(beta[log(phi[c])]))
 
 monteplot <- plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
 
