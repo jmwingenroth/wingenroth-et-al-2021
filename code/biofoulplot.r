@@ -202,13 +202,14 @@ final <- final %>%
   mutate(eta = eta * 2.43/(1.95*.4*.6),
          deta = deta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
 
-final %>%
+biofilmplot <- final %>%
   filter(pump_freq == 30, dowel_density!="0000",growth_days!=30) %>%
-  ggplot(aes(x = growth_days, y = eta, ymin = eta - deta, ymax = eta + deta, color = as.character(round(ad,5)))) +
-  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  ggplot(aes(x = growth_days, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = factor(ad, labels = c("0.22%","0.64%","1.17%")))) +
+  geom_line() + 
   geom_point() +
-  geom_errorbar() +
-  scale_color_manual(values = c("blue","green","red")) +
+  geom_ribbon(aes(fill = factor(ad)), alpha = .2, color = NA, show.legend = FALSE) +
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "Effective capture efficiency", x = "Biofilm growth (days)", color = expression(italic(ad))) +
+  labs(y = "ECE", x = "Biofilm Growth (Days)", color = expression(phi[c])) +
   theme_bw()
+
+ggsave("../pics/biofilm.png",biofilmplot,dpi = 600)
