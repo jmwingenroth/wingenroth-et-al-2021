@@ -384,6 +384,7 @@ plotece2 <- final %>%
   geom_point(position = position_dodge(width = .55)) +
   geom_errorbar(width = 0.4, position = position_dodge(width = .55)) +  
   scale_y_continuous(labels = scales::percent) +
+  scale_color_hue(h.start = 180)
   labs(y = "ECE", color = expression(Re[c]), x = expression(phi[c])) +
   theme_bw() +
   theme(legend.position = "bottom")
