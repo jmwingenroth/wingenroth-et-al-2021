@@ -32,6 +32,9 @@ We entered data into Google Sheets as we processed samples in the lab. I downloa
 ```{r, message=FALSE, warning=FALSE}
 
 library(tidyverse)
+library(broom)
+library(cowplot)
+library(lme4)
 
 ```
 
