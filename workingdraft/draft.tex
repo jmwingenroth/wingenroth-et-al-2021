@@ -120,14 +120,15 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 
 \subsection{Effects of Collector Density and Reynolds Number}
 
-Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases \ref{figXXX}. One exception occurred at the lowest collector density ($\phi = 0.226\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 133$) had lower \%ECE than both the lower and higher $\Rey_c$ treatments. When compared to the other collector density treatments at this $\Rey_c = 133$ level, this treatment's \%ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment. Repeating the suspended sediment experiment for this combination of parameter values yielded a \%ECE value very close to the estimate from the original experiment.
+Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases \ref{figXXX}. One exception occurred at the lowest collector density ($\phi = 0.226\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 133$) had lower ECE than both the lower and higher $\Rey_c$ treatments. When compared to the other collector density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment. Repeating the suspended sediment experiment for this combination of parameter values yielded a ECE value very close to the estimate from the original experiment.
 
-Monte Carlo analysis determined that there is a significant negative relationship between \%ECE and collector density for the low ($\Rey_c = 66$) and high ($\Rey_c = 200$) collector Reynolds number treatments, but the trend was insignificant for the intermediate ($\Rey_c = 133$) treatment \ref{figYYYa}. This approach also found a significant negative relationship between \%ECE and $\Rey_c$ for the low ($\phi = 0.226\%$) and high ($\phi = 1.17\%$) collector density treatments, but an insignificant trend for the intermediate ($\phi = 0.650\%$) collector density treatment \ref{figYYYb}. Leaving out the insignificant relationships, the two relationships between \%ECE and collector density were considerably more significant than those between \%ECE and Reynolds number.
+Monte Carlo analysis determined that there is a significant negative relationship between ECE and collector density for the low (p = 0.004) and high (p = 0.019) $\Rey_c$ treatments, but no significant effect was detected (p > 0.05) for the intermediate treatment (Figure \ref{fig:monte}a). This approach also found a significant negative relationship between ECE and $\Rey_c$ for the low (p = 0.026) and high (p = 0.046) collector density treatments, but an insignificant (p > 0.05) trend for the intermediate collector density treatment (Figure \ref{fig:monte}b). 
 
 \begin{figure}[H]
 \centering
-\includegraphics{montecarlo.png}
-\caption{This is a figure, Schemes follow the same formatting. If there are multiple panels, they should be listed as: (\textbf{a}) Description of what is contained in the first panel. (\textbf{b}) Description of what is contained in the second panel. Figures should be placed in the main text near to the first time they are cited. A caption on a single line should be centered.}
+\includegraphics{../pics/montecarlo.png}
+\caption{Effect size estimates resulting from Monte Carlo regression analysis. Error bars represent 95\% confidence intervals. Asterisks mark (\textbf{a}) Estimates of the effect of log-transformed collector solid volume fraction ($\beta_{\log(\phi)}$) on ECE, stratified by $\Rey_c$. (\textbf{b}) Estimates of the effect of log-transformed $\Rey_c$ ($\beta_{\log(\Rey)}$) on ECE, stratified by solid volume fraction.}
+\label{fig:monte}
 \end{figure}   
 
 \subsection{Effect of Turbulence}
@@ -136,25 +137,25 @@ Monte Carlo analysis determined that there is a significant negative relationshi
 \caption{Turbulence and flow characteristics for all collector solid volume fraction ($\phi$) and $\Rey_c$ treatments, including the control (zero-collector) treatments for reference}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
-\begin{tabular}{>{\bfseries}r>{\bfseries}rrrr}
+\begin{tabular}{>{\bfseries}r>{\bfseries}rrr}
 \toprule
-\textbf{$\phi$}&\textbf{$\Rey_c$}&\textbf{Turbulent Kinetic Energy (\SI{}{\metre^2/\second^2})}&\textbf{Bed Shear Stress (\SI{}{\pascal})}&\textbf{Longitudinal Velocity (\SI{}{\centi\metre/\second})}\\
+\textbf{$\phi$}&\textbf{$\Rey_c$}&\textbf{Turbulent Kinetic Energy (\SI{}{\metre^2/\second^2})}&\textbf{Bed Shear Stress (\SI{}{\pascal})}\\
 \midrule
-Control &   67  & \num{2.48d-6}&\num{-5.52d-4}&   2.03\\
-        &   134 & \num{2.98d-6}&\num{ 3.17d-3}&   4.10\\
-        &   200 & \num{3.37d-6}&\num{ 5.13d-3}&   6.24\\
+Control &   67  & \num{2.48d-6}&\num{-5.52d-4}\\
+        &   134 & \num{2.98d-6}&\num{ 3.17d-3}\\
+        &   200 & \num{3.37d-6}&\num{ 5.13d-3}\\
 \midrule
-0.226\% &   67  & \num{1.23d-6}&\num{-2.95d-5}&   1.87\\
-        &   134 & \num{5.26d-6}&\num{-1.39d-4}&   3.68\\
-        &   200 & \num{1.22d-5}&\num{ 1.87d-2}&   5.65\\
+0.226\% &   67  & \num{1.23d-6}&\num{-2.95d-5}\\
+        &   134 & \num{5.26d-6}&\num{-1.39d-4}\\
+        &   200 & \num{1.22d-5}&\num{ 1.87d-2}\\
 \midrule
-0.650\% &   67  & \num{9.13d-6}&\num{ 9.62d-4}&   1.39\\
-        &   134 & \num{3.59d-5}&\num{ 1.20d-3}&   3.01\\
-        &   200 & \num{5.96d-5}&\num{ 6.52d-4}&   4.70\\
+0.650\% &   67  & \num{9.13d-6}&\num{ 9.62d-4}\\
+        &   134 & \num{3.59d-5}&\num{ 1.20d-3}\\
+        &   200 & \num{5.96d-5}&\num{ 6.52d-4}\\
 \midrule
-1.17\%  &   67  & \num{1.11d-5}&\num{ 4.47d-4}&   1.76\\
-        &   134 & \num{2.98d-5}&\num{ 1.36d-3}&   4.22\\
-        &   200 & \num{5.44d-5}&\num{ 2.44d-3}&   5.41\\
+1.17\%  &   67  & \num{1.11d-5}&\num{ 4.47d-4}\\
+        &   134 & \num{2.98d-5}&\num{ 1.36d-3}\\
+        &   200 & \num{5.44d-5}&\num{ 2.44d-3}\\
 \bottomrule
 \end{tabular}
 \end{table}
