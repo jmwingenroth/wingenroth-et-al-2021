@@ -98,7 +98,7 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 \abstract{TO DO}
 
 % Keywords
-\keyword{sediment transport; collector efficiency; transitional turbulence}
+\keyword{sediment transport; collector efficiency; submerged vegetation; transitional turbulence; biofilm; algae; sedimentation}
 
 \begin{document}
 
@@ -118,9 +118,9 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 
 \section{Results}
 
-\subsection{Effects of Collector Density and Reynolds Number}
+\subsection{Particle Capture}
 
-Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases (Figure \ref{fig:ece}). One exception occurred at the lowest collector density ($\phi_c = 0.226\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 133$) had lower ECE than both the lower and higher $\Rey_c$ treatments. When compared to the other collector density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment. Repeating the suspended sediment experiment for this combination of parameter values yielded a ECE value very close to the estimate from the original experiment.
+Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases (Figure \ref{fig:ece}). One exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). For both of these comparisons, the large magnitude of our uncertainty suggests that the mid-$\Rey_c$, low-collector-density result could simply be an experimental anomaly.
 
 \begin{figure}[H]
 \centering
@@ -138,7 +138,7 @@ Monte Carlo analysis determined that there is a significant (null hypothesis: $\
 \label{fig:monte}
 \end{figure}   
 
-\subsection{Effect of Turbulence}
+\subsection{Turbulence and Flow Characteristics}
 
 \begin{table}[H]
 \caption{Turbulence and flow characteristics for all collector solid volume fraction ($\phi_c$) and $\Rey_c$ treatments, including the control (zero-collector) treatments for reference.}
@@ -152,11 +152,11 @@ Control &   67  & \num{2.48d-6}&\num{-5.52d-4}\\
         &   134 & \num{2.98d-6}&\num{ 3.17d-3}\\
         &   200 & \num{3.37d-6}&\num{ 5.13d-3}\\
 \midrule
-0.226\% &   67  & \num{1.23d-6}&\num{-2.95d-5}\\
+0.22\% &   67  & \num{1.23d-6}&\num{-2.95d-5}\\
         &   134 & \num{5.26d-6}&\num{-1.39d-4}\\
         &   200 & \num{1.22d-5}&\num{ 1.87d-2}\\
 \midrule
-0.650\% &   67  & \num{9.13d-6}&\num{ 9.62d-4}\\
+0.64\% &   67  & \num{9.13d-6}&\num{ 9.62d-4}\\
         &   134 & \num{3.59d-5}&\num{ 1.20d-3}\\
         &   200 & \num{5.96d-5}&\num{ 6.52d-4}\\
 \midrule
@@ -168,12 +168,12 @@ Control &   67  & \num{2.48d-6}&\num{-5.52d-4}\\
 \end{table}
 
 
-\subsection{Effect of Biofilm}
+\subsection{Biofilm Effects}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/biofilm.png}
-\caption{Estimates of effective capture efficiency calculated from experimental runs with varying degrees of biofilm growth. Colors represent the different collector densities, expressed as solid volume fraction ($\phi_c$). The shaded areas represent linear interpolations of the 95\% confidence intervals calculated from our experiments.}
+\caption{Estimates of effective capture efficiency calculated from experimental runs with varying degrees of biofilm growth. Colors represent the different collector densities, expressed as solid volume fraction ($\phi_c$). Straight lines are drawn between the points that represent our experiments and the shaded areas represent 95\% confidence intervals for ECE inferred from our measurement uncertainty.}
 \label{fig:biofilm}
 \end{figure}   
 
@@ -199,11 +199,10 @@ Control &   67  & \num{2.48d-6}&\num{-5.52d-4}\\
 
 \authorcontributions{Conceptualization, L.L., J.N., and J.W.; methodology, L.L. and J.W.; software, L.L., J.N., J.W., and C.Y.; validation, J.W.; formal analysis, J.W. and C.Y.; investigation, J.N., J.W, and C.Y.; resources, L.L.; data curation, J.W.; writing--original draft preparation, J.N., J.W., and C.Y.; writing--review and editing, L.L., J.N., J.W., and C.Y.; visualization, J.W.; supervision, L.L., J.W., and C.Y.; project administration, L.L. and J.W.; funding acquisition, L.L.}
 
-\funding{This research was funded by NSF award \#1455362. The APC was funded by %TODO
-\textcolor{red}{[WHAT GRANT WILL THE APC BE FUNDED BY???]}.}
+\funding{This research was funded by NSF award \#1455362.}
 
 %TODO
-\acknowledgments{Colin Keating, Yayla Sezinger, Elle Chen, Nicole Ulakovic, Katrina Ginsberg, Danielle Satin, Sam Stein, and Sheila Trampush.}
+\acknowledgments{The authors wish to thank and acknowledge Colin Keating and Aaron Hurst for their helpful work on preliminary flume experiments. We also wish to express great thanks to Yayla Sezinger, Elle Chen, Nicole Ulakovic, Katrina Ginsberg, and Danielle Satin for their time spent preparing for experiments, maintaining the flume, and fastidiously carrying out other important laboratory tasks. Lastly, we wish to thank Sam Stein and Sheila Trampush for graciously sharing data and participating in brainstorming sessions while working on concurrent studies within the same general topic area.}
 
 \conflictsofinterest{The authors declare no conflict of interest.} 
 
