@@ -480,7 +480,7 @@ cplot <- c_over_phi %>%
   annotate("polygon", x=c(.012,.012,.004,.004,.007), y= c(23,27,27,23,23), color = "black", fill = "gray 97") +
   annotate("text", .008, 25, parse = TRUE, label = "C == 0.00801*phi^-1.41")
 
-ggsave("../pics/cphiplot.png",cplot,dpi = 600)
+ggsave("../pics/cphiplot.png",cplot,dpi = 600, height = 4, units = "in")
 
 ```
 
