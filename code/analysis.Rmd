@@ -474,11 +474,11 @@ cplot <- c_over_phi %>%
   ggplot(aes(x = phi, y = C, color = factor(lab, levels = c("This study", "Fauria et al. (2015)")))) +
   geom_point(size = 2, pch = 4) +
   theme_bw() +
-  labs(x = expression(phi[c]), color = "Study") +
+  labs(x = expression(phi[c]), color = "") +
   scale_color_manual(values = c("darkgreen","red")) +
   geom_line(data = c_phi_curve, aes(x = phi, y = C), inherit.aes = FALSE) +
   annotate("polygon", x=c(.012,.012,.004,.004,.007), y= c(23,27,27,23,23), color = "black", fill = "gray 97") +
-  annotate("text", .008, 25, parse = TRUE, label = "C == 0.00801*phi^-1.41")
+  annotate("text", .008, 25, parse = TRUE, label = "C == 0.00801*phi[c]^-1.41")
 
 ggsave("../pics/cphiplot.png",cplot,dpi = 600, height = 4, units = "in")
 
