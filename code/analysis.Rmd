@@ -506,8 +506,8 @@ plotcomp <- final %>%
   ggplot(aes(x = Re, y = eta, ymin = eta - deta, ymax = eta + deta, color = factor(phi, labels = c("0.22%","0.64%","1.17%")))) +
   geom_line(data = fauria_pred, aes(y = eta_est, x = Re, linetype = "Fauria et al. model"), inherit.aes = FALSE, show.legend = TRUE) +
   geom_point() +
-  geom_errorbar(width = 20) +  
-  scale_y_continuous(labels = scales::percent) +
+  geom_errorbar(width = 10) +  
+  scale_y_log10(labels = scales::percent) +
   facet_wrap(~ as.character(round(phi,5))) +
   labs(y = "ECE", x = expression(Re[c]), color = expression(phi[c])) +
   theme_bw() +
@@ -517,6 +517,8 @@ plotcomp <- final %>%
         legend.position = "bottom") +
   guides(fill = guide_legend(override.aes = list(linetype = 0)),
          color = guide_legend(override.aes = list(linetype = 0)))
+
+plotcomp
 
 ggsave("../pics/comparisonplot.png", dpi = 600, height = 4)
 
