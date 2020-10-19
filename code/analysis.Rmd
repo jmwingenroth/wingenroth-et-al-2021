@@ -472,11 +472,11 @@ c_phi_curve <- tibble(phi = seq(0.002,.03,by = .0001), C = 10^-2.0966*phi^-1.410
 
 cplot <- c_over_phi %>%
   ggplot(aes(x = phi, y = C, color = factor(lab, levels = c("This study", "Fauria et al. (2015)")))) +
+  geom_line(data = c_phi_curve, aes(x = phi, y = C), inherit.aes = FALSE) +
   geom_point(size = 2, pch = 4) +
   theme_bw() +
-  labs(x = expression(phi[c]), color = "") +
+  labs(x = expression(phi[c]), color = "Study") +
   scale_color_manual(values = c("darkgreen","red")) +
-  geom_line(data = c_phi_curve, aes(x = phi, y = C), inherit.aes = FALSE) +
   annotate("polygon", x=c(.012,.012,.004,.004,.007), y= c(23,27,27,23,23), color = "black", fill = "gray 97") +
   annotate("text", .008, 25, parse = TRUE, label = "C == 0.00801*phi[c]^-1.41")
 
@@ -500,19 +500,25 @@ fauria_pred <- tibble(Re = rep(seq(66,200,length = 1000),3),
        phi = c(rep(0.002257447,1000),rep(0.006496250,1000),rep(0.011774453,1000))) %>%
   mutate(eta_est = Re^-1.14*C*0.04312975, ad = phi)
 
-final %>%
+plotcomp <- final %>%
   filter(dowel_density != "0000") %>%
   mutate(Refac = factor(Re, labels = c("Re = 66.78", "Re = 133.56", "Re = 200.34"))) %>%
-  ggplot(aes(x = Re, y = eta, ymin = eta - deta, ymax = eta + deta, color = as.character(round(phi,5)))) +
+  ggplot(aes(x = Re, y = eta, ymin = eta - deta, ymax = eta + deta, color = factor(phi, labels = c("0.22%","0.64%","1.17%")))) +
+  geom_line(data = fauria_pred, aes(y = eta_est, x = Re, linetype = "Fauria et al. model"), inherit.aes = FALSE, show.legend = TRUE) +
   geom_point() +
-  geom_errorbar() +  
-  geom_line(data = fauria_pred, aes(y = eta_est, x = Re), inherit.aes = FALSE) +
-  scale_color_manual(values = c("blue","green","red")) +
+  geom_errorbar(width = 20) +  
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ as.character(round(phi,5))) +
-  labs(y = "Effective capture efficiency", x = expression(Re), color = expression(phi)) +
+  labs(y = "ECE", x = expression(Re[c]), color = expression(phi[c])) +
   theme_bw() +
-  ggtitle("Comparison of experiments and power-law model based on experiments")
+  scale_linetype_discrete(name = "") +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_blank(),
+        legend.position = "bottom") +
+  guides(fill = guide_legend(override.aes = list(linetype = 0)),
+         color = guide_legend(override.aes = list(linetype = 0)))
+
+ggsave("../pics/comparisonplot.png", dpi = 600, height = 4)
 
 ```
 
