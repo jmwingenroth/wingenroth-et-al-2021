@@ -104,8 +104,6 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 
 \section{Introduction}
 
-\cite{Fauria_2015}
-
 \subsection{Environmental Significance}
 
 \subsection{Theoretical Background}
@@ -124,9 +122,27 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 \begin{figure}[H]
 \includegraphics[width=5in]{../pics/flume_with_sedtraps.png}
 \centering
-\caption{Conceptual diagram of the Ecogeomorphology laboratory flume. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. A side view of the open-channel part of the system is included. Some dimensions not to scale. Red circles in the top-down view and black rectangles in the side view of the test section show the locations of the sediment traps.}
+\caption{The Ecogeomorphology flume. Not all measurements are to scale. \textbf{(a)} Photograph of the test section (left-center) and pump (right). \textbf{(b)} Conceptual diagram of the flume as seen from above. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. Green points represent the inlets for the peristaltic pumps sampling suspended particle concentration. Red areas represent the sediment traps. \textbf{(c)} A side view of the open-channel part of the system.}
 \label{fig:floorplan}
 \end{figure}
+
+\begin{table}[H]
+\caption{Experimental and natural parameter ranges. Natural values are approximations based on field observations \cite{Nepf_2012}.}
+\centering
+%% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Parameter}&\textbf{This study}&\textbf{Fauria et al. (2015)}&\textbf{Purich (2006)}&\textbf{Natural}\\
+\midrule
+Flow velocity (\SI{}{\centi\metre/\second})     & 2.0--6.0 & 1.8--6.1 & 1.0--10.2 & 0--25     \\
+Flow depth (\SI{}{\centi\metre})                & 40       & 14--17   & 12        & 0--50     \\
+Average collector diameter (\SI{}{\centi\metre})& 0.318    & 0.3      & 0.63      & 0.1--1    \\
+
+\bottomrule
+\label{tbl:parameters}
+\end{tabular}
+\end{table}
+
 
 \subsection{Sediment Transport and Particle Capture Model}
 
@@ -134,7 +150,7 @@ $^{3}$ \quad Department of Statistics, University of California, Berkeley, CA}
 
 \subsection{Particle Capture}
 
-Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases (Figure \ref{fig:ece}). One exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). For both of these comparisons, the large magnitude of our uncertainty suggests that the mid-$\Rey_c$, low-collector-density result could simply be an anomaly.
+Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases (Figure \ref{fig:ece}). One exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). For both of these comparisons, the large magnitude of our uncertainty leaves open the possibility that the mid-$\Rey_c$, low-collector-density result could simply be an anomaly.
 
 \begin{figure}[H]
 \centering
@@ -178,6 +194,7 @@ Control &   67  & \num{2.48d-6}\\
         &   134 & \num{2.98d-5}\\
         &   200 & \num{5.44d-5}\\
 \bottomrule
+\label{tbl:turbulence}
 \end{tabular}
 \end{table}
 
@@ -196,7 +213,7 @@ Control &   67  & \num{2.48d-6}\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/comparisonplot.png}
-\caption{A comparison of our experimental estimates of effective capture efficiency, colored according to collector solid volume fraction ($\phi_c$), and the predictions of the Fauria et al. power law model \cite{Fauria_2015}. Effective capture efficiency is plotted on a log scale in order to display model fit more accurately at small values. Error bars represent +/- 1 SE.}
+\caption{A comparison of our experimental estimates of effective capture efficiency, colored according to collector solid volume fraction ($\phi_c$), and the predictions of the Fauria et al. \cite{Fauria_2015} power law model. Effective capture efficiency is plotted on a log scale in order to display model fit more accurately at small values. Error bars represent +/- 1 SE.}
 \label{fig:compplot}
 \end{figure}   
 
