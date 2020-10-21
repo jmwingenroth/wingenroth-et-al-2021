@@ -157,7 +157,7 @@ final %>%
 # K_BG
 
 bgvals <- final %>%
-  filter(dowel_density=="0000", date != 190802) %>% #took out control to avoid join error
+  filter(dowel_density=="0000") %>% #took out control to avoid join error
   mutate_with_error(k_bg ~ k_t - k_s) %>%
   select(pump_freq, k_bg, dk_bg) %>%
   arrange(pump_freq)
@@ -203,7 +203,7 @@ final <- final %>%
          deta = deta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
 
 biofilmplot <- final %>%
-  filter(pump_freq == 30, dowel_density!="0000",growth_days!=30) %>%
+  filter(pump_freq == 30, dowel_density!="0000") %>%
   ggplot(aes(x = growth_days, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = factor(ad, labels = c("0.22%","0.64%","1.17%")))) +
   geom_line() + 
   geom_point() +
