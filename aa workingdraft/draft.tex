@@ -10,6 +10,7 @@
 
 \subsection{Theoretical Background}
 
+% Capture diagram figure
 \begin{figure}[H]
 \includegraphics[width=5in]{../pics/collectorefficiency.png}
 \centering
@@ -21,6 +22,9 @@
 
 \subsection{Experimental Methods}
 
+We conducted our experiments in the Ecogeomorphology flume, an indoor (temperature: $22.2$ +/- 1 \SI{}{\celsius}) recirculating flume located in McCone Hall at the University of California, Berkeley. The flume has a 5.25 m L $\times$ 0.6 m W $\times$ 0.6 m H open-channel section with a cuboid geometry and a bed and sidewalls that are smooth and transparent (Figure \ref{fig:floorplan}). At its upstream and downstream ends, this section connects to rectangular ducts with gradually changing hydraulic diameter and rounded corners with curved vertical manifolds along streamlines, both intended to maintain laminar flow. Additionally, at the upstream end of the open-channel, a honeycomb flow collimator serves to further straighten flow streamlines before the test section. The ducts in turn connect to the inlet and outlet of a special type of electric pump (Discflo Pumps Corporation Inc., Santee, CA), which uses rotating discs to entrain fluid and suspended particles through its interior chamber via viscous drag, maintaining laminar flow and avoiding alteration of particle or fluid properties (e.g., abrasion, pulsation) \cite{discflo}. Altogether, the flume design maintains constant, adjustable discharge through the open channel, minimizing background turbulence and other artifacts that arise with other types of pumps.
+
+% Flume diagram figure
 \begin{figure}[H]
 \includegraphics[width=5in]{../pics/flume_with_sedtraps.png}
 \centering
@@ -28,10 +32,20 @@
 \label{fig:floorplan}
 \end{figure}
 
+Within the open-channel part of the flume, we designated a "test section" 1.95 m in length where collectors would be installed. This test section and the surrounding area were instrumented with the following devices:
+\begin{enumerate}
+     \item A flat-bedded array positioned flush with the neighboring channel bed, containing vertical, emergent collector stems, which were spaced uniformly in an unpatterned manner
+    \item Two battery-operated peristaltic pumps (Cole-Parmer, Vernon Hills, IL) used to sample suspended particle concentration via three hose inlets each (inside diameter = 3.1 mm), which were suspended at a range of heights from the channel bed (5; 14; 27 cm); these were positioned both upstream and downstream of the test section 
+   \item Sediment traps (n = 9) with 2.5 cm circular openings flush with the bed and collection filters recessed 5 cm below, which were used to estimate settled particle mass; these were interspersed among the collectors in a pattern intended to evaluate consistency throughout the test section
+\end{enumerate}
+
+We conducted experimental runs for a fully-crossed parameter space of collector Reynolds number (67; 134; 200) and collector density (0; 278; 800; 1450 collectors/m$^2$). These values, as well as other constant experimental parameters, were chosen to correspond to those that might occur for emergent grasses or reeds in natural settings (Table \ref{tbl:parameters}). A zero-collector control density was included in order to isolate the effects of our experimental installations from the background effects of the rest of the flume. We used 1/8" (0.3175 cm) cylindrical wooden dowels as collectors, which were covered in silicone grease (Chemplex 710, Fuchs Petrolub, Mannheim, Germany) in order to retain impacted particles. 
+
+% Experimental parameters table
 \begin{table}[H]
 \caption{Experimental and natural parameter ranges. Natural values are based on approximations or measurements from cited studies and literature reviews.}
-\begin{threeparttable}
 \centering
+\begin{threeparttable}
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Parameter}&\textbf{This study}&\textbf{Fauria et al. (2015)}&\textbf{Purich (2006)}&\textbf{Natural}\\
@@ -53,7 +67,7 @@ Solid volume fraction (\%)
 & 0.22--1.17  & 0.82--2.16  & 2.86--11.5   & 0.1--45 \cite{Nepf_2012} \\ 
 \midrule
 Particle type
-& Walnut shell flour  & Road dust  & Pliolite\textsuperscript{\textregistered}   & --- \\ 
+& Walnut shell  & Road dust  & Pliolite\textsuperscript{\textregistered}   & --- \\ 
 Specific gravity      
 & 1.53        &2.27--2.61 \tnote{1}  & 1.03         & 2.56--2.87 \cite{czuba2015sedgravity} \\
 Average particle diameter, $d_{50}$ (\SI{}{\micro\metre})     
@@ -64,7 +78,6 @@ Suspended concentration (\SI{}{\micro\liter/\liter})
 Particle-collector diameter ratio, $R$      
 &0.0079       &0.0004--0.083 \tnote{2} & 0.037        & <0.25     \\
 \bottomrule
-\label{tbl:parameters}
 \vspace{-4mm}
 \end{tabular}
 \begin{tablenotes}
@@ -73,7 +86,10 @@ Particle-collector diameter ratio, $R$
 \footnotesize \item[2] Fauria et al. \cite{Fauria_2015} used a LISST to measure collection across a broad range of particle diameters (1.25--250 \SI{}{\micro\metre})
 \end{tablenotes}
 \end{threeparttable}
+\label{tbl:parameters}
 \end{table}
+
+Before each experiment, the flume was filled with tap water to 0.4 m depth in the test section, enough to completely fill the ducts and pump.
 
 \subsection{Sediment Transport and Particle Capture Model}
 
@@ -83,6 +99,7 @@ Particle-collector diameter ratio, $R$
 
 Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases (Figure \ref{fig:ece}). One exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). For both of these comparisons, the large magnitude of our uncertainty leaves open the possibility that the mid-$\Rey_c$, low-collector-density result could simply be an anomaly.
 
+% ECE figure
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/ece_plot.png}
@@ -92,6 +109,7 @@ Effective collector efficiency was found to decrease with increasing collector R
 
 Monte Carlo analysis determined that there is a significant (null hypothesis: $\mu = 0$) negative relationship between ECE and collector density for the low (p = 0.004) and high (p = 0.019) $\Rey_c$ treatments, but no significant effect was detected (p > 0.05) for the intermediate treatment (Figure \ref{fig:monte}a). This approach also found a significant negative relationship between ECE and $\Rey_c$ for the low (p = 0.026) and high (p = 0.046) collector-density treatments, but an insignificant (p > 0.05) trend for the intermediate collector-density treatment (Figure \ref{fig:monte}b). 
 
+% Monte Carlo figure
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/montecarlo.png}
@@ -101,6 +119,7 @@ Monte Carlo analysis determined that there is a significant (null hypothesis: $\
 
 \subsection{Turbulence and Flow Characteristics}
 
+% Turbulence table
 \begin{table}[H]
 \caption{Turbulence and flow characteristics for all collector solid volume fraction ($\phi_c$) and $\Rey_c$ treatments, including the control (zero-collector) treatments for reference.}
 \centering
@@ -129,9 +148,9 @@ Control &   67  & \num{2.48d-6}\\
 \end{tabular}
 \end{table}
 
-
 \subsection{Biofilm Effects}
 
+% Biofilm figure
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/biofilm.png}
@@ -141,6 +160,7 @@ Control &   67  & \num{2.48d-6}\\
 
 \subsection{Comparison to Previous Models of Capture Efficiency}
 
+% Fauria model comparison figure
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/comparisonplot.png}
@@ -148,6 +168,7 @@ Control &   67  & \num{2.48d-6}\\
 \label{fig:compplot}
 \end{figure}   
 
+% C-phi model figure
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/cphiplot.png}
