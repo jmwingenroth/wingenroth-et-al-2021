@@ -29,58 +29,50 @@
 \end{figure}
 
 \begin{table}[H]
-\caption{Experimental and natural parameter ranges. Natural values are approximations from other studies and literature reviews \cite{Nepf_2012,kadlec1990, czuba2015sedgravity, bogen1992sedsize, wright2018hydrological}. The asterisk marks where empirical estimates \cite{mckenzie2008size} replace missing study-specific data.}
+\caption{Experimental and natural parameter ranges. Natural values are based on approximations or measurements from cited studies and literature reviews.}
+\begin{threeparttable}
 \centering
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Parameter}&\textbf{This study}&\textbf{Fauria et al. (2015)}&\textbf{Purich (2006)}&\textbf{Natural}\\
 \midrule
 Flow velocity (\SI{}{\centi\metre/\second})     
-& 2.0--6.0    & 1.8--6.1    & 1.0--10.2    & 0--25     \\
+& 2.0--6.0    & 1.8--6.1    & 1.0--10.2    & 0--25 \cite{nikora2008hydraulic}    \\
 Flow depth (\SI{}{\centi\metre})                
-& 40          & 14--17      & 12           & 0--50     \\
+& 40          & 14--17      & 12           & 0--50 \cite{kadlec1990}    \\
 \midrule
 Collector shape
-& Cylindrical & Artificial grass  & Cylindrical & -- \\ 
+& Cylindrical & Artificial grass  & Cylindrical & --- \\ 
 Collector diameter (\SI{}{\centi\metre})
-& 0.318       & 0.3         & 0.6          & 0.1--1.2  \\
+& 0.318       & 0.3         & 0.6          & 0.1--1.2 \cite{Nepf_2012,wright2018hydrological} \\
 Collector Reynolds number                       
-& 66--200     & 54--183     & 70--640      & 5--1000   \\ 
-Collector density ($\#/m^2$)
-& 278--1450   & 2724--7209  & 1013--4053   & 10--2700  \\
-Solid volume fraction, $\phi_c$ (\%)
-& 0.22--1.17  & 0.82--2.16  & 2.86--11.5   & 0.1--45  \\ 
+& 66--200     & 54--183     & 70--640      & 5--1000 \cite{kadlec1990}  \\ 
+Collector density ($\#/\text{m}^2$)
+& 278--1450   & 2724--7209  & 1013--4053   & 10--2700 \cite{wright2018hydrological} \\
+Solid volume fraction (\%)
+& 0.22--1.17  & 0.82--2.16  & 2.86--11.5   & 0.1--45 \cite{Nepf_2012} \\ 
 \midrule
 Particle type
-& Walnut shell flour  & Road dust  & Pliolite    & -- \\ 
+& Walnut shell flour  & Road dust  & Pliolite\textsuperscript{\textregistered}   & --- \\ 
 Specific gravity      
-& 1.53        &2.27--2.61*  & 1.03         & 2.56--2.87\\
-Particle diameter (\SI{}{\micro\metre})     
-& 0.7--250    &1.25--250    & 212--250     & <2--250   \\
+& 1.53        &2.27--2.61 \tnote{1}  & 1.03         & 2.56--2.87 \cite{czuba2015sedgravity} \\
+Average particle diameter, $d_{50}$ (\SI{}{\micro\metre})     
+& 25.2        & $\sim$10--15      & 212--250     & 45--100 \cite{hejduk2010variations,noe2010glades}  \\
 Suspended concentration (\SI{}{\micro\liter/\liter})      
-&             &             &              &           \\
+& 5.3--53.8   & 9--50       & $\sim$110   & 2-25 \cite{noe2010glades,aiona2013can}      \\
 \midrule
 Particle-collector diameter ratio, $R$      
-&             &             &              &           \\
+&0.0079       &0.0004--0.083 \tnote{2} & 0.037        & <0.25     \\
 \bottomrule
 \label{tbl:parameters}
+\vspace{-4mm}
 \end{tabular}
-\end{table}
-
-\begin{table}[H]
-\caption{Comparison of experimental equipment}
-\centering
-\begin{tabular}{lllll}
-\toprule
-\textbf{Parameter}&\textbf{This study}&\textbf{Fauria et al. (2015)}&\textbf{Purich (2006)}&\textbf{Natural}\\
-\midrule
-Collector type
-& Greased cylinders & Artificial leaves  & Greased cylinders & E.g., stems, leaves \\ 
-Particle type
-& Walnut shell flour  & Road dust  & Pliolite particles   & E.g., silt, clay \\ 
-\bottomrule
-\label{tbl:leftoverparams}
-\end{tabular}
+\begin{tablenotes}
+\footnotesize \item[1] Estimates from an observational study about road dust \cite{mckenzie2008size} (study-specific data unavailable)
+\vspace{2mm}
+\footnotesize \item[2] Fauria et al. (2015) used a LISST to measure collection across a broad range of particle diameters (1.25--250 \SI{}{\micro\metre})
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \subsection{Sediment Transport and Particle Capture Model}
