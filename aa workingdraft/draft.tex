@@ -8,7 +8,18 @@
 
 \subsection{Environmental Significance}
 
+Sediment transport is a driver of many key processes in coastal ecosystems, impacting land progradation \cite{kenyon1985morphology}, water quality \cite{goodwin2003temporal}, and ecological productivity \cite{kirwan2007coupled}. With the prospect of climate change and sea level
+rise looming, the significance of sediment load to coastal lands has grown considerably. Britsch
+and Dunbar \cite{britsch1993land} found that an estimated 17.8\% of land throughout a study area in the Louisiana Coastal
+Plain was lost from the 1930s to 1990, with a maximum rate of land loss of about \SI{109}{\kilo\metre\squared/\year}. This trend will be compounded in the near future as rates of relative sea level
+rise increase \cite{fitzgerald2008coastal}. Coastal and
+deltaic zones are home to a large human population worldwide, on the order of hundreds of millions, and represent a rich social and economic network \cite{syvitski2009sinking}. Developing better understanding of the interplay between geomorphology, ecology, and society in low-elevation deltas, marshes, and wetlands \cite{langley2009elevated, silliman2012degradation, ma2018ecogeomorphic} is an important motivator for future research dedicated to climate change adaptation and mitigation. Sedimentation drivers are an especially important study topic because of their potential for use in management seeking to counteract sea level rise.
+
+Mechanisms by which plants are known to affect sedimentation include direct capture of sediment on stems, leaves, and other plant surfaces \cite{mudd2010does}, direct deposition of organic matter via root growth and shedding of plant matter (e.g., leaves, seeds, fruit) \cite{nyman2006marsh, neubauer2008contributions}, and effects on turbulence and flow patterns impacting the rate at which suspended particles settle out of the water column due to gravity \cite{christiansen2000flow, leonard1995flow}. Additionally, plants' effects on bedload transport have been the subject of numerous studies \cite[e.g.,][]{yager2013influence, yang2019impact, jordanova2003experimental}. These mechanisms act on different, but sometimes overlapping, portions of a water body's sediment load. For instance, settled particles subsequently become bedload, subject to those vegetative effects. Bedload can also be resuspended by turbulent flow, and vegetation has been found to strongly influence the mechansisms by which this occurs also \cite{tinoco2018turbulence}. Even among suspended particles alone, different mechanisms affect particles with different sizes, specific gravity, and surficial properties. While gravitational settling plays a dominant role for large or dense particles in typical flow conditions for vegetated reaches \cite{mudd2010does, leonard1995flow}, fine particles that travel over great longitudinal distances before settling may be destined to either impact vegetation and be collected directly, or pass through vegetated areas without being retained.
+
 \subsection{Theoretical Background}
+
+Capture efficiency ($\eta=\frac{b}{d_c}$) is defined as the ratio between the upstream width ($b$) of the streamlines that encounter a collector and the collector's own diameter ($d_c$) (Figure \ref{fig:capeff}). It is a geometrical parameter that describes the ability of a vegetation stem to collect sediment particles from upstream in a given flow field. Effective capture efficiency ($\eta^\prime=p_r\eta$) accounts for the fact that not all particles coming into contact with a collector will adhere to it, thus including probability of retention ($p_r$) as a multiplicand in its calculation. This parameter, as opposed to capture efficiency $\eta$, corresponds to the empirical estimates made by our study and presumably any others that involve $p_r$ as an implicit factor. A formulation that includes efficiency $p_r$ is valuable because it determines the overall ability of a given vegetation system for removing sediment from flow through direct interception.
 
 % Capture diagram figure
 \begin{figure}[H]
@@ -18,28 +29,49 @@
 \label{fig:capeff}
 \end{figure}
 
+Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping flow (REF paper that describes creeping flow solution). For transitional flows (as considered here) and turbulent flows, analytical solutions are intractable so empirical estimates are often employed. Palmer \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form 
+
+\begin{equation}
+    \eta=C{\Rey_c}^{a}R^{b}\,,
+    \label{eq:powerlaw}
+\end{equation}
+
+\noindent where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that Palmer \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder coated with grease, for which retention was assumed to be complete ($p_r = 1$).
+
+Turbulence is also theorized and empirically confirmed to affect the settling velocity of heavy, fine particles \citep{Nielsen_1993, Jacobs_2016, Wang_2018}. Particularly, turbulent eddies generated along a rough bed or within vegetation stands oppose gravitational settling of sediment particles. In addition, turbulent wakes behind individual vegetation stems can remove sediment that has already adhered to neighboring stems (REF paper that described this effect). Thus, sediment-vegetation interaction in transitional flow is two-fold: first, vegetation stems directly intercept sediment from the flow, and second, vegetation structure influences turbulence and thereby gravitational settling.
+
 \section{Materials and Methods}
 
 \subsection{Experimental Methods}
 
-We conducted our experiments in the Ecogeomorphology flume, an indoor (temperature: $22.2$ +/- 1 \SI{}{\celsius}) recirculating flume located in McCone Hall at the University of California, Berkeley. The flume has a 5.25 m L $\times$ 0.6 m W $\times$ 0.6 m H open-channel section with a cuboid geometry and a bed and sidewalls that are smooth and transparent (Figure \ref{fig:floorplan}). At its upstream and downstream ends, this section connects to rectangular ducts with gradually changing hydraulic diameter and rounded corners with curved vertical manifolds along streamlines, both intended to maintain laminar flow. Additionally, at the upstream end of the open-channel, a honeycomb flow collimator serves to further straighten flow streamlines before the test section. The ducts in turn connect to the inlet and outlet of a special type of electric pump (Discflo Pumps Corporation Inc., Santee, CA), which uses rotating discs to entrain fluid and suspended particles through its interior chamber via viscous drag, maintaining laminar flow and avoiding alteration of particle or fluid properties (e.g., abrasion, pulsation) \cite{discflo}. Altogether, the flume design maintains constant, adjustable discharge through the open channel, minimizing background turbulence and other artifacts that arise with other types of pumps.
+\subsubsection{Materials}
+
+We conducted our experiments in the Ecogeomorphology flume, an indoor (22.2 +/- 1 \SI{}{\celsius}) recirculating flume located in McCone Hall at the University of California, Berkeley. The flume has a rectangular open-channel section (5.25 m L $\times$ 0.6 m W $\times$ 0.6 m H) and a bed and sidewalls that are smooth and transparent (Figure \ref{fig:floorplan}). At its upstream and downstream ends, this section connects to rectangular ducts with gradually changing hydraulic diameter and rounded corners with curved vertical manifolds along streamlines. These features are intended to maintain laminar flow when water is not affected by collectors. Additionally, at the upstream end of the open-channel, a honeycomb flow collimator served to further straighten flow streamlines before water enters the open channel. 
+
+
 
 % Flume diagram figure
 \begin{figure}[H]
 \includegraphics[width=5in]{../pics/flume_with_sedtraps.png}
 \centering
-\caption{The Ecogeomorphology flume. Not all measurements are to scale. \textbf{(a)} Photograph of the test section (left-center) and pump (right). \textbf{(b)} Conceptual diagram of the flume as seen from above. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. Green points represent the inlets for the peristaltic pumps sampling suspended particle concentration. Red areas represent the sediment traps. \textbf{(c)} A side view of the open-channel part of the system.}
+\caption{The Ecogeomorphology flume. Not all measurements are to scale. \textbf{(a)} Photograph of the test section (left-center) and pump (right). \textbf{(b)} Conceptual diagram of the flume as seen from above. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. Green points represent the inlets for the peristaltic pumps sampling suspended particle concentration. Red areas represent the settling traps. \textbf{(c)} A side view of the open-channel part of the system.}
 \label{fig:floorplan}
 \end{figure}
+
+In turn, the ducts guide water to and from the inlet and outlet of the pump array, which consists of a disc pump (Discflo Pumps Corporation, Santee, CA), and a magnetic flowmeter, connected by PVC pipe. This type of pump uses rotating discs to generate viscous drag, which entrains fluid and suspended particles through its interior chamber while maintaining laminar flow and avoiding structural disruption, pulsation, and abrasion \cite{discflo}. Altogether, the flume design maintains constant, adjustable discharge through the open channel, minimizing background turbulence and other artifacts that arise with other types of pumps.
 
 Within the open channel, we designated a "test section" 1.95 m in length where collectors would be installed. This test section and the surrounding area were instrumented with the following devices:
 \begin{enumerate}
      \item A flat-bedded array positioned flush with the neighboring channel bed, containing vertical, emergent collector stems, which were spaced uniformly in an unpatterned manner
-    \item Two battery-operated peristaltic pumps (Cole-Parmer, Vernon Hills, IL) used to sample suspended particle concentration via three hose inlets each (inside diameter = 3.1 mm), which were suspended at a range of heights from the channel bed (5; 14; 27 cm); these were positioned both upstream and downstream of the test section 
-   \item Sediment traps (n = 9) with 2.5 cm circular openings flush with the bed and collection filters recessed 5 cm below, which were used to estimate settled particle mass; these were interspersed among the collectors in a pattern intended to evaluate consistency throughout the test section
+    \item Two battery-operated peristaltic pumps (Cole-Parmer, Vernon Hills, IL) used to sample suspended particle concentration via three hose inlets each (inside diameter = 3.1 mm), which were suspended at a range of heights from the channel bed (5; 14; 27 cm); these were positioned 50 cm upstream and downstream of the test section 
+   \item Settling traps (n = 9) with 2.5 cm circular openings flush with the bed and collection filters (Whatman GF/F) on perforated filter holders recessed 5 cm below, which were used to estimate settled particle mass; these were interspersed among the collectors in a grid-like pattern
 \end{enumerate}
 
-We conducted experimental runs for a fully-crossed parameter space of collector Reynolds number (67; 134; 200) and collector density (0; 278; 800; 1450 collectors/m$^2$). These values, as well as other constant experimental parameters, were chosen to correspond to those that might occur for emergent grasses or reeds in natural settings (Table \ref{tbl:parameters}). A zero-collector control density was included in order to isolate the effects of our experimental installations from the background effects of the rest of the flume. We used 1/8" (0.3175 cm) cylindrical wooden dowels as collectors, which were covered in silicone grease (Chemplex 710, Fuchs Petrolub, Mannheim, Germany) in order to retain impacted particles. 
+We used 1/8" (0.3175 cm) cylindrical wooden dowels as collectors, which were covered in silicone grease (Chemplex 710, Fuchs Petrolub, Mannheim, Germany) in order to retain impacted particles. Crushed walnut shell was used as a substitute for suspended sediment because it has surficial properties and specific gravity (1.53) comparable to the organic-rich types common in wetlands. We used WF5-200 grade (Composition Materials Co., Milford, CT), which passes entirely through a \#60 sieve (\SI{250}{\micro\metre}), and which we determined has a average particle diameter ($d_{50}$) of \SI{25.2}{\micro\metre} based on measurements using a laser-scattering-based instrument (LISST-Portable|XR, Sequoia Scientific, Bellevue, WA).
+
+\subsubsection{Suspended Particle Concentration Analysis}
+
+We conducted experimental runs for a fully-crossed parameter space of collector Reynolds number (67; 134; 200) and collector density (0; 278; 800; 1450 collectors/m$^2$). These values, as well as other experimental parameters held constant throughout, were chosen because they correspond to those that might occur for emergent grasses or reeds in natural settings (Table \ref{tbl:parameters}). A zero-collector control density was included in order to isolate the effects of our experimental installations from the background effects of the rest of the flume.   
 
 % Experimental parameters table
 \begin{table}[H]
@@ -81,7 +113,7 @@ Particle-collector diameter ratio, $R$
 \vspace{-4mm}
 \end{tabular}
 \begin{tablenotes}
-\footnotesize \item[1] Estimates from an observational study about road dust \cite{mckenzie2008size} (study-specific data unavailable)
+\footnotesize \item[1] Estimated from a different study about road dust properties \cite{mckenzie2008size} 
 \vspace{2mm}
 \footnotesize \item[2] Fauria et al. \cite{Fauria_2015} used a LISST to measure collection across a broad range of particle diameters (1.25--250 \SI{}{\micro\metre})
 \end{tablenotes}
@@ -89,15 +121,84 @@ Particle-collector diameter ratio, $R$
 \label{tbl:parameters}
 \end{table}
 
-Before each experiment, the flume was filled with tap water to 0.4 m depth in the test section, enough to completely fill the ducts and pump.
+Before each experiment, the flume was filled with tap water to 0.4 m depth in the test section, which was enough to fully submerge the pump and almost the entirety of the duct length. At this depth, the volume of water in the entire flume was approximately 2.43 m$^3$ (See Supplementary Information).  A Nortek Vectrino Profiler ADV (acoustic Doppler velocimeter; Nortek AS, Vangkroken 2, 1351 Rud, Norway) was used to calibrate the pump to generate channel mean flow velocities (2.0; 4.0; 6.0 \SI{}{\centi\metre/\second}) within the pump's capabilities and corresponding to the range of interest for $\Rey_c$. At these flow rates (0.0048; 0.0096; 0.0144 \SI{}{\metre\cubed/\second}), circulation times for the entire system were 506 s, 253 s, and 169 s, respectively. The drag caused by collectors was not found to detectably affect upstream or downstream flow velocities.
+
+Settling traps were installed immediately before each run, then a slurry consisting of 200 g of crushed walnut shell suspended in 15.1 L of tap water was added using a spigot calibrated to finish draining after a period roughly equal to circulation time (3 minutes). Channel velocity was kept at 6 cm/s for this period across $\Rey_c$ treatments, then adjusted to the appropriate value for the treatment. This procedure was intended to make particle concentration longitudinally even throughout the system. Estimated depth-averaged starting concentration was 82.3 mg/L (\SI{53.8}{\micro\liter/\liter}).
+
+In preliminary experiments, we determined 100 minutes was an adequate duration for experimental runs to capture the effects of settling and collection on suspended concentrations across our parameter space (See Supplementary Information). We sampled suspended concentration using the peristaltic pumps every 5 minutes, the first sample occurring 5 minutes after we began adding sediment to the flume. Samples measured approximately 140 ml each, and our sampling frequency resulted in 19 sampled timesteps per experiment, with six samples per timestep. Settling traps were covered with a plunger and removed at 100 minutes, so the last peristaltic pump sample occurred at 95 minutes due to personnel limitations.
+
+Peristaltic pump samples were processed using vacuum filtration. Before filtration, quantitative glass microfiber filter papers (Whatman GF/F) were oven-dried for 24 hours at \SI{40}{\celsius} to remove any moisture, weighed, and assigned to a flume sample. The volume of flume water passed through the filter was measured, then the drying and weighing process was repeated to estimate the mass of sediment on the filter. Concentrations were recorded in \SI{}{\milli\gram/\liter}. Settling traps, which also used filter papers, were dried and weighed before and after the run in a similar fashion, to estimate the mass of settled particles they contained.
+
+\subsubsection{Estimating Collector-Induced Turbulence}
+
+We estimated mid-water-column turbulent kinetic energy (TKE) among the collectors for each combination of $\Rey_c$ and collector density using the Vectrino Profiler ADV. The Vectrino was mounted on a frame suspended above the test section and adjusted until its bottom-depth measurement read 15 cm. A bubble level was used to ensure it was oriented along the vertical axis. The ADV measured velocity in two horizontal dimensions, and two separate measurements along the vertical dimension, at a frequency of 10 Hz. It also collected other data such as autocorrelation and signal-to-noise ratio. We collected 5 minutes of data per treatment to ensure we captured any possible periodicity in turbulence. Measurements taken by the ADV were filtered, leaving out timepoints where the two vertical velocity measurements differed by 50\% or more or the SNR measurement was greater than 5 dB, and were subsequently despiked using a phase-space thresholding algorithm \cite{goring_nikora}. TKE was derived from the cleaned Vectrino data as half the sum of the variances of the velocity components:
+\begin{equation}
+    \text{TKE} = \frac{1}{2}[\overline{(u^\prime)^2} + \overline{(v^\prime)^2} + \overline{(w^\prime)^2}]\,.
+    \label{eqn:TKE}
+\end{equation}
+
+\subsubsection{Biofilm Growth}
+
+The effect of biofilm on the surficial properties of collectors, and thereby their effective collector efficiency, was another factor of interest for our experiment. While we did not incorporate biofilm into the fully-crossed parameter space of other explicative variables, we carried out an auxiliary experiment to assess its effect size relative to the other variables. After one of the experiments at each collector density, the water in the flume was allowed to come to rest, then the collectors sat constantly illuminated by one white, fluorescent overhead light for a number of days. The crushed walnut shell doubled as a food source for the microorganisms constituting the biofilm, which we observed grew plentifully in all cases.
+
+Once biofilm became visually apparent on the collectors' surfaces, an experiment was conducted using the same materials and protocols as the treatments without biofilm, holding $\Rey_c$ constant between biofilm treatments (200). The length of time it took for robust biofilm growth to occur differed between the low, medium, and high collector-density treatments (13; 18; 20 days). For the highest collector-density treatment, the flume was left full and illuminated for a longer period (46 days), after which a second experiment with more biofilm present was performed. While we did not quantitatively assess biofilm mass, we assumed that the number of days it was allowed to grow could be used as a proxy, acknowledging that the growth rate (in mass units per day) was probably exponential or logistical rather than linear.
 
 \subsection{Sediment Transport and Particle Capture Model}
+
+\subsubsection{Model Derivation}
+
+We used an exponential decay model for suspended sediment concentration adapted from Fauria et al. \cite{Fauria_2015} to estimate effective capture efficiency ($\eta^\prime$):
+
+\begin{equation}
+    \frac{\mathrm{d}\bar{\phi}}{\mathrm{d}t} = -\left[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c\right]\bar{\phi}(t) = -(k_s + k_c)\bar{\phi}(t) = -k\bar{\phi}(t)\,.
+    \label{eq:model}    
+\end{equation}
+
+\noindent $\bar{\phi}(t) = \frac{1}{h} \int_0^h\phi(z)dz$ is the depth-averaged suspended sediment concentration at time $t$, where $h$ is water depth and $z$ is the vertical dimension. $k_s = \frac{Cv_s}{h}(1-E_r)$ is the exponential time-decay rate of $\bar{\phi}$ due to settling, which is calculated from settling velocity ($v_s$), water depth ($h$), a constant $C$ that accounts for the shape of the Rouse profile, and a dimensionless rate at which particles are entrained from the bed ($E_r$). Because we focused on particle capture, we only empirically estimated $k_s$, not its constituent terms. However, further derivation is available in Fauria et al. \cite{Fauria_2015}. $k_c$ = $\eta^{\prime}ud_cI_c$ is the rate at which particles are removed from suspension due to capture by collectors. It is the product of effective capture efficiency, flow velocity ($u$), collector diameter ($d_c$), and collector height density ($I_c$). For emergent collectors, $I_c = \frac{N_ch}{V}$, where $N_c$ is the total number of stems, and $V$ is the volume of water in which stems are contained. The product $d_cI_c$ is also referred to as frontal-area density ($a$).
+
+To derive $k_c$, begin by considering a single collector. Its rate of collection is the product of the probability of retention ($p_r$) and the flux of particles passing through the cross-section ($b \times h$) where streamlines reach its surface, $p_r ubh\bar{\phi} = p_r \eta u d_c h \bar{\phi}$. By substituting for effective collector efficiency ($\eta^\prime = p_r \eta$) and multiplying by the number of collectors acting on the suspended particles per unit volume, the $k_c$ term is derived: $\eta^\prime u d_c \frac{N_c h}{V} \bar{\phi} = \eta^{\prime}ud_cI_c \bar{\phi} = k_c \bar{\phi}$.
+
+The solution of Eq. (\ref{eq:model}) is exponential,
+
+\begin{equation}
+    \bar{\phi}(t) = \bar{\phi}(0)e^{-kt} = \bar{\phi}(0)e^{-(k_s + k_c)t}\,.
+    \label{eq:expo}    
+\end{equation}
+
+\noindent Because we assume the vertical profile of sediment concentration maintains a constant shape through time, governed by the Rouse equation, concentration at any height ($\phi_a$) can be assumed to be proportional to average concentration ($\phi_a=\frac{\bar{\phi}}{C}$):
+\begin{equation}
+    \phi_a(t) = \phi_a(0)e^{-kt}\,,
+    \label{eq:specconc}
+\end{equation}
+which is the formula we used to estimate total time-decay of suspended concentration from our point measurements in the vertical profile.
+
+To calculate $k_s$, we began by calculating the average mass of sediment that settled per settling trap over the duration of the experiment (100 minutes). We then scaled this measurement up from the area of a settling trap's horizontal opening (5.07 cm$^2$) to the total test section bed area (1.17 m$^2$). The resulting estimate of the sediment mass settled in the test section ($m_s$) was divided by the total mass removed from suspension during a run to calculate the proportion of the decrease due to settling. This proportion was multiplied by the total exponential decay coefficient, $k$, to calculate $k_s$:
+
+\begin{equation}
+    k_s = \frac{m_s}{m_0(1-e^{-kT})}k\,,
+\end{equation}
+
+\noindent where $m_0$ was the mass of sediment suspended at the beginning of the experiment and $T$ was the total duration of the experiment.
+
+The equations above model the dynamics occurring in the test section alone. To account for settling and re-entrainment outside the test section, a background exponential decay rate ($k_b$) was estimated from runs with zero collectors for each $\Rey_c$ treatment ($k_c = 0$, hence $k = k_s + k_b$). ECE for our collector-density treatments was then calculated from $k_c$, which was calculated from $k$, $k_s$, and $k_b$:
+
+\begin{equation}
+    \eta^\prime = \frac{k_c}{ud_cI_c} = \frac{k - k_s - k_b}{ud_cI_c}\,.
+\end{equation}
+
+\subsubsection{Model Execution}
+
+
+
+\subsubsection{Contextualizing Findings}
+
+
 
 \section{Results}
 
 \subsection{Particle Capture}
 
-Effective collector efficiency was found to decrease with increasing collector Reynolds number and collector density in nearly all cases (Figure \ref{fig:ece}). One exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). For both of these comparisons, the large magnitude of our uncertainty leaves open the possibility that the mid-$\Rey_c$, low-collector-density result could simply be an anomaly.
+Effective collector efficiency was found to decrease with increasing collector Reynolds number and increasing collector density throughout our parameter space, with one exception. This exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). For both of these comparisons, the large magnitude of our uncertainty leaves open the possibility that the mid-$\Rey_c$, low-collector-density result could simply be an anomaly.
 
 % ECE figure
 \begin{figure}[H]
@@ -107,7 +208,7 @@ Effective collector efficiency was found to decrease with increasing collector R
 \label{fig:ece}
 \end{figure}   
 
-Monte Carlo analysis determined that there is a significant (null hypothesis: $\mu = 0$) negative relationship between ECE and collector density for the low (p = 0.004) and high (p = 0.019) $\Rey_c$ treatments, but no significant effect was detected (p > 0.05) for the intermediate treatment (Figure \ref{fig:monte}a). This approach also found a significant negative relationship between ECE and $\Rey_c$ for the low (p = 0.026) and high (p = 0.046) collector-density treatments, but an insignificant (p > 0.05) trend for the intermediate collector-density treatment (Figure \ref{fig:monte}b). 
+Monte Carlo analysis determined that there is a significant (null hypothesis: $\mu = 0$) negative relationship between ECE and collector density for the low (p = 0.004) and high (p = 0.019) $\Rey_c$ treatments, but no significant effect was detected (p > 0.05) for the intermediate treatment (Figure \ref{fig:monte}a). We also found a significant negative relationship between ECE and $\Rey_c$ for the low (p = 0.026) and high (p = 0.046) collector-density treatments, but an insignificant (p > 0.05) trend for the intermediate collector-density treatment (Figure \ref{fig:monte}b). 
 
 % Monte Carlo figure
 \begin{figure}[H]
@@ -119,6 +220,8 @@ Monte Carlo analysis determined that there is a significant (null hypothesis: $\
 
 \subsection{Turbulence and Flow Characteristics}
 
+Turbulent kinetic energy was consistently found to increase with increasing flow velocity as expected (Table \ref{tbl:turbulence}). Generally, higher collector density also led to greater turbulence, with the greatest increase in terms of both absolute and relative magnitude taking place between the lower and middle collector-density treatments. A slight decrease actually occurred thereafter (between the middle and highest collector densities) for the middle and highest $\Rey_c$ treatments, with a slight increase for the lowest $\Rey_c$ treatment. Altogether, these results likely indicate that the turbulent eddy scale and the distance between collectors converged somewhere in our range for those parameters, so that additional collectors acted to damp eddies more than they acted to create them. If there is a threshold for this effect, our results, including the similarity between the lowest collector density and the zero-collector control, suggest that it would occur at a collector-density value between our lower and middle treatments.
+
 % Turbulence table
 \begin{table}[H]
 \caption{Turbulence and flow characteristics for all collector solid volume fraction ($\phi_c$) and $\Rey_c$ treatments, including the control (zero-collector) treatments for reference.}
@@ -126,29 +229,31 @@ Monte Carlo analysis determined that there is a significant (null hypothesis: $\
 %% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{>{\bfseries}r>{\bfseries}rrr}
 \toprule
-\textbf{$\phi_c$}&\textbf{$\Rey_c$}&\textbf{Turbulent Kinetic Energy (\SI{}{\metre^2/\second^2})}\\
+\textbf{$\phi_c$}&\textbf{$\Rey_c$}&\textbf{mid-water-column TKE (\SI{}{\milli\metre^2/\second^2})}\\
 \midrule
-Control &   67  & \num{2.48d-6}\\
-        &   134 & \num{2.98d-6}\\
-        &   200 & \num{3.37d-6}\\
+Control &   67  & \num{2.48}\\
+        &   134 & \num{2.98}\\
+        &   200 & \num{3.37}\\
 \midrule
-0.22\% &   67  & \num{1.23d-6}\\
-        &   134 & \num{5.26d-6}\\
-        &   200 & \num{1.22d-5}\\
+0.22\% &   67  & \num{1.23}\\
+        &   134 & \num{5.26}\\
+        &   200 & \num{12.2}\\
 \midrule
-0.64\% &   67  & \num{9.13d-6}\\
-        &   134 & \num{3.59d-5}\\
-        &   200 & \num{5.96d-5}\\
+0.64\% &   67  & \num{9.13}\\
+        &   134 & \num{35.9}\\
+        &   200 & \num{59.6}\\
 \midrule
-1.17\%  &   67  & \num{1.11d-5}\\
-        &   134 & \num{2.98d-5}\\
-        &   200 & \num{5.44d-5}\\
+1.17\%  &   67  & \num{11.1}\\
+        &   134 & \num{29.8}\\
+        &   200 & \num{54.4}\\
 \bottomrule
 \label{tbl:turbulence}
 \end{tabular}
 \end{table}
 
 \subsection{Biofilm Effects}
+
+Biofilm growth was consistently found to increase ECE (Figure \ref{fig:biofilm}). The absolute increase was greatest by a considerable margin at the lowest collector density, for which biofilm was also allowed to grow for the shortest time. The middle and highest collector densities had similar absolute quantities of increase in their ECE for the initial biofilm runs (18-20 days), although the highest collector-density treatment demonstrated a far greater magnitude of increase in ECE after being allowed to grow for an additional 26 days (46 total).
 
 % Biofilm figure
 \begin{figure}[H]
@@ -160,6 +265,8 @@ Control &   67  & \num{2.48d-6}\\
 
 \subsection{Comparison to Previous Models of Capture Efficiency}
 
+Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, all of our observations were in agreement with the power-law model adapted by Fauria et al. \cite{Fauria_2015} from Palmer \cite{Palmer_2004} (Figure \ref{fig:compplot}). In no other case did the model prediction differ from our empirical observation by more than 1 standard error (SE), which is likely attributable to measurement error and/or stochastic variance implicit in our physical experiments.
+
 % Fauria model comparison figure
 \begin{figure}[H]
 \centering
@@ -167,6 +274,8 @@ Control &   67  & \num{2.48d-6}\\
 \caption{A comparison of our experimental estimates of effective capture efficiency, colored according to collector solid volume fraction ($\phi_c$), and the predictions of the Fauria et al. \cite{Fauria_2015} power law model. Effective capture efficiency is plotted on a log scale in order to display model fit more accurately at small values. Error bars represent +/- 1 SE.}
 \label{fig:compplot}
 \end{figure}   
+
+Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably good predictor for our results, we found the $C$ values for our different collector-density treatments and compared them to those estimated for the two collector densities studied by Fauria et al. (0.82\%, 2.16\%), expressed as solid volume fraction ($\phi_c$) to account for the dimensional differences between the two experiments (Figure \ref{fig:cphi}). We then fit a preliminary power-law regression to the results at the two studies' 5 combined $\phi_c$ test values, which fit relatively well (R$^2$ = 0.82) though data scarcity is an important consideration in evaluating the veracity of this model's coefficients.
 
 % C-phi model figure
 \begin{figure}[H]
