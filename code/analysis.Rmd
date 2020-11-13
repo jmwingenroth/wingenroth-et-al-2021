@@ -212,11 +212,15 @@ We estimate `k_tot` from our pump data by linear regression of `log(mvc)`:
 
 ```{r, warning=FALSE, message=FALSE}
 
+###TEMP CODE!!!
+#pumpfinal <- filter(pumpfinal, loc == "D")
+
 library(broom)
 
 r2mod <- list()
 r2val <- list()
 ktval <- list()
+resids <- list()
 
 for (k in 1:length(unique(pumpfinal$date))) {
   tempdata <- pumpfinal %>%
@@ -225,6 +229,7 @@ for (k in 1:length(unique(pumpfinal$date))) {
   r2mod[[k]] <- lm(data = tempdata, formula = log(mvc) ~ t)
   r2val[[k]] <- summary(r2mod[[k]])$r.squared
   ktval[[k]] <- -coef(r2mod[[k]])[2]
+  resids[[k]] <- cbind(tempdata,resid = resid(r2mod[[k]]))
   
 }
 
@@ -242,6 +247,24 @@ r2final <- tibble(unlist(r2val), names(unlist(r2val)), unlist(ktval)) %>% #requi
 
 ktdata <- bind_rows(lapply(r2mod, tidy), .id = "date") %>%
   filter(term == "t")
+
+
+
+```
+
+ANOVA:
+
+```{r}
+
+resids <- tibble(bind_rows(resids))
+
+residmod <- aov(data = resids, formula = resid ~ loc * ht)
+
+resids %>%
+  group_by(ht) %>%
+  summarise(mean(resid), mean(abs(resid)), n(), sd(resid))
+
+summary(residmod)
 
 ```
 
@@ -535,7 +558,7 @@ Each data point has a normal distribution associated with the estimate of eta (d
 
 Models:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 
 library(cowplot)
 
@@ -583,7 +606,7 @@ lmsre
 
 Plots:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 
 p_phi <- lmsphi %>%
   ggplot(aes(x = paste0(100*as.numeric(phi),"%"), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
@@ -639,7 +662,7 @@ imaginary_eta <- final %>%
 
 Grouped by stem density:
 
-```{r warning=FALSE}
+```{r warning=FALSE, eval=FALSE}
 
 monte <- list()
 
