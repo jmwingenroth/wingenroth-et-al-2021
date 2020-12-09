@@ -528,17 +528,18 @@ plotcomp <- final %>%
   filter(dowel_density != "0000") %>%
   mutate(Refac = factor(Re, labels = c("Re = 66.78", "Re = 133.56", "Re = 200.34"))) %>%
   ggplot(aes(x = Re, y = eta, ymin = eta - deta, ymax = eta + deta, color = factor(phi, labels = c("0.22%","0.64%","1.17%")))) +
-  geom_line(data = fauria_pred, aes(y = eta_est, x = Re, linetype = "Fauria et al. model"), inherit.aes = FALSE, show.legend = TRUE) +
+  geom_line(data = fauria_pred, aes(y = eta_est, x = Re, linetype = "Fauria et al. model"), inherit.aes = FALSE, show.legend = FALSE) +
   geom_point() +
   geom_errorbar(width = 10) +  
   scale_y_log10(labels = scales::percent) +
   facet_wrap(~ as.character(round(phi,5))) +
-  labs(y = "Effective Capture Efficiency", x = expression(Re[c]), color = expression(phi[c])) +
+  labs(y = "Effective Capture Efficiency", x = "Collector Reynolds Number", color = "Collector Solid Volume Fraction:") +
   theme_bw() +
   scale_linetype_discrete(name = "") +
   theme(strip.background = element_blank(),
         strip.text.x = element_blank(),
-        legend.position = "bottom") +
+        legend.position = "bottom",
+        legend.background = element_rect(colour = "black", size = .2)) +
   guides(fill = guide_legend(override.aes = list(linetype = 0)),
          color = guide_legend(override.aes = list(linetype = 0)))
 
