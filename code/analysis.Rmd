@@ -396,7 +396,7 @@ plotece1 <- final %>%
   geom_point(position = position_dodge(width = .55)) +
   geom_errorbar(width = 0.4, position = position_dodge(width = .55)) +  
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "ECE", x = expression(Re[c]), color = expression(phi[c])) +
+  labs(y = "Effective Capture Efficiency", x = expression(paste("Collector Reynolds Number (",Re[c]," )")), color = expression(phi[c])) +
   theme_bw() +
   theme(legend.position = "bottom")
 
@@ -408,7 +408,7 @@ plotece2 <- final %>%
   geom_errorbar(width = 0.4, position = position_dodge(width = .55)) +  
   scale_y_continuous(labels = scales::percent) +
   scale_color_manual(values = c("purple","orange","brown")) +
-  labs(y = "ECE", color = expression(Re[c]), x = expression(phi[c])) +
+  labs(y = "Effective Capture Efficiency", color = expression(Re[c]), x = expression(paste("Collector Solid Volume Fraction (",phi[c]," )"))) +
   theme_bw() +
   theme(legend.position = "bottom")
 
@@ -533,7 +533,7 @@ plotcomp <- final %>%
   geom_errorbar(width = 10) +  
   scale_y_log10(labels = scales::percent) +
   facet_wrap(~ as.character(round(phi,5))) +
-  labs(y = "ECE", x = expression(Re[c]), color = expression(phi[c])) +
+  labs(y = "Effective Capture Efficiency", x = expression(Re[c]), color = expression(phi[c])) +
   theme_bw() +
   scale_linetype_discrete(name = "") +
   theme(strip.background = element_blank(),
