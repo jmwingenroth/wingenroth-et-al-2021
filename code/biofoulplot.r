@@ -209,7 +209,7 @@ biofilmplot <- final %>%
   geom_point() +
   geom_ribbon(aes(fill = factor(ad)), alpha = .2, color = NA, show.legend = FALSE) +
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "ECE", x = "Biofilm Growth (Days)", color = expression(phi[c])) +
+  labs(y = "Effective Capture Efficiency", x = "Biofilm Growth (Days)", color = "Collector\nSolid\nVolume\nFraction") +
   theme_bw()
 
 ggsave("../pics/biofilm.png",biofilmplot,dpi = 600, width = 7, height = 5)

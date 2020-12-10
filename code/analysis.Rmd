@@ -414,7 +414,7 @@ plotece2 <- final %>%
 
 plotece <- plot_grid(plotece1, plotece2, labels = c("(a)","(b)"), scale = .9, align = "lrtb")
 
-save_plot("../pics/ece_plot.png",plotece, dpi = 600)
+save_plot("../pics/ece_plot.png",plotece, dpi = 600, base_asp = 1.75)
 
 plotece
 
@@ -498,7 +498,7 @@ cplot <- c_over_phi %>%
   geom_line(data = c_phi_curve, aes(x = phi, y = C), inherit.aes = FALSE) +
   geom_point(size = 2, pch = 4) +
   theme_bw() +
-  labs(x = expression(phi[c]), color = "") +
+  labs(x = expression(paste("Collector Solid Volume Fraction (", phi[c], " )" )), color = "") +
   scale_color_manual(values = c("darkgreen","red")) +
   scale_x_continuous(labels = scales::percent) +
   annotate("polygon", x=c(.012,.012,.004,.004,.007), y= c(23,27,27,23,23), color = "black", fill = "gray 97") +
@@ -559,9 +559,11 @@ Each data point has a normal distribution associated with the estimate of eta (d
 
 Models:
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 library(cowplot)
+
+set.seed(42)
 
 reps = 30000
 
@@ -607,7 +609,7 @@ lmsre
 
 Plots:
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 p_phi <- lmsphi %>%
   ggplot(aes(x = paste0(100*as.numeric(phi),"%"), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
@@ -617,7 +619,7 @@ p_phi <- lmsphi %>%
   theme_bw() +
   geom_text(aes(y = avg + 1.96*sd + 1, label = c("*",NA,"*")), fontface = "bold", size = 5) +
   ylim(-3,1.5) +
-  xlab(expression(phi[c])) +
+  xlab(expression(paste("Collector Solid Volume Fraction (",phi[c]," )"))) +
   ylab(expression(beta[log(Re[c])]))
 
 p_re <- lmsre %>%
@@ -628,7 +630,7 @@ p_re <- lmsre %>%
   theme_bw() +
   geom_text(aes(y = avg + 1.96*sd + 1, label = c(NA,"*","*")), fontface = "bold", size = 5) +
   ylim(-3,1.5) +
-  xlab(expression(Re[c])) +
+  xlab(expression(paste("Collector Reynolds Number (",Re[c]," )"))) +
   ylab(expression(beta[log(phi[c])]))
 
 monteplot <- plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
