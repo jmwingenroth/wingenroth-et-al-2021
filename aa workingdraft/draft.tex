@@ -48,10 +48,8 @@ Turbulence is also theorized and empirically confirmed to affect the settling ve
 
 We conducted our experiments in the Ecogeomorphology flume, an indoor (22.2 +/- 1 \SI{}{\celsius}) recirculating flume located in McCone Hall at the University of California, Berkeley. The flume has a rectangular open-channel section (5.25 m L $\times$ 0.6 m W $\times$ 0.6 m H) and a bed and sidewalls that are smooth and transparent (Figure \ref{fig:floorplan}). At its upstream and downstream ends, this section connects to rectangular ducts with gradually changing hydraulic diameter and rounded corners with curved vertical manifolds along streamlines. These features are intended to maintain laminar flow when water is not affected by collectors. Additionally, at the upstream end of the open-channel, a honeycomb flow collimator served to further straighten flow streamlines before water enters the open channel. 
 
-
-
 % Flume diagram figure
-\begin{figure}[H]
+\begin{figure}[h]
 \includegraphics[width=5in]{../pics/flume_with_sedtraps.png}
 \centering
 \caption{The Ecogeomorphology flume. Not all measurements are to scale. \textbf{(a)} Photograph of the test section (center-left) and pump (right). \textbf{(b)} Conceptual diagram of the flume as seen from above. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. Green points represent the inlets for the peristaltic pumps sampling suspended particle concentration. Red areas represent the settling traps. \textbf{(c)} A side view of the open-channel part of the system.}
@@ -74,7 +72,7 @@ We used 1/8" (0.3175 cm) cylindrical wooden dowels as collectors, which were cov
 We conducted experimental runs for a fully-crossed parameter space of collector Reynolds number (67; 134; 200) and collector density (0; 278; 800; 1450 collectors/m$^2$). These values, as well as other experimental parameters held constant throughout, were chosen because they correspond to those that might occur for emergent grasses or reeds in natural settings (Table \ref{tbl:parameters}). A zero-collector control density was included in order to isolate the effects of our experimental installations from the background effects of the rest of the flume.   
 
 % Experimental parameters table
-\begin{table}[H]
+\begin{table}[h]
 \caption{Experimental and natural parameter ranges. Natural values are based on approximations or measurements from cited studies and literature reviews in wetlands or other low-elevation flows.}
 \centering
 \begin{threeparttable}
@@ -197,14 +195,14 @@ The equations above model the dynamics occurring in the test section alone. To a
 In order to correct for observed heteroscedasticity across time, with earlier, higher-concentration measurements showing greater variance, we log-transformed the exponential model (Eq. (\ref{eq:expo})). This resulted in a linear model taking the form,
 
 \begin{equation}
-    log(\boldsymbol{\phi_a}) = log(\phi_a(0)) - k\boldsymbol{t} + \boldsymbol{U} \,,
+    log(\boldsymbol{\bar{\phi}}) = log(\bar{\phi}(0)) - k\boldsymbol{t} + \boldsymbol{U} \,,
 \end{equation}
 
 \noindent which was evaluated for each experimental configuration separately. Bold font signifies vector variables, and $\boldsymbol{U}$ is the random error term of the model. We used residual plots to verify that this transformed model exhibited uniformity of residuals (See Supplementary Information). The standard error of this $k$ term and the standard deviation of $m_s$ estimates from settling traps were propagated through Eqs. (\ref{eq:ks}) and (\ref{eq:eta}), for both control and treatment runs, and were ultimately used to calculate uncertainty estimates for ECE.
 
-Our experiment collected suspended concentration samples at three different heights and both upstream and downstream of the test section, whereas Fauria et al. \cite{Fauria_2015} collected at one position only. Because the observed magnitude of the Rouse profile (Eq. (\ref{eq:rouse})) and the upstream-downstream difference were barely detectable with our degree of precision, and both were too small to substantially affect model results, we opted to pool data from all six suspended sediment sampling locations rather than complicating the model further.
+Our experiment collected suspended concentration samples at three different heights and both upstream and downstream of the test section. Because the observed magnitude of the Rouse profile (Eq. (\ref{eq:rouse})) and the upstream-downstream difference were barely detectable with our degree of precision, and both were negligible relative to the concentration decay over time, we opted to pool data from all six suspended sediment sampling locations rather than complicating the model further. While we might overestimate or underestimate absolute concentration this way, exponential decay rates, and thus estimated ECE, would not be affected.
 
-To assess the significance of the effects on ECE of $\Rey_c$ and collector density, the latter parameterized as solid volume fraction ($\phi_c$) in the interest of comparability with other studies, we used a Monte Carlo approach. For each combination of $\Rey_c$ and $\phi_c$, 30,000 random values were drawn from a normal distribution whose mean equals that combination's empirically estimated ECE and whose standard deviation equals its standard error (SE). These values were log-transformed, since we expected the relationships to fit a power-law model. For each stratum of a given explicative variable, sets (triplets) with one randomly sampled value from each of the strata of the other explicative variable were regressed using ordinary least squares, producing a roughly normal distribution of coefficients (n = 30,000) for each level of both variables (6 total). The distributions of slopes were used in two-tailed t-tests (null hypothesis: $\mu = 0$; $\alpha = 0.05$) to determine the significance of relationships.
+We used a Monte Carlo approach to assess the significance of the effects on ECE of $\Rey_c$ and collector density, the latter parameterized as solid volume fraction ($\phi_c$) in the interest of comparability with other studies. For each combination of $\Rey_c$ and $\phi_c$, 30,000 random values were drawn from a normal distribution whose mean equals that combination's empirically estimated ECE and whose standard deviation equals its standard error (SE). These values were log-transformed, since we expected the relationships to fit a power-law model. For each stratum of a given explicative variable, sets (triplets) with one randomly sampled value from each of the strata of the other explicative variable were regressed using ordinary least squares, producing a roughly normal distribution of coefficients (n = 30,000) for each level of both variables (6 total). The distributions of slopes were used in two-tailed t-tests (null hypothesis: $\mu = 0$; $\alpha = 0.05$) to determine the significance of relationships.
 
 \section{Results}
 
@@ -213,7 +211,7 @@ To assess the significance of the effects on ECE of $\Rey_c$ and collector densi
 Effective capture efficiency was found to decrease with increasing collector Reynolds number and increasing collector density throughout our parameter space, with one exception. This exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). Our experimental uncertainty was great enough that this might be attributable to random error. Surprisingly, repeating the experiment with the same parameters yielded a nearly identical result (omitted from analysis).
 
 % ECE figure
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=5in]{../pics/ece_plot.png}
 \caption{Estimates of effective capture efficiency calculated from laboratory experiments across the collector density $\times$ Reynolds number parameter space. Error bars represent +/- 1 SE. (\textbf{a}) Estimates plotted over $\Rey_c$, colored by solid volume fraction ($\phi_c$). (\textbf{b}) Estimates plotted over solid volume fraction, colored by $\Rey_c$.}
@@ -223,7 +221,7 @@ Effective capture efficiency was found to decrease with increasing collector Rey
 Monte Carlo analysis determined that there is a significant negative relationship between ECE and collector density for the low (p = 0.004) and high (p = 0.019) $\Rey_c$ treatments, but no significant effect was detected (p > 0.05) for the intermediate treatment (Figure \ref{fig:monte}a). We also found a significant negative relationship between ECE and $\Rey_c$ for the low (p = 0.026) and high (p = 0.046) collector-density treatments, but an insignificant (p > 0.05) trend for the intermediate collector-density treatment (Figure \ref{fig:monte}b). 
 
 % Monte Carlo figure
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=5in]{../pics/montecarlo.png}
 \caption{Effect size estimates from Monte Carlo regression analysis. Error bars represent 95\% confidence intervals. Asterisks mark the parameter values at which the effect size was found to be significant. (\textbf{a}) Estimates of the effect of log-transformed collector solid volume fraction ($\beta_{\log(\phi_c)}$) on ECE, stratified by $\Rey_c$. (\textbf{b}) Estimates of the effect of log-transformed $\Rey_c$ ($\beta_{\log(\Rey_c)}$) on ECE, stratified by solid volume fraction ($\phi_c$).}
@@ -235,7 +233,7 @@ Monte Carlo analysis determined that there is a significant negative relationshi
 Turbulent kinetic energy was consistently found to increase with increasing flow velocity as expected (Table \ref{tbl:turbulence}). Generally, higher collector density also led to greater turbulence, with the greatest increase in terms of both absolute and relative magnitude taking place between the lower and middle collector-density treatments. A slight decrease actually occurred thereafter (between the middle and highest collector densities) for the middle and highest $\Rey_c$ treatments, with a slight increase for the lowest $\Rey_c$ treatment. Altogether, these results likely indicate that the turbulent eddy scale and the distance between collectors converged somewhere in our range for those parameters, so that additional collectors acted to damp eddies more than they acted to create them. If there is a threshold for this effect, our results, including the relative similarity between the lowest collector density and the zero-collector control, suggest that it would occur at a collector-density value between our lower and middle treatments.
 
 % Turbulence table
-\begin{table}[H]
+\begin{table}[h]
 \caption{Turbulent kinetic energy (TKE) for all collector solid volume fraction ($\phi_c$) and $\Rey_c$ treatments, including the control (zero-collector) treatments for reference.}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
@@ -287,7 +285,7 @@ Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, 
 \label{fig:compplot}
 \end{figure}   
 
-Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably good predictor for our results, we found the $C$ values for our different collector-density treatments and compared them to those estimated for the two collector densities studied by Fauria et al. ($\phi_c$ = 0.82\%, 2.16\%). We then fit a preliminary power-law regression to the results at the two studies' five combined $\phi_c$ test values, which fit relatively well (R$^2$ = 0.82) though data scarcity and the differing environments of the two studies are important to consider in evaluating the certainty of this model's coefficients.
+Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably good predictor for our results, we found the $C$ values for our different collector-density treatments and compared them to those estimated for the two collector densities studied by Fauria et al. ($\phi_c$ = 0.82\%, 2.16\%). We then fit a preliminary power-law regression to the results at the two studies' five combined $\phi_c$ test values, which fit relatively well (R$^2$ = 0.82) though data scarcity and the differing environments of the two studies are important to consider in evaluating the certainty of this model's coefficients (Figure \ref{fig:cphi}).
 
 % C-phi model figure
 \begin{figure}[H]
