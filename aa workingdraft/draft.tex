@@ -29,14 +29,14 @@ Capture efficiency ($\eta=\frac{b}{d_c}$) is defined as the ratio between the up
 \label{fig:capeff}
 \end{figure}
 
-Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping flow (REF paper that describes creeping flow solution). For transitional flows (as considered here) and turbulent flows, analytical solutions are intractable so empirical estimates are often employed. Palmer \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form 
+Particle capture in transitionally turbulent flows ($1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping flows and potential flows (REF papers that describes creeping flow and potential flow solution). For transitional flows as studied here, analytical solutions are intractable so empirical estimates are often employed. Palmer \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form 
 
 \begin{equation}
     \eta=C{\Rey_c}^{a}R^{b}\,,
     \label{eq:powerlaw}
 \end{equation}
 
-\noindent where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_c}{d_p}$ is the ratio between collector diameter and particle diameter ($d_p$). $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that Palmer \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder coated with grease, for which retention was assumed to be complete ($p_r = 1$).
+\noindent where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and $R=\frac{d_p}{d_c}$. $C$, $a$, and $b$ are empirically determined regression coefficients. It is worth noting that Palmer \cite{Palmer_2004} used $\eta$ in their notation for this model as opposed to $\eta^\prime$ because their experiment involved an isolated single cylinder coated with grease, for which retention was assumed to be complete ($p_r = 1$).
 
 Turbulence is also theorized and empirically confirmed to affect the settling velocity of heavy, fine particles \citep{Nielsen_1993, Jacobs_2016, Wang_2018}. Particularly, turbulent eddies generated along a rough bed or within vegetation stands oppose gravitational settling of sediment particles. In addition, turbulent wakes behind individual vegetation stems can remove sediment that has already adhered to neighboring stems (REF paper that described this effect). Thus, sediment-vegetation interaction in transitional flow is two-fold: first, vegetation stems directly intercept sediment from the flow, and second, vegetation structure influences turbulence and thereby gravitational settling.
 
@@ -145,16 +145,14 @@ Once biofilm became visually apparent on the collectors' surfaces, an experiment
 
 \subsubsection{Model Derivation}
 
-We used an exponential decay model for suspended sediment concentration adapted from Fauria et al. \cite{Fauria_2015} to estimate effective capture efficiency ($\eta^\prime$):
+We used an exponential decay model for suspended sediment concentration adapted from Fauria et al. \cite{Fauria_2015} to estimate ECE ($\eta^\prime$):
 
 \begin{equation}
-    \frac{\mathrm{d}\bar{\phi}}{\mathrm{d}t} = -\left[\frac{Cv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c\right]\bar{\phi}(t) = -(k_s + k_c)\bar{\phi}(t) = -k\bar{\phi}(t)\,.
+    \frac{\mathrm{d}\bar{\phi}}{\mathrm{d}t} = -\left[\frac{C_bv_s}{h}(1-E_r) + \eta^{\prime}ud_cI_c\right]\bar{\phi}(t) = -(k_s + k_c)\bar{\phi}(t) = -k\bar{\phi}(t)\,.
     \label{eq:model}    
 \end{equation}
 
-\noindent $\bar{\phi}(t) = \frac{1}{h} \int_0^h\phi(z)dz$ is the depth-averaged suspended sediment concentration at time $t$, where $h$ is water depth and $z$ is a spatial coordinate along the vertical axis. $k_s = \frac{Cv_s}{h}(1-E_r)$ is the exponential time-decay rate of $\bar{\phi}$ due to settling, which is calculated from settling velocity ($v_s$), water depth ($h$), a constant $C$ that accounts for the shape of the Rouse profile, and a dimensionless rate at which particles are entrained from the bed ($E_r$). Because we focused on particle capture, we only empirically estimated $k_s$, not its constituent terms. However, further derivation is available in Fauria et al. \cite{Fauria_2015}. $k_c$ = $\eta^{\prime}ud_cI_c$ is the rate at which particles are removed from suspension due to capture by collectors. It is the product of effective capture efficiency, flow velocity ($u$), collector diameter ($d_c$), and collector height density ($I_c$). For emergent collectors, $I_c = \frac{N_ch}{V}$, where $N_c$ is the total number of stems, and $V$ is the volume of water in which stems are contained. The product $d_cI_c$ is also referred to as frontal-area density ($a$).
-
-To derive $k_c$, begin by considering a single collector. Its rate of collection is the product of the probability of retention ($p_r$) and the flux of particles passing through the cross-section ($b \times h$) where streamlines reach its surface, $p_r ubh\bar{\phi} = p_r \eta u d_c h \bar{\phi}$. By substituting for effective capture efficiency ($\eta^\prime = p_r \eta$) and multiplying by the number of collectors acting on the suspended particles per unit volume, the $k_c$ term is derived: $\eta^\prime u d_c \frac{N_c h}{V} \bar{\phi} = \eta^{\prime}ud_cI_c \bar{\phi} = k_c \bar{\phi}$.
+\noindent $\bar{\phi}(t) = \frac{1}{h} \int_0^h\phi(z) \,\mathrm{d}z$ is the depth-averaged suspended sediment concentration at time $t$, where $h$ is water depth, $z$ is height above the bed, and $\phi(z)$ is concentration at height $z$. $k_s = \frac{C_bv_s}{h}(1-E_r)$ is the exponential time-decay rate of $\bar{\phi}$ due to settling, which is calculated from settling velocity ($v_s$), $h$, a constant ($C_b$) that accounts for the concentration near the bed predicted by the Rouse equation relative to $\bar{\phi}$, and a dimensionless rate at which particles are entrained from the bed ($E_r$). Further derivation of $k_s$ is available in Fauria et al. \cite{Fauria_2015}. $k_c$ = $\eta^{\prime}ud_cI_c$ is the rate at which particles are removed from suspension due to capture by collectors. $I_c = \frac{N_ch}{V}$ is collector height density, where $N_c$ is the total number of stems, and $V$ is the volume of water in which stems are contained.
 
 The solution of Eq. (\ref{eq:model}) is exponential,
 
@@ -163,14 +161,14 @@ The solution of Eq. (\ref{eq:model}) is exponential,
     \label{eq:expo}    
 \end{equation}
 
-Concentration at any height ($\phi_a$) can be assumed to change in proportion to average concentration because we assume the vertical profile of sediment concentration maintains a constant shape through time, governed by the Rouse equation \cite{rouse1937modern},
+\noindent Concentration at any height can be assumed to change over time in proportion to average concentration because we assume the vertical profile of sediment concentration maintains a constant shape governed by the Rouse equation \cite{rouse1937modern},
 
 \begin{equation}
-    \frac{\phi}{\phi_a} = \left( \frac{h - z}{z} \frac{a}{h - a} \right)^{R_0}\,,
+    \frac{\phi_z}{\phi_r} = \left( \frac{h - z}{z} \frac{z_r}{h - z_r} \right)^{R_0}\,,
     \label{eq:rouse}    
 \end{equation}
 
-\noindent where $\phi$ is concentration at height $z$, and $\phi_a$ is concentration at an arbitrary reference height $a$, and $R_0$ is referred to as the Rouse number \cite{kumbhakar2017derivation}.
+\noindent where $\phi_r$ is concentration at an arbitrary reference height above the bed ($z_r$), and $R_0$ is referred to as the Rouse number \cite{kumbhakar2017derivation}.
 
 To calculate $k_s$, we began by calculating the average mass of sediment that settled per settling trap over the duration of the experiment (100 minutes). We then scaled this measurement up from the area of a settling trap's horizontal opening (5.07 $\times 10^{-4}$ m$^2$) to the total test section bed area (1.17 m$^2$). The resulting estimate of the sediment mass settled in the test section ($m_s$) was divided by the total mass removed from suspension during a run to calculate the proportion of the decrease due to settling. This proportion was multiplied by the total exponential decay coefficient, $k$, to calculate $k_s$:
 
@@ -181,7 +179,7 @@ To calculate $k_s$, we began by calculating the average mass of sediment that se
 
 \noindent where $m_0$ was the mass of sediment suspended at the beginning of the experiment and $T$ was the total duration of the experiment.
 
-The equations above model the dynamics occurring in the test section alone. To account for settling and re-entrainment outside the test section, a background exponential decay rate ($k_b$) was estimated from runs with zero collectors for each $\Rey_c$ treatment ($k_c = 0$, hence $k = k_s + k_b$). ECE for our collector-density treatments was then calculated from $k_c$, which was calculated from $k$, $k_s$, and $k_b$. Also, because collectors only act on suspended particles while they are passing through the test section, this estimate for ECE was scaled by the ratio (5.19) between the total volume of water in the flume (\SI{2.43}{\metre\cubed}) and the volume of water in the test section (\SI{0.468}{\metre\cubed}):
+The equations above model the dynamics occurring in the test section alone. To account for settling and re-entrainment outside the test section, a background exponential decay rate ($k_b$) was estimated from runs with zero collectors for each $\Rey_c$ treatment ($k_c = 0$, hence $k = k_s + k_b$). ECE for our collector-density treatments was then calculated from $k_c$, which was calculated from $k$, $k_s$, and $k_b$. Also, because collectors only act on suspended particles while they are passing through the test section, this estimate for ECE was scaled by the ratio (5.19) between the total volume of water in the flume (\SI{2.43}{\metre\cubed}) and $V = \SI{0.468}{\metre\cubed}$:
 
 \begin{equation}
     \eta^\prime = 5.19\frac{k_c}{ud_cI_c} = 5.19\frac{k - k_s - k_b}{ud_cI_c}\,.
@@ -322,15 +320,43 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
 \conflictsofinterest{The authors declare no conflict of interest.} 
 
 %% optional
-% \abbreviations{The following abbreviations are used in this manuscript:\\
-
-% \noindent 
-% \begin{tabular}{@{}ll}
-% MDPI & Multidisciplinary Digital Publishing Institute\\
-% DOAJ & Directory of open access journals\\
-% TLA & Three letter acronym\\
-% LD & linear dichroism
-% \end{tabular}}
+ \abbreviations{The following notations are used in this manuscript: \\
+ 
+ \noindent 
+ \begin{tabular}{@{}ll}
+ $\eta$ & particle capture efficiency, dimensionless\\
+ $b$ & upstream width of streamlines that intersect a collector, cm\\
+ $d_c$ & collector diameter, cm\\
+ $\eta^\prime$ & effective capture efficiency (ECE), dimensionless\\
+ $p_r$ & probability of particle retention, dimensionless \\
+ $d_p$ & particle diameter, \SI{}{\micro\metre} \\
+ $\Rey_c$ & collector Reynolds number, dimensionless \\
+ $u$ & flow velocity, cm/s \\
+ $\nu$ & kinematic viscosity \SI{}{\centi\metre\squared/\second} \\
+ $R$ & particle-collector diameter rato, dimensionless \\
+ $C,a,b$ & power-law coefficients (Eq. (\ref{eq:powerlaw})), dimensionless \\
+ $\bar{\phi}$ & depth-averaged suspended sediment concentration, \SI{}{\micro\liter/\liter} \\
+ $t$ & time, s \\
+ $h$ & water depth, cm \\
+ $z$ & height above the bed, cm \\
+ $\phi_z$ & suspended sediment concentration at height $z$, \SI{}{\micro\liter/\liter} \\
+ $k_s$ & concentration time-decay due to settling, s$^{-1}$ \\
+ $v_s$ & settling velocity, cm/s \\
+ $C_b$ & constant relating near-bed concentration to depth-averaged concentration, dimensionless \\
+ $E_r$ & entrainment rate, dimensionless \\
+ $k_c$ & concentration time-decay due to collection, s$^{-1}$ \\
+ $I_c$ & collector height density, \SI{}{\metre/\metre\cubed} \\
+ $N_c$ & number of collectors, \# \\
+ $V$ & test section volume, \SI{}{\metre\cubed} \\
+ $z_r$ & reference height (Eq. (\ref{eq:rouse})), cm \\
+ $\phi_r$ & suspended sediment concentration at reference height $z_r$, \SI{}{\micro\liter/\liter} \\
+ $R_0$ & Rouse number, dimensionless \\
+ $m_s$ & sediment mass settled in test section, g \\
+ $m_0$ & sediment mass suspended at beginning of experiment, g \\
+ $T$ & total duration of experiment, s \\
+ $k_b$ & background concentration time-decay, s$^{-1}$ \\
+ $\phi_c$ & collector solid volume fraction, dimensionless \\
+ \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
