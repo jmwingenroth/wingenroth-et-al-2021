@@ -154,7 +154,7 @@ We used an exponential decay model for suspended sediment concentration adapted 
 
 \noindent $\bar{\phi}(t) = \frac{1}{h} \int_0^h\phi(z) \,\mathrm{d}z$ is the depth-averaged suspended sediment concentration at time $t$, where $h$ is water depth, $z$ is height above the bed, and $\phi(z)$ is concentration at height $z$. $k_s = \frac{C_bv_s}{h}(1-E_r)$ is the exponential time-decay rate of $\bar{\phi}$ due to settling, which is calculated from settling velocity ($v_s$), $h$, a constant ($C_b$) that accounts for the concentration near the bed predicted by the Rouse equation relative to $\bar{\phi}$, and a dimensionless rate at which particles are entrained from the bed ($E_r$). Further derivation of $k_s$ is available in Fauria et al. \cite{Fauria_2015}. $k_c$ = $\eta^{\prime}ud_cI_c$ is the rate at which particles are removed from suspension due to capture by collectors. $I_c = \frac{N_ch}{V}$ is collector height density, where $N_c$ is the total number of stems, and $V$ is the volume of water in which stems are contained.
 
-The solution of Eq. (\ref{eq:model}) is exponential,
+The solution of the differential Eq. (\ref{eq:model}) is exponential,
 
 \begin{equation}
     \bar{\phi}(t) = \bar{\phi}(0)e^{-kt} = \bar{\phi}(0)e^{-(k_s + k_c)t}\,.
@@ -168,7 +168,7 @@ The solution of Eq. (\ref{eq:model}) is exponential,
     \label{eq:rouse}    
 \end{equation}
 
-\noindent where $\phi_r$ is concentration at an arbitrary reference height above the bed ($z_r$), and $R_0$ is referred to as the Rouse number \cite{kumbhakar2017derivation}.
+\noindent where $\phi_r$ is concentration at an arbitrary reference height above the bed ($z_r$), conventionally $0.05h$, and $R_0$ is referred to as the Rouse number \cite{kumbhakar2017derivation}.
 
 To calculate $k_s$, we began by calculating the average mass of sediment that settled per settling trap over the duration of the experiment (100 minutes). We then scaled this measurement up from the area of a settling trap's horizontal opening (5.07 $\times 10^{-4}$ m$^2$) to the total test section bed area (1.17 m$^2$). The resulting estimate of the sediment mass settled in the test section ($m_s$) was divided by the total mass removed from suspension during a run to calculate the proportion of the decrease due to settling. This proportion was multiplied by the total exponential decay coefficient, $k$, to calculate $k_s$:
 
@@ -264,7 +264,7 @@ Control &   67  & \num{2.48}\\
 Biofilm growth was consistently found to increase ECE (Figure \ref{fig:biofilm}). The absolute increase was greatest by a considerable margin at the lowest collector density, for which biofilm was also allowed to grow for the shortest time. The middle and highest collector densities had similar absolute quantities of increase in their ECE for the initial biofilm runs (18-20 days), although the highest collector-density treatment demonstrated a far greater magnitude of increase in ECE after being allowed to grow for an additional 26 days (46 total).
 
 % Biofilm figure
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=5in]{../pics/biofilm.png}
 \caption{Estimates of effective capture efficiency calculated from experimental runs with varying degrees of biofilm growth. Colors represent the different collector densities, expressed as solid volume fraction ($\phi_c$). Straight lines are drawn between the points that represent our experiments and the shaded areas represent 95\% confidence intervals for ECE inferred from our measurement uncertainty.}
@@ -276,7 +276,7 @@ Biofilm growth was consistently found to increase ECE (Figure \ref{fig:biofilm})
 Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, all of our observations were in agreement with the power-law model adapted by Fauria et al. \cite{Fauria_2015} from Palmer \cite{Palmer_2004} (Figure \ref{fig:compplot}). In no other case did the model prediction differ from our empirical observation by more than 1 standard error (SE), which is likely attributable to measurement error and/or stochastic variance implicit in our physical experiments.
 
 % Fauria model comparison figure
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=5in]{../pics/comparisonplot.png}
 \caption{A comparison of our experimental estimates of effective capture efficiency, colored according to collector solid volume fraction ($\phi_c$), and the predictions of the Fauria et al. \cite{Fauria_2015} power law model (black lines). Effective capture efficiency is plotted on a log scale in order to display model fit more accurately at small values. Error bars represent +/- 1 SE.}
@@ -320,10 +320,9 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
 \conflictsofinterest{The authors declare no conflict of interest.} 
 
 %% optional
- \abbreviations{The following notations are used in this manuscript: \\
+ \abbreviations{The following notations are used in this manuscript:
  
- \noindent 
- \begin{tabular}{@{}ll}
+ \noindent \begin{tabular}{@{}ll}
  $\eta$ & particle capture efficiency, dimensionless\\
  $w_u$ & upstream width of streamlines that intersect a collector, cm\\
  $d_c$ & collector diameter, cm\\
@@ -333,7 +332,7 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
  $\Rey_c$ & collector Reynolds number, dimensionless \\
  $u$ & flow velocity, cm/s \\
  $\nu$ & kinematic viscosity \SI{}{\centi\metre\squared/\second} \\
- $R$ & particle-collector diameter rato, dimensionless \\
+ $R$ & particle-collector diameter ratio, dimensionless \\
  $C,a,b$ & power-law coefficients (Eq. (\ref{eq:powerlaw})), dimensionless \\
  $\bar{\phi}$ & depth-averaged suspended sediment concentration, \SI{}{\micro\liter/\liter} \\
  $t$ & time, s \\
@@ -347,7 +346,7 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
  $k_c$ & concentration time-decay due to collection, s$^{-1}$ \\
  $I_c$ & collector height density, \SI{}{\metre/\metre\cubed} \\
  $N_c$ & number of collectors, \# \\
- $V$ & test section volume, \SI{}{\metre\cubed} \\
+ $V$ & test section water volume, \SI{}{\metre\cubed} \\
  $z_r$ & reference height (Eq. (\ref{eq:rouse})), cm \\
  $\phi_r$ & suspended sediment concentration at reference height $z_r$, \SI{}{\micro\liter/\liter} \\
  $R_0$ & Rouse number, dimensionless \\
@@ -355,8 +354,8 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
  $m_0$ & sediment mass suspended at beginning of experiment, g \\
  $T$ & total duration of experiment, s \\
  $k_b$ & background concentration time-decay, s$^{-1}$ \\
- $\phi_c$ & collector solid volume fraction, dimensionless \\
-  \end{tabular}}
+ $\phi_c$ & collector solid volume fraction, dimensionless
+ \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
@@ -383,7 +382,9 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
 % =====================================
 
 \reftitle{References}
+
 \externalbibliography{yes}
+
 \bibliography{refs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -399,4 +400,4 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\end{document}
+\noindent \end{document}
