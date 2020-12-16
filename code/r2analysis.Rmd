@@ -32,6 +32,7 @@ We entered data into Google Sheets as we processed samples in the lab. I downloa
 ```{r, message=FALSE, warning=FALSE}
 
 library(tidyverse)
+library(cowplot)
 
 ```
 
@@ -214,16 +215,19 @@ pumpfinal %>%
 n_start = 8
 n_stop = 8
 
+r2data <- list()
 r2mod <- list()
 r2val <- list()
 ktval <- list()
 
 for (i in 1:n_start) {
+  r2data[[i]] <- list()
   r2mod[[i]] <- list()
   r2val[[i]] <- list()
   ktval[[i]] <- list()
   
   for (j in 1:n_stop) {
+    r2data[[i]][[j]] <- list()
     r2mod[[i]][[j]] <- list()
     r2val[[i]][[j]] <- list()
     ktval[[i]][[j]] <- list()
@@ -234,6 +238,7 @@ for (i in 1:n_start) {
                t/300 < 20 - j,
                date == unique(pumpfinal$date)[k])
       
+      r2data[[i]][[j]][[k]] <- tempdata
       r2mod[[i]][[j]][[k]] <- lm(data = tempdata, formula = log(mvc) ~ t)
       r2val[[i]][[j]][[k]] <- summary(r2mod[[i]][[j]][[k]])$r.squared
       ktval[[i]][[j]][[k]] <- -coef(r2mod[[i]][[j]][[k]])[2]
@@ -269,26 +274,30 @@ CURVATURE (CRUDE) ANALYSIS:
 
 modresid <- list()
 curvmod <- list()
+curvval <- list()
 
 for (i in 1:length(r2mod)) {
   modresid[[i]] <- list()
   curvmod[[i]] <- list()
+  curvval[[i]] <- list()
+  
   for (j in 1:length(r2mod[[i]])) {
     modresid[[i]][[j]] <- list()
     curvmod[[i]][[j]] <- list()
-    
+  
     for (k in 1:length(r2mod[[i]][[j]])){
-      
       modresid[[i]][[j]][[k]] <- tibble(resid = resid(r2mod[[i]][[j]][[k]]),
-                                        index = 1:length(resid(r2mod[[i]][[j]][[k]])))
-      
-      curvmod[[i]][[j]][[k]] <- coef(lm(data = modresid[[i]][[j]][[k]], formula = resid ~ index + I(index^2)))
-      
+                                        t = r2data[[i]][[j]][[k]]$t)
     }
+    
+    modresid[[i]][[j]] <- bind_rows(modresid[[i]][[j]])
+    curvmod[[i]][[j]] <- lm(data = modresid[[i]][[j]], 
+                            formula = resid ~ t + I(t^2))
+    curvval[[i]][[j]] <- tibble(start = i, 
+                                stop = j, 
+                                curv = curvmod[[i]][[j]]$coefficients[3])
   }
 }
-
-
 
 ```
 
@@ -320,21 +329,39 @@ r2final %>%
   geom_line() +
   geom_point()
 
-r2final %>%
+p1 <- r2final %>%
   group_by(start, stop) %>%
   summarise(mean_r2 = mean(r2)) %>%
-  ggplot(aes(x = start, y = stop, fill = mean_r2, label = round(mean_r2,3))) +
+  ggplot(aes(x = as.factor(as.numeric(start)-1), y = as.factor(as.numeric(stop)-1), fill = mean_r2, label = round(mean_r2,3))) +
   geom_tile() +
   geom_text() +
-  scale_fill_viridis_c()
+  scale_fill_gradient2(midpoint = .5, limits = c(0,1)) +
+  labs(y = "Timesteps Removed from End of Run", 
+       x = "Timesteps Removed from Beginning of Run", 
+       fill = expression(paste("Mean ",R^{2})))
 
-r2final %>%
+p2 <- r2final %>%
   group_by(start, stop) %>%
   summarise(min_r2 = min(r2)) %>%
-  ggplot(aes(x = start, y = stop, fill = min_r2, label = round(min_r2,3))) +
+  ggplot(aes(x = as.factor(as.numeric(start)-1), y = as.factor(as.numeric(stop)-1), fill = min_r2, label = round(min_r2,3))) +
   geom_tile() +
   geom_text() +
-  scale_fill_viridis_c()
+  scale_fill_gradient2(midpoint = .5, limits = c(0,1)) +
+  labs(y = "Timesteps Removed from End of Run", 
+       x = "Timesteps Removed from Beginning of Run", 
+       fill = expression(paste("Min. ",R^{2})))
 
+p3 <- bind_rows(curvval) %>%
+  ggplot(aes(x = as.factor(as.numeric(start)-1), y = as.factor(as.numeric(stop)-1), fill = curv, label = signif(curv, digits = 2))) +
+  geom_tile() +
+  geom_text() +
+  scale_fill_gradient2(low = scales::muted("red"), mid = "white", high = scales::muted("red")) +
+    labs(y = "Timesteps Removed from End of Run", 
+       x = "Timesteps Removed from Beginning of Run", 
+       fill = expression(paste(italic(t^{2})," Coefficient")))
+
+final_plot <- plot_grid(p3, p1, p2, labels = c("(a)","(b)","(c)"), scale = .9) 
+
+final_plot
 ```
 
