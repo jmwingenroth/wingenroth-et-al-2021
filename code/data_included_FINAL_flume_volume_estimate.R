@@ -32,4 +32,17 @@ estimates <- unlist(estimates)*.0036
 
 names(estimates) <- c("linear", "quadratic", "cubic", "4th order")
 
+time2 <- (time - min(time))*3600
+
+plot(time2, flow, xlab = "Time (s)", ylab = "Flow (mL/s)")
+lines(time2, coef(fits[[1]])[1] + coef(fits[[1]])[2]*time)
+lines(time2, coef(fits[[2]])[1] + coef(fits[[2]])[2]*time + coef(fits[[2]])[3]*(time^2), col = "red")
+lines(time2, coef(fits[[3]])[1] + coef(fits[[3]])[2]*time + coef(fits[[3]])[3]*(time^2) + coef(fits[[3]])[4]*(time^3), col = "green")
+lines(time2, coef(fits[[4]])[1] + coef(fits[[4]])[2]*time + coef(fits[[4]])[3]*(time^2) + coef(fits[[4]])[4]*(time^3) + coef(fits[[4]])[5]*(time^4), col = "blue")
+legend("bottomleft", 
+       legend = c("Measurements","Linear", "Quadratic", "Cubic", "4th order"),
+       col = c("black","black","red","green", "blue"),
+       pch = c(1,NA,NA,NA,NA),
+       lty = c(NA,1,1,1,1))
+
 estimates
