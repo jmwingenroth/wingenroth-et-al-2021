@@ -213,3 +213,4 @@ biofilmplot <- final %>%
   theme_bw()
 
 ggsave("../pics/biofilm.png",biofilmplot,dpi = 600, width = 7, height = 5)
+
