@@ -8,12 +8,7 @@
 
 \subsection{Environmental Significance}
 
-Sediment transport is a driver of many key processes in coastal ecosystems, impacting land progradation \cite{kenyon1985morphology}, water quality \cite{goodwin2003temporal}, and ecological productivity \cite{kirwan2007coupled}. With the prospect of climate change and sea level
-rise looming, the significance of sediment load to coastal lands has grown considerably. Britsch
-and Dunbar \cite{britsch1993land} found that an estimated 17.8\% of land throughout a study area in the Louisiana Coastal
-Plain was lost from the 1930s to 1990, with a maximum rate of land loss of about \SI{109}{\kilo\metre\squared/\year}. This trend will be compounded in the near future as rates of relative sea level
-rise increase \cite{fitzgerald2008coastal}. Coastal and
-deltaic zones are home to a large human population worldwide, on the order of hundreds of millions, and represent a rich social and economic network \cite{syvitski2009sinking}. Developing better understanding of the interplay between geomorphology, ecology, and society in low-elevation deltas, marshes, and wetlands \cite{langley2009elevated, silliman2012degradation, ma2018ecogeomorphic} is an important motivator for future research dedicated to climate change adaptation and mitigation. Sedimentation drivers are an especially important study topic because of their potential for use in management seeking to counteract sea level rise.
+Aquatic flora in many low-elevation marshes and wetlands are at risk of degradation or extirpation due to sea level rise over the course of the 21st century \cite{thorne2018us,jankowski2017vulnerability}. However, vegetation is also hypothesized to play an important role in determining the vertical accretion rate of these same habitats, which factors into their degree of adaptability to sea level rise \cite{kirwan2010limits}. In order to better predict sedimentation rates, as well as other properties that are related to sediment transport, such as water quality \cite{goodwin2003temporal} and ecological productivity \cite{kirwan2007coupled}, quantitative understanding of the ways in which vegetation and suspended sediment interact is required. 
 
 Mechanisms by which plants are known to affect sedimentation include direct capture of sediment on stems, leaves, and other plant surfaces \cite{mudd2010does}, direct deposition of organic matter via root growth and shedding of plant matter (e.g., leaves, seeds, fruit) \cite{nyman2006marsh, neubauer2008contributions}, and effects on turbulence and flow patterns impacting the rate at which suspended particles settle out of the water column due to gravity \cite{christiansen2000flow, leonard1995flow}. Additionally, plants' effects on bedload transport have been the subject of numerous studies \cite[e.g.,][]{yager2013influence, yang2019impact, jordanova2003experimental}. These mechanisms act on different, but sometimes overlapping, portions of a water body's sediment load. For instance, settled particles subsequently become bedload, subject to those vegetative effects. Bedload can also be resuspended by turbulent flow, and vegetation has been found to strongly influence the mechanisms by which this occurs also \cite{tinoco2018turbulence}. Even among suspended particles alone, different mechanisms affect particles with different sizes, specific gravity, and surficial properties. While gravitational settling plays a dominant role for large or dense particles in typical flow conditions for vegetated reaches \cite{mudd2010does, leonard1995flow}, fine particles that travel over great longitudinal distances before settling may be destined to either impact vegetation and be collected directly, or pass through vegetated areas without being retained.
 
@@ -22,7 +17,7 @@ Mechanisms by which plants are known to affect sedimentation include direct capt
 Capture efficiency ($\eta=\frac{w_u}{d_c}$) is defined as the ratio between the upstream width ($w_u$) of the streamlines that encounter a collector and the collector's own diameter ($d_c$) (Figure \ref{fig:capeff}). It is a geometrical parameter that describes the ability of a vegetation stem to collect sediment particles from upstream in a given flow field. Effective capture efficiency ($\eta^\prime=p_r\eta$; ECE) accounts for the fact that not all particles coming into contact with a collector will adhere to it, thus including probability of retention ($p_r$) as a multiplicand in its calculation. ECE is the appropriate variable for the empirical estimates made by our study and presumably any others that involve $p_r$ as an implicit factor, and it, rather than $\eta$, corresponds to the realized efficiency of natural vegetation for removing sediment from flow through direct interception.
 
 % Capture diagram figure
-\begin{figure}[H]
+\begin{figure}[h]
 \includegraphics[width=5in]{../pics/collectorefficiency.png}
 \centering
 \caption{A diagram illustrating capture efficiency for a cylindrical collector. $w_u$ is the horizontal width of upstream flow and $d_c$ is collector diameter. Adapted from Palmer et al. (2004) \cite{Palmer_2004}.}
@@ -137,7 +132,7 @@ We estimated mid-water-column turbulent kinetic energy (TKE) among the collector
 
 \subsubsection{Biofilm Growth}
 
-The effect of biofilm on the surficial properties of collectors, and thereby their effective capture efficiency, was another factor of interest for our experiment. While we did not incorporate biofilm into the fully-crossed parameter space of other explicative variables, we carried out an auxiliary experiment to roughly assess its effect size. After one of the experiments at each collector density, the water in the flume was allowed to come to rest, then the collectors sat constantly illuminated by one white, fluorescent overhead light for a measured number of days. The crushed walnut shell doubled as a food source for the microorganisms constituting the biofilm, which we observed grew plentifully in all cases.
+The effect of biofilm on the surficial properties of collectors, and thereby their effective capture efficiency, was another factor of interest for our experiment. While we did not incorporate biofilm into the fully-crossed parameter space of other explicative variables, we carried out an auxiliary experiment to roughly assess its effect size. After one of the experiments at each collector density, the water in the flume was allowed to come to rest, then the collectors sat constantly illuminated by one white, fluorescent grow-light for a measured number of days. The crushed walnut shell doubled as a food source for the microorganisms constituting the biofilm, which we observed grew plentifully in all cases.
 
 Once biofilm became visually apparent on the collectors' surfaces, an experiment was conducted using the same materials and protocols as the treatments without biofilm, holding $\Rey_c$ constant between biofilm treatments (200). The length of time it took for robust biofilm growth to occur differed between the low, medium, and high collector-density treatments (13; 18; 20 days). For the highest collector-density treatment, the flume was left full and illuminated for a longer period (46 days), after which a second experiment with more biofilm present was performed. While we did not quantitatively assess biofilm mass, we assumed that the number of days it was allowed to grow could be used as a proxy, acknowledging that the growth rate (in mass units per day) was probably exponential or logistic rather than linear.
 
@@ -200,13 +195,13 @@ In order to correct for observed heteroscedasticity across time, with earlier, h
 
 Our experiment collected suspended concentration samples at three different heights and both upstream and downstream of the test section. Because the observed magnitude of the Rouse profile (Eq. (\ref{eq:rouse})) and the upstream-downstream difference were barely detectable with our degree of precision, and both were negligible relative to the concentration decay over time, we opted to pool data from all six suspended sediment sampling locations rather than complicating the model further. While we might overestimate or underestimate absolute concentration this way, exponential decay rates, and thus estimated ECE, would not be affected.
 
-We used a Monte Carlo approach to assess the significance of the effects on ECE of $\Rey_c$ and collector density, the latter parameterized as solid volume fraction ($\phi_c$) in the interest of comparability with other studies. For each combination of $\Rey_c$ and $\phi_c$, 30,000 random values were drawn from a normal distribution whose mean equals that combination's empirically estimated ECE and whose standard deviation equals its standard error (SE). These values were log-transformed, since we expected the relationships to fit a power-law model. For each stratum of a given explicative variable, sets (triplets) with one randomly sampled value from each of the strata of the other explicative variable were regressed using ordinary least squares, producing a roughly normal distribution of coefficients (n = 30,000) for each level of both variables (6 total). The distributions of slopes were used in two-tailed t-tests (null hypothesis: $\mu = 0$; $\alpha = 0.05$) to determine the significance of relationships.
+We used a Monte Carlo approach to assess the significance of the effects on ECE of $\Rey_c$ and collector density, the latter parameterized as solid volume fraction ($\phi_c$) in the interest of comparability with other studies. For each combination of $\Rey_c$ and $\phi_c$, 30,000 random values were drawn from a normal distribution whose mean equals that combination's empirically estimated ECE and whose standard deviation equals its standard error (SE). These values were log-transformed, since we expected the relationships to fit a power-law model. For each stratum of a given explicative variable, sets (triplets) with one randomly sampled value from each of the strata of the other explicative variable were regressed using ordinary least squares, producing a roughly normal distribution of coefficients (n = 30,000) for each level of both variables (6 total). The distributions of slopes were used in two-tailed t-tests (null hypothesis: $\mu = 0$; $\alpha = 0.05$) to determine the significance of relationships.
 
 \section{Results}
 
 \subsection{Particle Capture}
 
-Effective capture efficiency was found to decrease with increasing collector Reynolds number and increasing collector density throughout our parameter space, with one exception. This exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). Our experimental uncertainty was great enough that this might be attributable to random error. Surprisingly, repeating the experiment with the same parameters yielded a nearly identical result (omitted from analysis).
+Effective capture efficiency was found to decrease with increasing collector Reynolds number and increasing collector density throughout our parameter space, with one exception. This exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). Our experimental uncertainty was great enough that this might be attributable to random error. However, repeating the experiment with the same parameters yielded a nearly identical result (omitted from analysis).
 
 % ECE figure
 \begin{figure}[h]
@@ -261,7 +256,7 @@ Control &   67  & \num{2.48}\\
 
 \subsection{Biofilm Effects}
 
-Biofilm growth was consistently found to increase ECE (Figure \ref{fig:biofilm}). The absolute increase was greatest by a considerable margin at the lowest collector density, for which biofilm was also allowed to grow for the shortest time. The middle and highest collector densities had similar absolute quantities of increase in their ECE for the initial biofilm runs (18-20 days), although the highest collector-density treatment demonstrated a far greater magnitude of increase in ECE after being allowed to grow for an additional 26 days (46 total).
+We observed robust biofilm growth, consistent throughout the test section. Biofilm grew on the surfaces of collectors and, as we discovered after turning the pump on, in strands (less than 5 cm long) that were pulled downstream of collectors' by the flow. Biofilm growth was consistently found to increase ECE (Figure \ref{fig:biofilm}). For the runs conducted when biofilm was first observed to be abundant in the test section (13-20 days), both absolute (+0.71\% ECE) and relative (an improvement to 2.48 times control) increase were greatest by a considerable margin at the lowest collector density, which also had the shortest growth period (13 days). The middle and highest collector densities were fairly close in terms of absolute increase (+0.09\% ECE and +0.07\% ECE, respectively) and relative increase (1.53 times and 1.73 times, respectively). Interestingly, in our test of a longer grow time (46 days) at the highest collector density, ECE increased with far greater relative (7.15 times) and absolute (+0.60\% ECE) magnitude, suggesting that the other runs might not have been at saturation in terms of biofilm mass.
 
 % Biofilm figure
 \begin{figure}[h]
@@ -295,9 +290,17 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
 
 \section{Discussion}
 
-\subsection{Inferred Mechanisms of Effect for Collector Density and Reynolds Number}
+\subsection{Inferred Mechanisms of Effect for Reynolds Number and Collector Density}
+
+
 
 \subsection{Relative Importance of Biofilm}
+
+Our results confirm those of Fauria et al. \cite{Fauria_2015} in that the presence of biofilm was found to have a substantial positive effect on ECE. Because their study already confirmed that the negative effect of $\Rey_c$ on ECE is supported both with and without biofilm present, and because the duration of growth makes biofilm runs quite time-intensive, we focused solely on collector density's interactions with biofilm. Roughly equivalent biofilm growth (visibly apparent after 13-20 days) resulted in fairly similar relative increase of ECE across our collector density parameter range (improvement to 1.53--2.38 times control), despite quite different absolute values of ECE. As Fauria et al. \cite{Fauria_2015} found for $\Rey_c$, biofilm-positive runs exhibited a consistent negative relationship between collector density and ECE.
+
+Absolute effects of biofilm were on par with those of $\Rey_c$ and collector density across our parameter space. At the Reynolds number (200) used for biofilm experiments, ECE ranged from 0.10\% to 0.48\% across our collector-density treatments without biofilm, for an effect size of 0.38\%, and absolute effects of biofilm ranged from +0.07\% ECE to +0.71\% ECE. Differences in ECE across varying $\Rey_c$ (0.20\%--1.71\% ECE) were larger than the biofilm effect sizes by a ratio of roughly 2.5:1. This demonstrates biofilm's effect is on the same order of magnitude as the other variables, but the fact that our parameter ranges span an arbitrary fraction of possible natural values mean that these comparisons should be considered to be inexact.
+
+The multiplicative nature of biofilm's relationship with ECE, and biofilm's apparent importance relative to other factors, makes incorporating quantitative measures of biofilm in future models for ECE seem like a promising avenue. We are unable to do so here because we did not measure biofilm growth quantitatively, aside from our effort to standardize it across treatments of the other variables. To develop such a model, more sophisticated hydroponic equipment to monitor and account for factors impacting growth rate \cite{schnurr2014effect, trulear1982dynamics}, and protocols for measuring the mass and other characteristics of biofilm grown \cite{liu1994simple,characklis1982dynamics}, should be incorporated in future experiments.
 
 \subsection{Designing Wetlands for Maximum Sedimentation}
 
@@ -359,15 +362,21 @@ Having confirmed that the Fauria et al. \cite{Fauria_2015} model is a reasonably
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
-% \appendixtitles{no} %Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
-% \appendix
-% \section{}
-% \unskip
-% \subsection{}
-% The appendix is an optional section that can contain details and data supplemental to the main text. For example, explanations of experimental details that would disrupt the flow of the main text, but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data is shown in the main text can be added here if brief, or as Supplementary data. Mathematical proofs of results not central to the paper can be added as an appendix.
+\appendixtitles{no} %Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
+\appendix
+\section{}
+\unskip
+\subsection{}
+The appendix is an optional section that can contain details and data supplemental to the main text. For example, explanations of experimental details that would disrupt the flow of the main text, but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data is shown in the main text can be added here if brief, or as Supplementary data. Mathematical proofs of results not central to the paper can be added as an appendix.
 
-% \section{}
-% All appendix sections must be cited in the main text. In the appendixes, Figures, Tables, etc. should be labeled starting with `A', e.g., Figure A1, Figure A2, etc. 
+\section{}
+All appendix sections must be cited in the main text. In the appendixes, Figures, Tables, etc. should be labeled starting with `A', e.g., Figure A1, Figure A2, etc. 
+
+\section{}
+All appendix sections must be cited in the main text. In the appendixes, Figures, Tables, etc. should be labeled starting with `A', e.g., Figure A1, Figure A2, etc. 
+
+\section{}
+All appendix sections must be cited in the main text. In the appendixes, Figures, Tables, etc. should be labeled starting with `A', e.g., Figure A1, Figure A2, etc. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
