@@ -370,12 +370,12 @@ The multiplicative nature of biofilm's relationship with ECE, and biofilm's appa
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/wf5-200sizedist.png}
-\caption{Walnut shell flour (WF5-200) particle size distribution, as measured by LISST-XR|Portable. (\textbf{a}) Probability density function, with mode (\SI{32.55}{\micro\metre}) indicated (\textbf{b}) Cumulative density function, with 50th (\SI{25.20}{\micro\metre}) and 84th (\SI{57.53}{\micro\metre}) percentiles highlighted}
+\caption{Walnut shell flour (WF5-200) particle size distribution, as measured by LISST-XR|Portable. (\textbf{a}) Probability density function, with mode (\SI{32.55}{\micro\metre}) indicated. (\textbf{b}) Cumulative density function, with 50th (\SI{25.20}{\micro\metre}) and 84th (\SI{57.53}{\micro\metre}) percentiles highlighted.}
 \end{figure}
 
 \subsection{Flume Volume}
 
-In order to estimate ECE, we need to know the collection rate for water that is being acted upon by the collectors (i.e., in the test section), which requires scaling up by the ratio between the test section volume (1.95 m $\times$ 0.6 m $\times$ 0.4 m = \SI{0.468}{m^3}) and the water volume of the flume's entire wetted floorplan under experimental conditions (depth = 0.4 m in test section). To calculate the latter, we drained the flume after an experiment while measuring flow rate at the drain outlet over time, performed polynomial regression (Figure \ref{fig:flumevol}), and calculated a definite integral (Table \ref{tbl:flumevol}) from when draining began to when the part of the flume involved in the experimental flows was empty ($V = \int_{t_{full}}^{t_{empty}}{-\frac{dV}{dt}dt}$). Because polynomials of second order and above fit well, and all yielded very similar volume estimates, we felt confident using \SI{2.43}{\metre\cubed} as the flume volume in our calculations.
+In order to estimate ECE, we need to know the collection rate for water that is being acted upon by the collectors (i.e., in the test section), which requires scaling up by the ratio between the test section volume (1.95 m $\times$ 0.6 m $\times$ 0.4 m = \SI{0.468}{m^3}) and the water volume of the flume's entire wetted floorplan under experimental conditions (depth = 0.4 m in test section). Because of the flume's irregular floorplan and shape, estimating its water volume theoretically is impractical, and technical documents were calculated at a different height, so we made an empirical estimate. We drained the flume after an experiment while measuring flow rate at the drain outlet over time, performed polynomial regression (Figure \ref{fig:flumevol}), and calculated a definite integral (Table \ref{tbl:flumevol}) from when draining began to when the part of the flume involved in the experimental flows was empty ($V = \int_{t_{full}}^{t_{empty}}{-\frac{dV}{dt}dt}$). Because polynomials of second order and above fit well and yielded very similar volume estimates, we felt confident using \SI{2.43}{\metre\cubed} as the flume volume in our calculations.
 
 
 \begin{figure}[H]
@@ -402,13 +402,22 @@ Cubic        &  2.4373     &   0.94\\
 \end{tabular}
 \end{table}
 
-\subsection{Heteroskedasticity Remediation}
+\subsection{Heteroskedasticity Reduction}
 
-\subsection{Experimental Run Duration}
+
+
+\subsection{Residual Non-Randomness}
 
 The U-shaped pattern in the residual plot could be attributable to the bed, walls, and other surfaces in the flume, including the collector surfaces, beginning the experiment free of particles. This means that at the beginning of the run, re-suspension from these surfaces is equal to zero. As particles adhere during the run, the absolute rate of re-suspension can be assumed to increase even if $p_r$ remains constant, resulting in a declining overall magnitude of exponential decay of suspended particle concentration. It should be noted that we observed re-entrainment from the test section bed in particular to be negligible, but this does not necessarily apply to other aspects of the flume. 
 
-To minimize the effect of changing re-suspension rates on our analyses, we sought to minimize the positive curvature in our residual plot without making substantial sacrifices in terms of model fit. We went about doing so by conducting models for an $n \times m$ grid with $n$ timesteps dropped from the beginning and $m$ from the end of all experimental runs in the dataset. We calculated a crude estimate of curvature using the second-order coefficient of a quadratic model of the residuals, and the mean and minimum R$^2$ of the set of 12 linear models used in analyses, for each point in the grid (Figure). 
+To minimize the effect of changing re-suspension rates on our analyses, we sought to minimize the positive curvature in our residual plot without making substantial sacrifices in terms of R$^2$ values. We went about doing so by evaluating models for an $n \times m$ grid with $n$ timesteps dropped from the beginning and $m$ from the end of all experimental runs in the dataset. We calculated a crude estimate of curvature using the second-order coefficient of a quadratic model of the pooled residuals, and the mean and minimum of the R$^2$ values of the 12 linear models for $k$ that were used to estimate ECE, for each point in the grid (Figure \ref{fig:r2analysis}). Since reducing curvature by removing timesteps consistently resulted in lower mean and minimum R$^2$ values, we concluded that the conservative course of action was to retain all collected data in the model. 19 timesteps collected over 95 minutes ($n = m = 0$) yielded a fairly good balance between maximizing R$^2$ and minimizing non-randomness of residuals.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5in]{../pics/r2analysis.png}
+\caption{Heatmaps of estimated curvature and model summary statistics for modifications of our dataset with $n$ timesteps removed from the beginning of experimental runs and $m$ timesteps removed from the end. Blue colors represent desirable values in terms of model fit, whereas red represents undesirable values. \textbf{(a)} Curvature in the plot of residuals pooled across our $\Rey_c$ and collector-density parameter space, parameterized as the second-order coefficient of a quadratic model. \textbf{(b)} Mean of our 12 models' R$^2$ values. \textbf{(c)} Minimum of our 12 models' R$^2$ values.}
+\label{fig:r2analysis}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
