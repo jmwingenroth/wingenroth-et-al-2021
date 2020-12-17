@@ -220,16 +220,20 @@ library(broom)
 r2mod <- list()
 r2val <- list()
 ktval <- list()
-resids <- list()
+resids_lin <- list()
+nlsmod <- list()
+resids_exp <- list()
 
 for (k in 1:length(unique(pumpfinal$date))) {
-  tempdata <- pumpfinal %>%
+  tempdata <- filter(pumpfinal) %>%
     filter(date == unique(pumpfinal$date)[k])
   
   r2mod[[k]] <- lm(data = tempdata, formula = log(mvc) ~ t)
   r2val[[k]] <- summary(r2mod[[k]])$r.squared
   ktval[[k]] <- -coef(r2mod[[k]])[2]
-  resids[[k]] <- cbind(tempdata,resid = resid(r2mod[[k]]))
+  resids_lin[[k]] <- cbind(tempdata,resid = resid(r2mod[[k]]))
+  nlsmod[[k]] <- nls(data = tempdata, formula = mvc ~ a*exp(b*t), start = list(a = 80, b = 1e-4))
+  resids_exp[[k]] <- cbind(tempdata, resid = resid(nlsmod[[k]]))
   
 }
 
@@ -248,7 +252,47 @@ r2final <- tibble(unlist(r2val), names(unlist(r2val)), unlist(ktval)) %>% #requi
 ktdata <- bind_rows(lapply(r2mod, tidy), .id = "date") %>%
   filter(term == "t")
 
+resids_lin <- bind_rows(resids_lin) 
+resids_exp <- bind_rows(resids_exp)
 
+
+
+residplot <- function(dataset, title) {
+
+  ggplot(aes(x = t, y = resid), data = dataset) +
+    geom_point() +
+    theme_bw() +
+    theme(plot.title = element_text(hjust = .5)) +
+    geom_hline(yintercept = 0, color = "black") +
+    geom_smooth(color = "red") +
+    labs(x = "Time (s)", y = "Residual Value") +
+    ggtitle(title)
+  
+}
+
+varplot <- function(dataset) {
+
+dataset %>%
+  group_by(t) %>%
+  summarise(var = sd(resid)^2) %>%
+  ggplot(aes(x = t, y = var)) +
+  geom_line() +
+  theme_bw() +
+  labs(x = "Time (s)", y = "Residual Variance")
+
+}
+
+
+p1 <- residplot(resids_exp, title = "Exponental Model")
+p2 <- residplot(resids_lin, title = "Linear Model")
+p3 <- varplot(resids_exp)
+p4 <- varplot(resids_lin)
+
+
+
+heterosked_plot <- plot_grid(p1, p2, p3, p4, align = "h", labels = c("(a)","(b)","(c)","(d)"), scale = .9)
+
+ggsave("../pics/heterosked.png", heterosked_plot, dpi = 600, height = 5)
 
 ```
 
