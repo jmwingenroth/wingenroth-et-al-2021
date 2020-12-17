@@ -283,7 +283,7 @@ dataset %>%
 }
 
 
-p1 <- residplot(resids_exp, title = "Exponental Model")
+p1 <- residplot(resids_exp, title = "Exponential Model")
 p2 <- residplot(resids_lin, title = "Linear Model")
 p3 <- varplot(resids_exp)
 p4 <- varplot(resids_lin)
