@@ -260,7 +260,7 @@ resids_exp <- bind_rows(resids_exp)
 residplot <- function(dataset, title) {
 
   ggplot(aes(x = t, y = resid), data = dataset) +
-    geom_point() +
+    geom_point(alpha = .5) +
     theme_bw() +
     theme(plot.title = element_text(hjust = .5)) +
     geom_hline(yintercept = 0, color = "black") +
