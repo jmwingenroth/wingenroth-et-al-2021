@@ -118,7 +118,7 @@ Before each experiment, the flume was filled with tap water to 0.4 m depth in th
 
 sediment traps were installed immediately before each run, then a slurry consisting of 200 g of crushed walnut shell suspended in 15.1 L of tap water was added using a spigot calibrated to finish draining after a period roughly equal to circulation time (3 minutes). Channel velocity was kept at 6 cm/s for this period across $\Rey_c$ treatments, then adjusted to the appropriate value for the treatment. This procedure was intended to make particle concentration longitudinally even throughout the system. Estimated depth-averaged starting concentration was 82.3 mg/L (\SI{53.8}{\micro\liter/\liter}).
 
-We determined 100 minutes was the necessary duration for experimental runs to capture the effects of settling and collection on suspended concentrations across our parameter space (See Appendix A4). We sampled suspended concentration using the peristaltic pumps every 5 minutes, the first sample occurring 5 minutes after we began adding sediment to the flume. Samples measured approximately 140 ml each, and our sampling frequency resulted in 19 sampled timesteps per experiment, with six samples per timestep. sediment traps were covered with a plunger and removed at 100 minutes, so the last peristaltic pump sample occurred at 95 minutes due to personnel limitations.
+In preliminary experiments, we determined 100 minutes was more than adequate to capture the effects of settling and collection on suspended concentrations across our parameter space. We sampled suspended concentration using the peristaltic pumps every 5 minutes, the first sample occurring 5 minutes after we began adding sediment to the flume. Samples measured approximately 140 ml each, and our sampling frequency resulted in 19 sampled timesteps per experiment, with six samples per timestep. sediment traps were covered with a plunger and removed at 100 minutes, so the last peristaltic pump sample occurred at 95 minutes due to personnel limitations.
 
 Peristaltic pump samples were processed using vacuum filtration. Before filtration, quantitative glass microfiber filter papers (Whatman GF/F) were oven-dried for 24 hours at \SI{40}{\celsius} to remove any moisture, weighed, and assigned to a flume sample. The volume of flume water passed through the filter was measured, then the drying and weighing process was repeated to estimate the mass of sediment on the filter. Concentrations were recorded in \SI{}{\milli\gram/\liter}. sediment traps, which also used filter papers, were dried and weighed before and after the run in a similar fashion, to estimate the mass of settled particles they contained.
 
@@ -185,13 +185,13 @@ The equations above model the dynamics occurring in the test section alone. To a
 
 \subsubsection{Model Execution}
 
-In order to correct for observed heteroscedasticity across time, with earlier, higher-concentration measurements showing greater variance, we log-transformed the exponential model (Eq. (\ref{eq:expo})). This resulted in a linear model taking the form,
+In order to correct for observed heteroscedasticity (See Appendix A3) across time, with earlier, higher-concentration measurements showing greater variance, we log-transformed the exponential model (Eq. (\ref{eq:expo})). This resulted in a linear model taking the form,
 
 \begin{equation}
     log(\boldsymbol{\bar{\phi}}) = log(\bar{\phi}(0)) - k\boldsymbol{t} + \boldsymbol{U} \,,
 \end{equation}
 
-\noindent which was evaluated for each experimental configuration separately. Bold font signifies vector variables, and $\boldsymbol{U}$ is the random error term of the model. We used residual plots to verify that this transformed model exhibited uniformity of residuals (See Appendix A3). The standard error of this $k$ term and the standard deviation of $m_s$ estimates from sediment traps were propagated through Eqs. (\ref{eq:ks}) and (\ref{eq:eta}), for both control and treatment runs, and were ultimately used to calculate uncertainty estimates for ECE.
+\noindent which was evaluated for each experimental configuration separately. Bold font signifies vector variables, and $\boldsymbol{U}$ is the random error term of the model. The standard error of this $k$ term and the standard deviation of $m_s$ estimates from sediment traps were propagated through Eqs. (\ref{eq:ks}) and (\ref{eq:eta}), for both control and treatment runs, and were ultimately used to calculate uncertainty estimates for ECE.
 
 Our experiment collected suspended concentration samples at three different heights and both upstream and downstream of the test section. Because the observed magnitude of the Rouse profile (Eq. (\ref{eq:rouse})) and the upstream-downstream difference were barely detectable with our degree of precision, and both were negligible relative to the concentration decay over time, we opted to pool data from all six suspended sediment sampling locations rather than complicating the model further. While we might overestimate or underestimate absolute concentration this way, exponential decay rates, and thus estimated ECE, would not be affected.
 
@@ -375,7 +375,9 @@ The multiplicative nature of biofilm's relationship with ECE, and biofilm's appa
 
 \subsection{Flume Volume}
 
-In order to estimate ECE, we need to know the collection rate for water that is being acted upon by the collectors (i.e., in the test section), which requires scaling up by the ratio between the test section volume (1.95 m $\times$ 0.6 m $\times$ 0.4 m = \SI{0.468}{m^3}) and the water volume of the flume's entire wetted floorplan under experimental conditions (depth = 0.4 m in test section). Because of the flume's irregular floorplan and shape, estimating its water volume theoretically is impractical, and technical documents were calculated at a different height, so we made an empirical estimate. We drained the flume after an experiment while measuring flow rate at the drain outlet over time, performed polynomial regression (Figure \ref{fig:flumevol}), and calculated a definite integral (Table \ref{tbl:flumevol}) from when draining began to when the part of the flume involved in the experimental flows was empty ($V = \int_{t_{full}}^{t_{empty}}{-\frac{dV}{dt}dt}$). Because polynomials of second order and above fit well and yielded very similar volume estimates, we felt confident using \SI{2.43}{\metre\cubed} as the flume volume in our calculations.
+In order to estimate ECE, we need to know the collection rate for water that is being acted upon by the collectors (i.e., in the test section). This requires scaling up by the ratio between the test section volume (1.95 m $\times$ 0.6 m $\times$ 0.4 m = \SI{0.468}{m^3}) and the water volume of the flume's entire wetted floorplan under experimental conditions (depth = 0.4 m in test section). Because of the flume's irregular floorplan and shape, estimating its water volume theoretically is impractical, and technical documents were calculated at a different height, so we made an empirical estimate. 
+
+We drained the flume after an experiment while measuring flow rate at the drain outlet over time, performed polynomial regression (Figure \ref{fig:flumevol}), and calculated a definite integral (Table \ref{tbl:flumevol}) from when draining began to when the part of the flume involved in the experimental flows was empty ($V = \int_{t_{full}}^{t_{empty}}{-\frac{dV}{dt}dt}$). Because polynomials of second order and above fit well and yielded very similar volume estimates, we felt confident using \SI{2.43}{\metre\cubed} as the flume volume in our calculations.
 
 
 \begin{figure}[H]
@@ -404,24 +406,13 @@ Cubic        &  2.4373     &   0.94\\
 
 \subsection{Heteroskedasticity Reduction}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=5in]{../pics/heterosked.png}
-\caption{Plots of residuals and residual variance pooled from all 12 $\Rey_c$ and collector density treatments, including controls. Red lines are locally-weighted smoothing functions \textbf{(a)} Residuals of the exponential model. \textbf{(b)} Residuals of the transformed linear model used in analyses.}
-\label{fig:flumevol}
-\end{figure}
-
-\subsection{Run Duration}
-
-The U-shaped pattern in the residual plot could be attributable to the bed, walls, and other surfaces in the flume, including the collector surfaces, beginning the experiment free of particles. This means that at the beginning of the run, re-suspension from these surfaces is equal to zero. As particles adhere during the run, the absolute rate of re-suspension can be assumed to increase even if $p_r$ remains constant, resulting in a declining overall magnitude of exponential decay of suspended particle concentration. It should be noted that we observed re-entrainment from the test section bed in particular to be negligible, but this does not necessarily apply to other aspects of the flume. 
-
-To minimize the effect of changing re-suspension rates on our analyses, we sought to minimize the positive curvature in our residual plot without making substantial sacrifices in terms of R$^2$ values. We went about doing so by evaluating models for an $n \times m$ grid with $n$ timesteps dropped from the beginning and $m$ from the end of all experimental runs in the dataset. We calculated a crude estimate of curvature using the second-order coefficient of a quadratic model of the pooled residuals, and the mean and minimum of the R$^2$ values of the 12 linear models for $k$ that were used to estimate ECE, for each point in the grid (Figure \ref{fig:r2analysis}). Since reducing curvature by removing timesteps consistently resulted in lower mean and minimum R$^2$ values, we concluded that the conservative course of action was to retain all collected data in the model. 19 timesteps collected over 95 minutes ($n = m = 0$) yielded a fairly good balance between maximizing R$^2$ and minimizing non-randomness of residuals.
+Because measurement error was proportional to sample concentration, heteroskedasticity was observed in our suspended concentration data. We log-transformed the data and then performed a linear regression and confirmed that heteroskedasticity was reduced (Figure \ref{fig:heterosked}). While it would be preferable to address non-randomness (i.e., curvature) in the residuals \textit{post hoc} also, subsetting data across time is not advisable because $k_s$ was calculated for $T$, the total run duration.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5in]{../pics/r2analysis.png}
-\caption{Heatmaps of estimated curvature and model summary statistics for modifications of our dataset with $n$ timesteps removed from the beginning of experimental runs and $m$ timesteps removed from the end. Blue colors represent desirable values in terms of model fit, whereas red represents undesirable values. \textbf{(a)} Curvature in the plot of residuals pooled across our $\Rey_c$ and collector-density parameter space, parameterized as the second-order coefficient of a quadratic model. \textbf{(b)} Mean of our 12 models' R$^2$ values. \textbf{(c)} Minimum of our 12 models' R$^2$ values.}
-\label{fig:r2analysis}
+\includegraphics[width=5.5in]{../pics/heterosked.png}
+\caption{Plots of residuals and residual variance pooled from all 12 $\Rey_c$ and collector density treatments, including controls. Red lines are locally-weighted smoothing functions \textbf{(a)} Residuals of the exponential model. \textbf{(b)} Residuals of the transformed linear model used in analyses. \textbf{(c)} Variance of the residual values of the exponential model. \textbf{(d)} Variance of the residual values of the linear model used in analyses.}
+\label{fig:heterosked}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
