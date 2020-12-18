@@ -479,9 +479,9 @@ TKEplot <- final %>%
   geom_errorbar() +
   theme_bw() +
   scale_x_log10() +
-  labs(y = "ECE")
+  labs(y = "Effective Capture Efficiency", x = "Turbulent Kinetic Energy")
 
-ggsave("../pics/tke.png", TKEplot, dpi = 600, height = 5)
+ggsave("../pics/tke.png", TKEplot, dpi = 600, height = 3, width = 5)
 
 ```
 
