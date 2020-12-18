@@ -300,7 +300,8 @@ ANOVA:
 
 ```{r}
 
-resids <- tibble(bind_rows(resids))
+resids <- tibble(bind_rows(resids_lin)) %>%
+  mutate(t = as.numeric(t))
 
 residmod <- aov(data = resids, formula = resid ~ loc * ht)
 
@@ -464,6 +465,23 @@ plotece
 
 ```
 
+TKE scatterplot
+
+```{r}
+
+final %>%
+  filter(eta>0) %>%
+  arrange(frontal_area, u) %>%
+  select(dowel_density, u, eta, deta) %>%
+  mutate(TKE = c(1.23, 5.26, 12.2, 9.13, 35.9, 59.6, 11.1, 29.8, 54.4)) %>%
+  ggplot(aes(x = log10(TKE), y = eta, ymax = eta + deta, ymin = eta - deta)) +
+  geom_point() +
+  geom_errorbar() +
+  theme_bw() 
+  
+```
+
+
 ## Addressing Laurel's comments on the outline
 
 Most of Laurel's comments addressed the structure and written content of the paper. However, several recommended new analyses to include.
@@ -480,7 +498,7 @@ Fauria's functional form was $CRe_c^{-1.14}R^{0.65}$. Excluding runs with biofil
 
 Let's dig into stem density, frontal area, ad, etc.
 
-Fauria didn't use cylinders but they give dimensions for their synthetic grass: average x-y plane cross-section was 3mm x 1mm, and it seems that they set water height to match stem height roughly. Given that their stems faced randomy in all directions, average *frontal* diameter per stem assuming a 3mm x 1mm rectangular prism (to avoid a multiple integral) would be approximated by, in mm,
+Fauria didn't use cylinders but they give dimensions for their synthetic grass: average x-y plane cross-section was 3mm x 1mm, and it seems that they set water height to match stem height roughly. Given that their stems faced randomly in all directions, average *frontal* diameter per stem assuming a 3mm x 1mm rectangular prism (to avoid a multiple integral) would be approximated by, in mm,
 
 $$\frac{\int_0^{\pi/2}[3\sin(\theta)+\cos(\theta)]\, \text{d}\theta}{\pi/2} = \frac{(1)-(-3)}{\pi/2}=\frac{8}{\pi}\,.$$
 
@@ -544,9 +562,7 @@ cplot <- c_over_phi %>%
   theme_bw() +
   labs(x = expression(paste("Collector Solid Volume Fraction (", phi[c], " )" )), color = "") +
   scale_color_manual(values = c("darkgreen","red")) +
-  scale_x_continuous(labels = scales::percent) +
-  annotate("polygon", x=c(.012,.012,.004,.004,.007), y= c(23,27,27,23,23), color = "black", fill = "gray 97") +
-  annotate("text", .008, 25, parse = TRUE, label = "C == 0.00801*phi[c]^-1.41")
+  scale_x_continuous(labels = scales::percent)
 
 ggsave("../pics/cphiplot.png",cplot,dpi = 600, height = 4, units = "in")
 
@@ -603,7 +619,7 @@ Each data point has a normal distribution associated with the estimate of eta (d
 
 Models:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval = FALSE}
 
 library(cowplot)
 
@@ -653,7 +669,7 @@ lmsre
 
 Plots:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval = FALSE}
 
 p_phi <- lmsphi %>%
   ggplot(aes(x = paste0(100*as.numeric(phi),"%"), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
