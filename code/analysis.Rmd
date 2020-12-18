@@ -556,11 +556,11 @@ lm(data = c_over_phi, formula = log10(C) ~ log10(phi)) %>%
 c_phi_curve <- tibble(phi = seq(0.002,.03,by = .0001), C = 10^-2.0966*phi^-1.4107)
 
 cplot <- c_over_phi %>%
-  ggplot(aes(x = phi, y = C, color = factor(lab, levels = c("This study", "Fauria et al. (2015)")))) +
+  ggplot(aes(x = phi, y = C, pch = factor(lab, levels = c("This study", "Fauria et al. (2015)")), color = factor(lab, levels = c("This study", "Fauria et al. (2015)")))) +
   geom_line(data = c_phi_curve, aes(x = phi, y = C), inherit.aes = FALSE) +
-  geom_point(size = 2, pch = 4) +
+  geom_point(size = 2) +
   theme_bw() +
-  labs(x = expression(paste("Collector Solid Volume Fraction (", phi[c], " )" )), color = "") +
+  labs(x = expression(paste("Collector Solid Volume Fraction (", phi[c], " )" )), color = "", pch = "") +
   scale_color_manual(values = c("darkgreen","red")) +
   scale_x_continuous(labels = scales::percent)
 
