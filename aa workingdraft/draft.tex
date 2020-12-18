@@ -10,7 +10,7 @@ Aquatic flora in many low-elevation marshes and wetlands are at risk of degradat
 
 Aquatic plants affect sedimentation via numerous mechanisms. Sediment is captured directly on stems, leaves, and other plant surfaces \cite{mudd2010does, peruzzo2012capillary}, and effects of plants on turbulence and flow patterns impact the rate at which suspended particles settle out of the water column due to gravity \cite{christiansen2000flow, leonard1995flow, Nielsen_1993, Jacobs_2016, Wang_2018}. Furthermore, plants affect bedload transport \cite{yager2013influence, yang2019impact, jordanova2003experimental} and reentrainment of cohesive \cite{d2007landscape} and sandy \cite{tinoco2018turbulence} sediment by turbulent flow, which both also impact long-term bed elevation change \cite{wu2005depth,d2007landscape}. While gravitational settling plays a dominant role for large or dense particles in typical flow conditions for vegetated reaches \cite{mudd2010does, leonard1995flow}, finer and lighter particles may be destined to either impact vegetation and be captured directly or pass through vegetated areas without being retained.
 
-In our study, we focused specifically on capture efficiency of emergent stems. Capture efficiency is a geometrical parameter that describes the ability of a collector, usually modeled as a cylinder for vegetation stems, to capture suspended sediment particles in an open-channel flow (Figure \ref{fig:capeff}). It is calculated as the ratio ($\eta=\frac{w_u}{d_c}$) between the upstream width containing all particles that contact a single collector ($w_u$) and the collector's diameter ($d_c$). Effective capture efficiency ($\eta^\prime=p_r\eta$; ECE) accounts for the fact that not all particles coming into infinitessimally close proximity to a collector will adhere to it \cite{spielman1977particle}, and that affixed particles may later be sheared off \cite{defina2010floating}, thus including probability of retention ($p_r$) as a multiplicand in its calculation. ECE is the appropriate variable for the empirical estimates made by our study and presumably in any other settings that involve $p_r$ as an implicit factor.
+In our study, we focused specifically on capture efficiency of emergent stems, one of the less well-studied effects of vegetation. Capture efficiency is a geometrical parameter that describes the ability of a collector, usually modeled as a cylinder for vegetation stems, to capture suspended sediment particles in an open-channel flow (Figure \ref{fig:capeff}). It is calculated as the ratio ($\eta=\frac{w_u}{d_c}$) between the upstream width containing all particles that contact a single collector ($w_u$) and the collector's diameter ($d_c$). Effective capture efficiency ($\eta^\prime=p_r\eta$; ECE) accounts for the fact that not all particles coming into infinitessimally close proximity to a collector will adhere to it \cite{spielman1977particle}, and that affixed particles may later be sheared off \cite{defina2010floating}, thus including probability of retention ($p_r$) as a multiplicand in its calculation. ECE is the appropriate variable for the empirical estimates made by our study and presumably in any other settings that involve $p_r$ as an implicit factor.
 
 % Capture diagram figure
 \begin{figure}[H]
@@ -231,7 +231,7 @@ Monte Carlo analysis determined that there is a significant negative relationshi
 
 \subsection{Turbulence}
 
-TKE was consistently found to increase with increasing flow velocity as expected (Table \ref{tbl:turbulence}). Generally, higher collector density also led to greater turbulence, with the greatest increase in terms of both absolute and relative magnitude taking place between the lower and middle collector-density treatments. A slight decrease actually occurred thereafter (between the middle and highest collector densities) for the middle and highest $\Rey_c$ treatments, with a slight increase for the lowest $\Rey_c$ treatment. The similarity of TKE for the upper two collector-density treatments suggests a potential threshold occurring before or near the middle treatment's $\phi_c$ value.
+TKE was consistently found to increase with increasing flow velocity as expected (Table \ref{tbl:turbulence}). Generally, higher collector density also led to greater turbulence, with the greatest increase in terms of both absolute and relative magnitude taking place between the lower and middle collector-density treatments. A slight decrease actually occurred thereafter (between the middle and highest collector densities) for the middle and highest $\Rey_c$ treatments, with a slight increase for the lowest $\Rey_c$ treatment. The similarity of TKE for the upper two collector-density treatments suggests a potential threshold occurring before or near the middle treatment's $\phi_c$ value. ECE and TKE exhibited a negative relationship across the experimental parameter space (n = 9) taken as a whole (Figure \ref{fig:tke}).
 
 % Turbulence table
 \begin{table}[H]
@@ -265,7 +265,7 @@ Control &   67  & \num{2.48}\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{../pics/tke.png}
-\caption{Effective capture efficiency as a function of turbulent kinetic energy}
+\caption{Effective capture efficiency as a function of turbulent kinetic energy for all experimental treatments studied.}
 \label{fig:tke}
 \end{figure}   
 
@@ -283,13 +283,13 @@ We observed robust biofilm growth, consistent throughout the test section. Biofi
 
 \subsection{Comparison to Previous Models of Capture Efficiency}
 
-Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, all of our observations were in agreement with the power-law model from Fauria et al. \cite{Fauria_2015} (Figure \ref{fig:compplot}). In no other case did the model prediction differ from our empirical observation by more than 1 standard error (SE). Moreover, the model relating $C$ to $\phi_c$ yielded relatively good fit (R$^2$ = 0.82):
+Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, all of our observations were in agreement with the power-law model from Fauria et al. \cite{Fauria_2015} (Figure \ref{fig:compplot}). In no other case did the model prediction differ from our empirical observation by more than 1 standard error (SE). Moreover, the model relating $C$ to $\phi_c$ yielded marginally good fit (R$^2$ = 0.82):
 
 \begin{equation}
     C = 0.00801{\phi_c}^{-1.41}\,.
 \end{equation}
 
-\noindent It underestimated $C$ for all of our collector-density treatments, and overestimated it for both of those from Fauria et al. ($\phi_c$ = 0.82\%, 2.16\%), but by a relatively small magnitude in comparison to the absolute differences in $C$ among the various $\phi_c$ values (n = 5).
+\noindent It underestimated $C$ for all of our collector-density treatments, and overestimated it for both of those from Fauria et al. ($\phi_c$ = 0.82\%, 2.16\%), but by a relatively small magnitude in comparison to the absolute differences in $C$ among the various $\phi_c$ values (n = 5). Data scarcity should be considered a limiting factor in the interpretation of these results.
 
 % Fauria model comparison figure
 \begin{figure}[H]
