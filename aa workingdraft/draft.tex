@@ -10,7 +10,7 @@ Aquatic flora in many low-elevation marshes and wetlands are at risk of degradat
 
 Aquatic plants affect sedimentation via numerous mechanisms. Sediment is captured directly on stems, leaves, and other plant surfaces \cite{mudd2010does, peruzzo2012capillary}, and effects of plants on turbulence and flow patterns impact the rate at which suspended particles settle out of the water column due to gravity \cite{christiansen2000flow, leonard1995flow, Nielsen_1993, Jacobs_2016, Wang_2018}. Furthermore, plants affect bedload transport \cite{yager2013influence, yang2019impact, jordanova2003experimental} and reentrainment of cohesive \cite{d2007landscape} and sandy \cite{tinoco2018turbulence} sediment by turbulent flow, which both also impact long-term bed elevation change \cite{wu2005depth,d2007landscape}. While gravitational settling plays a dominant role for large or dense particles in typical flow conditions for vegetated reaches \cite{mudd2010does, leonard1995flow}, finer and lighter particles may be destined to either impact vegetation and be captured directly or pass through vegetated areas without being retained.
 
-In our study, we focused specifically on capture efficiency of emergent stems, one of the less well-studied effects of vegetation. Capture efficiency is a geometrical parameter that describes the ability of a collector, usually modeled as a cylinder for vegetation stems, to capture suspended sediment particles in an open-channel flow (Figure \ref{fig:capeff}). It is calculated as the ratio ($\eta=\frac{w_u}{d_c}$) between the upstream width containing all particles that contact a single collector ($w_u$) and the collector's diameter ($d_c$). Effective capture efficiency ($\eta^\prime=p_r\eta$; ECE) accounts for the fact that not all particles coming into infinitessimally close proximity to a collector will adhere to it \cite{spielman1977particle}, and that affixed particles may later be sheared off \cite{defina2010floating}, thus including probability of retention ($p_r$) as a multiplicand in its calculation. ECE is the appropriate variable for the empirical estimates made by our study and presumably in any other settings that involve $p_r$ as an implicit factor.
+In our study, we focused specifically on capture efficiency of emergent stems, one of the less well-studied effects of vegetation. Capture efficiency is a geometrical parameter that describes the ability of a collector, usually modeled as a cylinder for vegetation stems, to capture suspended sediment particles in an open-channel flow (Figure \ref{fig:capeff}). It is calculated as the ratio ($\eta=\frac{w_u}{d_c}$) between the upstream width containing all particles that contact a single collector ($w_u$) and the collector's diameter ($d_c$). Effective capture efficiency (ECE; $\eta^\prime=p_r\eta$) accounts for the fact that not all particles coming into infinitesimally close proximity to a collector will adhere to it \cite{spielman1977particle, wu2012single}, and that affixed particles may later be sheared off \cite{peruzzo2012capillary}, thus including probability of retention ($p_r$) as a multiplicand in its calculation.
 
 % Capture diagram figure
 \begin{figure}[H]
@@ -20,26 +20,42 @@ In our study, we focused specifically on capture efficiency of emergent stems, o
 \label{fig:capeff}
 \end{figure}
 
-Particle capture in transitionally turbulent flows (approx: $1<\Rey<1000$), which occur commonly in the environments and on the length scales of aquatic macrovegetation, does not follow the analytical expressions involving Reynolds number, collector diameter, and particle diameter ($d_p$), derived for creeping \cite{lamb1932, langmuir1942filtration, fuchs1965mechanics} and potential \cite{fuchs1965mechanics} flows. Hence, empirical estimates are often employed. Palmer \cite{Palmer_2004} introduced a power law expression for estimating capture efficiency of cylindrical collectors, which takes the form 
+Physical properties of collectors, particles, and flow environments are all known to affect capture efficiency, though the relative importance of different mechanisms of effect is still being determined. Greater flow velocities ($u$) and larger particle diameters ($d_p$) result in greater direct capture and inertial impaction of particles on stems \cite{Palmer_2004,fuchs1965mechanics}. However, increased $u$ results in increased turbulence---often parameterized by collector Reynolds number ($\Rey_c=\frac{ud_c}{\nu}$), where $\nu$ is kinematic viscosity---which can trap particles in vortices distant from collector surfaces and shear particles off of collectors, resulting in lower ECE. Increased $d_c$ and spatial density of collectors, which we parameterize as solid volume fraction ($\phi_c$), can also result in increased turbulence intensity due to collector wakes, although at sufficiently high densities, decreasing interstitial distance can limit turbulence scale and have a damping effect on turbulent kinetic energy (TKE) \cite{nepf_drag_1999}. Lastly, biofilm comprising algae, cyanobacteria, and other microorganisms that live on the surfaces of submerged vegetation, has been confirmed to affect capture efficiency \cite{Fauria_2015}. Increased stem roughness \cite{Palmer_2004} seems a likely mechanism, along with possibly improved particle adherence \cite{wu2014colloid}.
+
+While analytical expressions have been developed for particle capture in creeping and potential flows \cite{lamb1932, langmuir1942filtration, fuchs1965mechanics}, the complexity of the effects described above precludes theoretical solutions for transitional turbulence (approx: $1<\Rey_c<1000$), which occurs commonly in the environments and on the length scales of aquatic macrovegetation. Hence, empirical estimates are often employed. Palmer \cite{Palmer_2004} introduced a power law expression:
 
 \begin{equation}
     \eta=C{\Rey_c}^{a}R^{b}\,,
     \label{eq:powerlaw}
 \end{equation}
 
-\noindent where collector Reynolds number $\Rey_c=\frac{ud_c}{\nu}$, $u$ is flow velocity, $\nu$ is kinematic velocity, and particle-collector diameter ratio ($R=\frac{d_p}{d_c}$). $C$, $a$, and $b$ are empirically determined regression coefficients. They used an isolated single cylinder coated with grease, for which retention was assumed to be complete ($p_r = 1$), and yielded a model with a $b$ coefficient closer to the analytical expression for creeping flows ($O(R^2)$) than for potential flows ($O(R)$) \cite{fuchs1965mechanics}:
+\noindent where $C$, $a$, and $b$ are empirically determined regression coefficients. They used an isolated single cylinder coated with grease, for which retention was assumed to be complete ($p_r = 1$), and yielded a model,
 
 \begin{equation}
-    \eta=0.224{\Rey_c}^{0.718}R^{2.08}\,.
+    \eta=0.224{\Rey_c}^{0.718}R^{2.08}\,,
     \label{eq:palmer}
 \end{equation}
+
+\noindent with a $b$ coefficient closer to the analytical expression for creeping flows ($O(R^2)$) than that for potential flows ($O(R)$). Wu et al. \cite{Wu_2011} studied single-collector capture efficiency of colloid particles, which have different physicochemical interactions with collector surfaces, and found a contrasting model:
+
+\begin{equation}
+    \eta_0=0.0044{\Rey_c}^{-0.94}N_{\Pec}^{-0.03}\,,
+    \label{eq:wu}
+\end{equation}
+
+\noindent where $\eta_0$ is contact efficiency, which accounts for $p_r < 1$ due to particles not adhering on initial contact, but still assumes zero resuspension, and $N_{\Pec}$ is the Peclet number ($ud_c/D$, where $D$ is the dispersion coefficient of the sediment). However, because of their study's focus on laminar flow, their model might not scale to transitionally turbulent conditions.
+
+Before our investigation, two other laboratory studies have examined sediment capture in patches of multiple collectors \cite{purich2006capture,Fauria_2015}. Purich \cite{purich2006capture}, who also used greased cylindrical collectors, found a negative relationship between $\eta$ and $\Rey_c$ for their middle collector-density treatment, but little to no effect---and low absolute $\eta$ values---for their high- and low-density treatments. Fauria et al. \cite{Fauria_2015} studied artificial leaves as opposed to stems and yielded a new model for ECE in patches of multiple collectors based on the form of Eq. (\ref{eq:powerlaw}):
 
 \begin{equation}
     \eta^\prime=C{\Rey_c}^{-1.14}R^{0.65}\,,
     \label{eq:fauria}
 \end{equation}
 
-\noindent where $C$ varied depending on their other explicative variables: collector density and biofilm.
+
+\noindent where $C$ varied depending on their other explicative variables: collector density and biofilm. While they did find higher ECE at lower collector density, and with biofilm present, they only estimated two collector-density treatments, and only determined the effect for biofilm for one of the two. Their study design also did not differentiate enhanced gravitational settling theorized to occur in the proximity of collectors from direct capture on their leaves' surfaces. Perhaps most importantly, neither Fauria et al. nor Purich reported the uncertainty of their respective ECE or $\eta$ estimates.
+
+With so many variables differing between relatively few studies, additional experimental work is needed to fill in yet unexplored parameter combinations. For example, Eq. (\ref{eq:fauria}) has only been tested on leaf-shaped collectors as opposed to vertical cylinders, and the synthetic particulate matter used by Purich \cite{purich2006capture} has physical properties well outside the range of sediment expected in most natural settings. Our study builds on previous work by testing Eq. (\ref{eq:fauria}) for cylindrical collectors across a range of $\Rey_c$ similar to Fauria et al \cite{Fauria_2015} and an expanded range of multiple $\phi_c$ values. Additionally, we measure TKE \textit{in situ} to assess its role as a mediator variable between collector density and ECE, delve into the importance of biofilm relative to $\Rey_c$ and $\phi_c$ across a range of collector densities, estimate uncertainty in ECE for our particular experimental conditions, and take the first steps towards a quantitative model for ECE as a function of $\phi_c$.
 
 \section{Materials and Methods}
 
@@ -50,7 +66,7 @@ Particle capture in transitionally turbulent flows (approx: $1<\Rey<1000$), whic
 We conducted our experiments in the Ecogeomorphology flume, an indoor (22.2 +/- 1 \SI{}{\celsius}) recirculating flume located in McCone Hall at the University of California, Berkeley. The flume has a rectangular open-channel section (5.25 m L $\times$ 0.6 m W $\times$ 0.6 m H) and a bed and sidewalls that are smooth and transparent (Figure \ref{fig:floorplan}). At its upstream and downstream ends, this section connects to rectangular ducts with gradually changing hydraulic diameter and rounded corners with curved vertical manifolds along streamlines. These features are intended to maintain laminar flow when water is not affected by collectors. Additionally, at the upstream end of the open-channel, a honeycomb flow collimator served to further straighten flow streamlines before water enters the open channel. 
 
 % Flume diagram figure
-\begin{figure}[H]
+\begin{figure}[htb]
 \includegraphics[width=5in]{../pics/flume_with_sedtraps.png}
 \centering
 \caption{The Ecogeomorphology flume. Not all measurements are to scale. \textbf{(a)} Photograph of the test section (center-left) and pump (right). \textbf{(b)} Conceptual diagram of the flume as seen from above. Labeled parts are: 1) pump, 2) magnetic flowmeter, 3) test section, and 4) honeycomb flow collimator. Arrows indicate direction of flow. Green points represent the inlets for the peristaltic pumps sampling suspended particle concentration. Red areas represent the sediment traps. \textbf{(c)} A side view of the open-channel part of the system.}
@@ -66,14 +82,14 @@ Within the open channel, we designated a "test section" 1.95 m in length where c
    \item sediment traps (n = 9) with 2.5 cm circular openings flush with the bed and collection filters (Whatman GF/F) on perforated filter holders recessed in a 5 cm deep cylindrical cavity (trap Reynolds number and aspect ratio chosen to minimize bias \cite{butman1986sediment}); these were interspersed among the collectors in a grid-like pattern
 \end{enumerate}
 
-We used 1/8" (0.3175 cm) cylindrical wooden dowels as collectors, which were covered in silicone grease (Chemplex 710, Fuchs Petrolub, Mannheim, Germany) in order to retain impacted particles. Crushed walnut shell was used as a substitute for suspended sediment because it has surficial and physical properties comparable to the organic-rich types common in wetlands \cite{muller2017experiments, jenzer2015sediment, redding2006particle}. We used WF5-200 grade (Composition Materials Co., Milford, CT), which passes entirely through a \#60 sieve (\SI{250}{\micro\metre}), and which we determined has a average particle diameter ($d_{50}$) of \SI{25.2}{\micro\metre} based on measurements using a laser-scattering-based instrument (LISST-Portable|XR, Sequoia Scientific, Bellevue, WA; See Appendix A1). We also empirically estimated the particle density for this specific walnut shell flour to be 1.53 \SI{}{\gram/\centi\metre\cubed}.
+We used 1/8" (0.3175 cm) cylindrical wooden dowels as collectors, which were covered in silicone grease (Chemplex 710, Fuchs Petrolub, Mannheim, Germany) in order to retain impacted particles and spread randomly throughout the test section at the appropriate density. Crushed walnut shell was used as a substitute for suspended sediment because it has surficial and physical properties comparable to the organic-rich types common in wetlands \cite{muller2017experiments, jenzer2015sediment, redding2006particle}. We used WF5-200 grade (Composition Materials Co., Milford, CT), which passes entirely through a \#60 sieve (\SI{250}{\micro\metre}), and which we determined has a average particle diameter ($d_{50}$) of \SI{25.2}{\micro\metre} based on measurements using a laser-scattering-based instrument (LISST-Portable|XR, Sequoia Scientific, Bellevue, WA; See Appendix A1). We also empirically estimated the particle density for this specific walnut shell flour to be 1.53 \SI{}{\gram/\centi\metre\cubed} using volume displacement.
 
 \subsubsection{Suspended Particle Concentration Analysis}
 
-We conducted experimental runs for a fully-crossed parameter space of collector Reynolds number (67; 134; 200) and collector density (0; 285; 821; 1487 collectors/m$^2$). These values, as well as other experimental parameters held constant throughout, were chosen because they correspond to those that might occur for emergent grasses or reeds in natural settings (Table \ref{tbl:parameters}). A zero-collector control density was included in order to isolate the effects of our experimental installations from the background effects of the rest of the flume.   
+We conducted experimental runs for a fully-crossed parameter space of collector Reynolds number (67; 134; 200) and collector density (0; 285; 821; 1487 collectors/m$^2$ bed area). These values, as well as other experimental parameters held constant throughout, were chosen because they correspond to those that might occur for emergent grasses or reeds in natural settings (Table \ref{tbl:parameters}). A zero-collector control density was included in order to isolate the effects of our experimental installations from the background effects of the rest of the flume.   
 
 % Experimental parameters table
-\begin{table}[H]
+\begin{table}[h]
 \caption{Experimental and natural parameter ranges. Natural values are based on approximations or measurements from cited studies and literature reviews in wetlands or other low-elevation flows.}
 \centering
 \begin{threeparttable}
@@ -114,7 +130,7 @@ Particle-collector diameter ratio, $R$
 \begin{tablenotes}
 \footnotesize \item[1] Estimated from a different study about road dust properties \cite{mckenzie2008size} 
 \vspace{2mm}
-\footnotesize \item[2] Fauria et al. \cite{Fauria_2015} used a LISST to measure collection in separate bins across a broad range of particle diameters (1.25--250 \SI{}{\micro\metre}) rather than overall suspended concentration
+\footnotesize \item[2] Fauria et al. \cite{Fauria_2015} used a LISST to measure capture in separate bins across a broad range of particle diameters (1.25--250 \SI{}{\micro\metre}) rather than overall suspended concentration
 \end{tablenotes}
 \end{threeparttable}
 \label{tbl:parameters}
@@ -122,11 +138,11 @@ Particle-collector diameter ratio, $R$
 
 Before each experiment, the flume was filled with tap water to 0.4 m depth in the test section, which was enough to fully submerge the pump and almost the entirety of the duct length. At this depth, the volume of water in the entire flume was approximately 2.43 m$^3$ (See Appendix A2).  A Nortek Vectrino Profiler ADV (acoustic Doppler velocimeter; Nortek AS, Vangkroken 2, 1351 Rud, Norway) was used to calibrate the pump to generate channel mean flow velocities (2.0; 4.0; 6.0 \SI{}{\centi\metre/\second}) within the pump's capabilities and corresponding to the range of interest for $\Rey_c$. At these flow rates (0.0048; 0.0096; 0.0144 \SI{}{\metre\cubed/\second}), circulation times for the entire system were 506 s, 253 s, and 169 s, respectively. The drag caused by collectors was not found to detectably affect upstream or downstream flow velocities.
 
-Sediment traps were installed immediately before each run, then a slurry consisting of 200 g of crushed walnut shell suspended in 15.1 L of tap water was added using a spigot calibrated to finish draining after a period roughly equal to circulation time (3 minutes). Channel velocity was kept at 6 cm/s for this period across $\Rey_c$ treatments, then adjusted to the appropriate value for the treatment. This procedure was intended to make particle concentration longitudinally even throughout the system. Estimated depth-averaged starting concentration was 82.3 mg/L (\SI{53.8}{\micro\liter/\liter}).
+Sediment traps were installed immediately before each run, then a slurry consisting of 200 g of crushed walnut shell suspended in 15.1 L of tap water was added using a spigot calibrated to finish draining after a period roughly equal to circulation time (3 minutes). Test-section flow velocity was kept at 6 cm/s for this period across $\Rey_c$ treatments, then adjusted to the appropriate value for the treatment. This procedure was intended to make particle concentration longitudinally even throughout the system. Estimated depth-averaged starting concentration was 82.3 mg/L (\SI{53.8}{\micro\liter/\liter}).
 
-In preliminary experiments, we determined 100 minutes was more than adequate to capture the effects of settling and collection on suspended concentrations across our parameter space. We sampled suspended concentration using the peristaltic pumps every 5 minutes, the first sample occurring 5 minutes after we began adding sediment to the flume. Samples measured approximately 140 ml each, and our sampling frequency resulted in 19 sampled timesteps per experiment, with six samples per timestep. sediment traps were covered with a plunger and removed at 100 minutes, so the last peristaltic pump sample occurred at 95 minutes due to personnel limitations.
+In preliminary experiments, we determined 100 minutes was more than adequate to capture the effects of settling and capture on suspended concentrations across our parameter space. We sampled suspended concentration using the peristaltic pumps every 5 minutes, the first sample occurring 5 minutes after we began adding sediment to the flume. Samples measured approximately 140 ml each, and our sampling frequency resulted in 19 sampled timesteps per experiment, with six samples per timestep. sediment traps were covered with a plunger and removed at 100 minutes, so the last peristaltic pump sample occurred at 95 minutes due to personnel limitations.
 
-Peristaltic pump samples were processed using vacuum filtration. Before filtration, quantitative glass microfiber filter papers (Whatman GF/F) were oven-dried for 24 hours at \SI{40}{\celsius} to remove any moisture, weighed, and assigned to a flume sample. The volume of flume water passed through the filter was measured, then the drying and weighing process was repeated to estimate the mass of sediment on the filter. Concentrations were recorded in \SI{}{\milli\gram/\liter}. sediment traps, which also used filter papers, were dried and weighed before and after the run in a similar fashion, to estimate the mass of settled particles they contained.
+Peristaltic pump samples were processed using vacuum filtration. Before filtration, quantitative glass microfiber filter papers (Whatman GF/F) were oven-dried for 24 hours at \SI{40}{\celsius} to remove any moisture, weighed, and assigned to a flume sample. The volume of flume water passed through the filter was measured, then the drying and weighing process was repeated to estimate the mass of sediment on the filter. Concentrations were recorded in \SI{}{\milli\gram/\liter}. Filter papers from sediment traps were dried and weighed before and after the run in a similar fashion, to estimate the mass of settled particles they contained.
 
 \subsubsection{Estimating Collector-Induced Turbulence}
 
@@ -138,9 +154,9 @@ We estimated mid-water-column turbulent kinetic energy (TKE) among the collector
 
 \subsubsection{Biofilm Growth}
 
-The effect of biofilm on the surficial properties of collectors, and thereby their effective capture efficiency, was another factor of interest for our experiment. While we did not incorporate biofilm into the fully-crossed parameter space of other explicative variables, we carried out an auxiliary experiment to roughly assess its effect size. After one of the experiments at each collector density, the water in the flume was allowed to come to rest, then the collectors sat constantly illuminated by one white, fluorescent grow-light for a measured number of days. The crushed walnut shell doubled as a food source for the microorganisms constituting the biofilm, which we observed grew plentifully in all cases.
+The effect of biofilm on the surficial properties of collectors, and thereby their effective capture efficiency, was another factor of interest for our experiment. While we did not incorporate biofilm into the fully-crossed parameter space of other explicative variables due to the time-intensiveness of growing algae, we did carry out an auxiliary experiment to roughly assess its effect size. After one of the experiments at each collector density, the water in the flume was allowed to come to rest, then the collectors sat constantly illuminated by one white, fluorescent grow-light for a measured number of days. The crushed walnut shell doubled as a food source for the microorganisms constituting the biofilm, which we observed grew plentifully in all cases.
 
-Once biofilm became visually apparent on the collectors' surfaces, an experiment was conducted using the same materials and protocols as the treatments without biofilm, holding $\Rey_c$ constant between biofilm treatments (200). The length of time it took for robust biofilm growth to occur differed between the low, medium, and high collector-density treatments (13; 18; 20 days). For the highest collector-density treatment, the flume was left full and illuminated for a longer period (46 days), after which a second experiment with more biofilm present was performed. While we did not quantitatively assess biofilm mass, we assumed that the number of days it was allowed to grow could be used as a proxy, acknowledging that the growth rate (in mass units per day) was probably exponential or logistic rather than linear.
+Once biofilm became visually apparent on the collectors' surfaces, an experiment was conducted using the same materials and protocols as the treatments without biofilm, holding $\Rey_c = 200$ constant between biofilm treatments. The length of time it took for robust biofilm growth to occur differed between the low, medium, and high collector-density treatments (13; 18; 20 days, respectively). For the highest collector-density treatment, a follow-up experiment with a longer growth period (46 days) was performed. While we did not quantitatively assess biofilm mass, we assumed that the number of days it was allowed to grow could be used as a proxy, acknowledging that the growth rate (in mass units per day) was probably exponential or logistic rather than linear.
 
 \subsection{Sediment Transport and Particle Capture Model}
 
@@ -180,14 +196,12 @@ To calculate $k_s$, we began by calculating the average mass of sediment that se
 
 \noindent where $m_0$ was the mass of sediment suspended at the beginning of the experiment and $T$ was the total duration of the experiment.
 
-The equations above model the dynamics occurring in the test section alone. To account for settling and reentrainment outside the test section, a background exponential decay rate ($k_b$) was estimated from runs with zero collectors for each $\Rey_c$ treatment ($k_c = 0$, hence $k = k_s + k_b$). ECE for our collector-density treatments was then calculated from $k_c$, which was calculated from $k$, $k_s$, and $k_b$. Also, because collectors only act on suspended particles while they are passing through the test section, this estimate for ECE was scaled by the ratio (5.19) between the total volume of water in the flume (\SI{2.43}{\metre\cubed}) and $V = \SI{0.468}{\metre\cubed}$:
+The equations above model the dynamics occurring in the test section alone. To account for settling and reentrainment outside the test section, a background exponential decay rate ($k_b$) was estimated from runs with zero collectors for each $\Rey_c$ treatment ($k_c = 0 \implies k_b = k - k_s$). ECE for our collector-density treatments was then calculated from $k_c$. Also, because collectors only act on suspended particles while they are passing through the test section, this estimate for ECE was scaled by the ratio (5.19) between the total volume of water in the flume (\SI{2.43}{\metre\cubed}) and $V = \SI{0.468}{\metre\cubed}$:
 
 \begin{equation}
     \eta^\prime = 5.19\frac{k_c}{ud_cI_c} = 5.19\frac{k - k_s - k_b}{ud_cI_c}\,.
     \label{eq:eta}
 \end{equation}
-
-\noindent Using this volumetric scaling factor to estimate actual ECE, as Fauria et al. also did \cite{Fauria_2015}, is justified under the assumption that evapotranspiration and any other fluxes in and out of the flume's water volume are negligible.
 
 \subsubsection{Model Execution}
 
@@ -201,7 +215,7 @@ In order to correct for observed heteroscedasticity (See Appendix A3) across tim
 
 Our experiment collected suspended concentration samples at three different heights and both upstream and downstream of the test section. Because the observed magnitude of the Rouse profile (Eq. (\ref{eq:rouse})) and the upstream-downstream difference were barely detectable with our degree of precision, and both were negligible relative to the concentration decay over time, we opted to pool data from all six suspended sediment sampling locations rather than complicating the model further. While we might overestimate or underestimate absolute concentration this way, exponential decay is expected to be constant across height on account of the constant Rouse profile, and thus estimated ECE would not be affected.
 
-We used a Monte Carlo approach to assess the significance of the effects on ECE of $\Rey_c$ and collector density, the latter parameterized as solid volume fraction ($\phi_c$) in the interest of comparability with other studies. For each combination of $\Rey_c$ and $\phi_c$, 30,000 random values were drawn from a normal distribution whose mean equals that combination's empirically estimated ECE and whose standard deviation equals its standard error (SE). These values were log-transformed, since we expected the relationships to fit a power-law model. For each stratum of a given explicative variable, sets (triplets) with one randomly sampled value from each of the strata of the other explicative variable were regressed using ordinary least squares, producing a roughly normal distribution of coefficients (n = 30,000) for each level of both variables (6 total). The distributions of slopes were used in two-tailed t-tests (null hypothesis: $\mu = 0$; $\alpha = 0.05$) to determine the significance of relationships.
+We used a Monte Carlo approach to assess the significance of the effects of $\Rey_c$ and $\phi_c$ on ECE. For each combination of $\Rey_c$ and $\phi_c$, 30,000 random values were drawn from a normal distribution whose mean equals that combination's empirically estimated ECE and whose standard deviation equals its standard error (SE). These values were log-transformed, since we expected the relationships to fit a power-law model. For each stratum of a given explicative variable, sets (triplets) with one randomly sampled value from each of the strata of the other explicative variable were regressed using ordinary least squares, producing a roughly normal distribution of coefficients (n = 30,000) for each level of both variables (6 total). The distributions of slopes were used in two-tailed t-tests (null hypothesis: $\mu = 0$; $\alpha = 0.05$) to determine the significance of relationships.
 
 Lastly, we compared our results to Fauria et al. \cite{Fauria_2015} by fitting their model (Eq. (\ref{eq:fauria})) to our data at each of our collector densities, estimating $C$, then fitting a power-law function relating the combined $C$ values from their study and ours to collector density. $C$ is directly proportional to ECE in their model, so this can be thought of as an indirect way to quantify the relationship between collector density and ECE.
 
@@ -209,13 +223,13 @@ Lastly, we compared our results to Fauria et al. \cite{Fauria_2015} by fitting t
 
 \subsection{Particle Capture}
 
-Effective capture efficiency was found to decrease with increasing collector Reynolds number and increasing collector density throughout our parameter space, with one exception. This exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). Our experimental uncertainty was great enough that this might be attributable to random error. However, repeating the experiment with the same parameters yielded a nearly identical result (omitted from analysis).
+Effective capture efficiency was found to decrease with increasing $\Rey_c$ and $\phi_c$ throughout our parameter space, with one exception. This exception occurred at the lowest collector density ($\phi_c = 0.22\%$), where the intermediate $\Rey_c$ treatment ($\Rey_c = 134$) had lower ECE than both the lower and higher $\Rey_c$ treatments (Figure \ref{fig:ece}a). When compared to the other collector-density treatments with the same $\Rey_c$ value, this low collector-density experiment's calculated ECE was slightly lower than the intermediate collector-density treatment, and was greater than the highest collector-density treatment (Figure \ref{fig:ece}b). Our experimental uncertainty was great enough that this might be attributable to random error. However, repeating the experiment with the same parameters yielded a nearly identical result (omitted from analysis).
 
 % ECE figure
-\begin{figure}[H]
+\begin{figure}[htb]
 \centering
 \includegraphics[width=5in]{../pics/ece_plot.png}
-\caption{Estimates of effective capture efficiency calculated from laboratory experiments across the collector density $\times$ Reynolds number parameter space. Error bars represent +/- 1 SE. (\textbf{a}) Estimates plotted over $\Rey_c$, colored by solid volume fraction ($\phi_c$). (\textbf{b}) Estimates plotted over solid volume fraction, colored by $\Rey_c$.}
+\caption{Estimates of effective capture efficiency calculated from laboratory experiments across the collector density $\times$ Reynolds number ($\Rey_c$) parameter space. Error bars represent +/- 1 SE. (\textbf{a}) Estimates plotted over $\Rey_c$, colored by solid volume fraction ($\phi_c$). (\textbf{b}) Estimates plotted over $\phi_c$, colored by $\Rey_c$.}
 \label{fig:ece}
 \end{figure}   
 
@@ -287,9 +301,18 @@ Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, 
 
 \begin{equation}
     C = 0.00801{\phi_c}^{-1.41}\,.
+    \label{eq:cphi}
 \end{equation}
 
-\noindent It underestimated $C$ for all of our collector-density treatments, and overestimated it for both of those from Fauria et al. ($\phi_c$ = 0.82\%, 2.16\%), but by a relatively small magnitude in comparison to the absolute differences in $C$ among the various $\phi_c$ values (n = 5). Data scarcity should be considered a limiting factor in the interpretation of these results.
+\noindent It underestimated $C$ for all of our collector-density treatments, and overestimated it for both of those from Fauria et al. ($\phi_c$ = 0.82\%, 2.16\%). However the magnitude of this error was small in comparison to the absolute differences in $C$ among the various $\phi_c$ values (n = 5). Data scarcity should be considered a limiting factor in the interpretation of these results.
+
+
+
+\section{Discussion}
+
+\subsection{Inferred Mechanisms of Effect for Collector Density and Reynolds Number}
+
+It is notable that the exponential coefficient for $\phi_c$ as a predictor of $C$ (Eq. (\ref{eq:cphi})), and thus indirectly ECE, is greater in magnitude than those found by Fauria et al. \cite{Fauria_2015} for either $\Rey_c$ or $R$ as a direct predictor of ECE. With the evidence of a positive---albeit potentially thresholded---effect of collector density on TKE, and the evidence of TKE's negative effect on ECE, it seems likely that secondary turbulence generated by upstream collectors negatively affects downstream collectors' ECE. This is conceptually valid because greater fluctuations in flow velocity exert stronger forces with more variable directionality on sediment particles affixed to collectors, increasing the probability of resuspension. 
 
 % Fauria model comparison figure
 \begin{figure}[H]
@@ -307,23 +330,21 @@ Aside from the outlier at the mid $\Rey_c$, lowest collector-density treatment, 
 \label{fig:cphi}
 \end{figure}   
 
-\section{Discussion}
-
-\subsection{Inferred Mechanisms of Effect for Collector Density and Reynolds Number}
-
-It is notable that the exponential coefficient for $\phi_c$ as a predictor of $C$ (Figure \ref{fig:cphi}), and thus indirectly ECE, is greater in magnitude than those found by Fauria et al. \cite{Fauria_2015} for either $\Rey_c$ or $R$ as a direct predictor of ECE. With the evidence of a positive---albeit potentially thresholded---effect of collector density on TKE, and the evidence of TKE's negative effect on ECE, it seems likely that secondary turbulence generated by upstream collectors negatively affects downstream collectors' ECE. This is conceptually valid because greater fluctuations in flow velocity exert stronger forces with more variable directionality on sediment particles affixed to collectors, increasing the probability of resuspension. 
-
 The threshold in TKE's relationship with collector density likely indicates that the turbulent eddy scale and the distance between collectors converged somewhere in our parameter space, so that additional collectors acted to damp eddies as much or more than they acted to create them. Accounting for secondary turbulence in future models and experiments seems feasible and important. In general, moving on from the simplistic power-law models developed initially as a way to bridge the gap between analytical expressions for creeping and potential flows to more theoretically-grounded empirical models \cite{stein2020} seems a promising avenue for future investigation.
 
-The ECE we observed at our lowest $\Rey_c$ and collector-density treatment (1.92\%) is one of the highest observed in any previous laboratory experiment with multiple collectors \cite{stein2020}. Our observation did fall above the value (1.67\%) predicted by the Fauria et al. model \cite{Fauria_2015} that was fit at that collector density. However, the anomalous experiment at the middle $\Rey_c$ treatment that also influenced that model's fit (Figure \ref{fig:compplot}) probably explains some or all of that difference. Removing this anomaly would leave only two points, overfitting the model by definition, so we chose to leave it in as a lesser of two evils. On the whole, our results demonstrate that the Fauria et al. model remains a reasonably good predictor of ECE even at collector densities far lower than those they studied.
+The ECE of 1.92\% that we observed at our lowest $\Rey_c$ and collector-density treatment is one of the highest observed in any laboratory experiment with multiple collectors \cite{stein2020}. Our observation did fall above the value (1.67\%) predicted by the Fauria et al. model \cite{Fauria_2015} that was fit at that collector density. However, the anomalous experiment at the middle $\Rey_c$ treatment that also influenced that model's fit (Figure \ref{fig:compplot}) probably explains some or all of that difference. Repeating the experiment with the same parameters failed to rectify the anomaly, since it yielded a similar ECE estimate.
+
+On the whole, our results demonstrate that the Fauria et al. model remains a reasonably good predictor of ECE even at collector densities lower than those they studied, and add to the pool of evidence that ECE in settings with multiple stems has a negative relationship with $\Rey_c$ \cite{Fauria_2015,wu2014colloid}, as opposed to the positive relationship between $\eta$ and $\Rey_c$ observed for sediment in settings with only one stem \cite{Palmer_2004}. 
+
+We attribute that difference in part to resuspension driven by turbulent wakes from upstream stems. It is noteworthy that we observed a negative effect despite greasing our stems with the same product and protocol used by Palmer \cite{Palmer_2004}, calling into question previous assumptions that $p_r = 1$ for greased dowels. While Purich \cite{purich2006capture} did empirically confirm resuspension from their greased collectors was low, they did so based on a dowel holding relatively few particles (n = 35). If those particles were added manually before the test, or if they remained on the dowel throughout agitation when others might have been removed, they might not reflect the average resuspension behavior of captured particles.
 
 \subsection{Relative Importance of Biofilm}
 
-The presence of biofilm was found to have a substantial positive effect on ECE. Because Fauria et al. \cite{Fauria_2015} already confirmed that the negative effect of $\Rey_c$ on ECE is supported both with and without biofilm present, and because the duration of growth makes biofilm runs quite time-intensive, we focused solely on collector density's interactions with biofilm. Roughly equivalent biofilm growth (visibly apparent after 13-20 days) resulted in fairly similar relative increase of ECE across our collector density parameter range (improvement to 1.53--2.38 times control), despite quite different absolute values of ECE. As Fauria et al. \cite{Fauria_2015} found for $\Rey_c$, biofilm-positive runs exhibited consistent decline in ECE with increasing collector density.
+The presence of biofilm, which is thought to predominantly affect particle adherence and retention, was found to have a substantial positive effect on ECE. Because Fauria et al. \cite{Fauria_2015} already confirmed that the negative effect of $\Rey_c$ on ECE is supported both with and without biofilm present, and because the duration of growth makes biofilm runs quite time-intensive, we focused solely on collector density's interactions with biofilm. Roughly equivalent biofilm growth (visibly apparent after 13-20 days) resulted in similar relative increase of ECE across our collector density parameter range (improvement to 1.53--2.38 times control), despite quite different absolute values of ECE. As Fauria et al. \cite{Fauria_2015} found for $\Rey_c$, biofilm-positive runs---like biofilm-negative runs---exhibited consistent decline in ECE with increasing collector density.
 
-Absolute effects of biofilm were on par with those of $\Rey_c$ and collector density across our parameter space. At the Reynolds number (200) used for biofilm experiments, ECE ranged from 0.10\% to 0.48\% across our collector-density treatments without biofilm, for an effect size of 0.38\%, and absolute effects of biofilm ranged from +0.07\% ECE to +0.71\% ECE. Absolute effects of $\Rey_c$ (0.20\%--1.71\% ECE) on ECE for specific collector densities were larger than the biofilm effect sizes by a ratio of roughly 2.5:1. This demonstrates biofilm's effect is on the same order of magnitude as the other variables, but the fact that our parameter ranges span an arbitrary fraction of possible natural values means that these comparisons should be considered to be inexact.
+Absolute effects of biofilm were on par with those of $\Rey_c$ and collector density across our parameter space. At the Reynolds number (200) used for biofilm experiments, ECE ranged from 0.10\% to 0.48\% across our collector-density treatments without biofilm, for an effect size of 0.38\%, and absolute effects of biofilm ranged from +0.07\% ECE to +0.71\% ECE. Absolute effects of $\Rey_c$ (0.20\%--1.71\% ECE) on ECE for specific collector densities were larger than the biofilm effect sizes by a ratio of roughly 2.5:1. This demonstrates biofilm's effect is on the same order of magnitude as the other variables, but the fact that our parameter ranges span a subset of reasonable natural values means that these comparisons should be considered to be inexact.
 
-The multiplicative nature of biofilm's relationship with ECE, and biofilm's apparent importance relative to other factors, makes incorporating quantitative measures of biofilm in future models for ECE seem like a promising avenue. We are unable to do so here because we did not measure biofilm growth quantitatively, aside from our effort to standardize it across treatments of the other variables. To develop such a model, more sophisticated hydroponic equipment to monitor and account for factors impacting growth rate \cite{schnurr2014effect, trulear1982dynamics}, and protocols for measuring the mass and other characteristics of biofilm grown \cite{liu1994simple,characklis1982dynamics}, should be incorporated in future experiments. Additionally, the strands we observed forming on collectors led us to question the relative proportion of collection due to filamentous and surficial biofilm, another question in need of investigation.
+The multiplicative nature of biofilm's relationship with ECE, and biofilm's apparent importance relative to other factors, makes incorporating quantitative measures of biofilm in future models for ECE seem like a promising avenue. We are unable to do so here because we did not measure biofilm growth quantitatively, aside from our effort to standardize it across treatments of the other variables. To develop such a model, more sophisticated hydroponic equipment to monitor and account for factors impacting growth rate \cite{schnurr2014effect, trulear1982dynamics}, and protocols for measuring the mass and other characteristics of biofilm grown \cite{liu1994simple,characklis1982dynamics}, should be incorporated in future experiments. Additionally, the strands we observed forming on collectors led us to question the relative proportion of capture due to filamentous versus surficial biofilm, another question in need of investigation.
 
 \subsection{Designing Wetlands for Maximum Sedimentation}
 
@@ -371,7 +392,7 @@ The multiplicative nature of biofilm's relationship with ECE, and biofilm's appa
  $v_s$ & settling velocity, cm/s \\
  $C_b$ & constant relating near-bed concentration to depth-averaged concentration, dimensionless \\
  $E_r$ & entrainment rate, dimensionless \\
- $k_c$ & concentration time-decay due to collection, s$^{-1}$ \\
+ $k_c$ & concentration time-decay due to capture, s$^{-1}$ \\
  $I_c$ & collector height density, \SI{}{\metre/\metre\cubed} \\
  $N_c$ & number of collectors, \# \\
  $V$ & test section water volume, \SI{}{\metre\cubed} \\
@@ -400,14 +421,14 @@ The multiplicative nature of biofilm's relationship with ECE, and biofilm's appa
 
 \subsection{Flume Volume}
 
-In order to estimate ECE, we need to know the collection rate for water that is being acted upon by the collectors (i.e., in the test section). This requires scaling up by the ratio between the test section volume (1.95 m $\times$ 0.6 m $\times$ 0.4 m = \SI{0.468}{m^3}) and the water volume of the flume's entire wetted floorplan under experimental conditions (depth = 0.4 m in test section). Because of the flume's irregular floorplan and shape, estimating its water volume theoretically is impractical, and technical documents were calculated at a different water depth, so we made an empirical estimate. 
+In order to estimate ECE, we need to know the particle capture rate for water that is being acted upon by the collectors (i.e., in the test section). This requires scaling up by the ratio between the test section volume (1.95 m $\times$ 0.6 m $\times$ 0.4 m = \SI{0.468}{m^3}) and the water volume of the flume's entire wetted floorplan under experimental conditions (depth = 0.4 m in test section). Because of the flume's irregular floorplan and shape, estimating its water volume theoretically is impractical, and technical documents were calculated at a different water depth, so we made an empirical estimate. 
 
-We drained the flume after an experiment while measuring flow rate at the drain outlet over time, performed polynomial regression (Figure \ref{fig:flumevol}), and calculated a definite integral (Table \ref{tbl:flumevol}) from when draining began to when the part of the flume involved in the experimental flows was empty ($V = \int_{t_{full}}^{t_{empty}}{-\frac{dV}{dt}dt}$). Because polynomials of second order and above fit well and yielded very similar volume estimates, we felt confident using \SI{2.43}{\metre\cubed} as the flume volume in our calculations.
+We drained the flume after an experiment while measuring flow rate at the drain outlet over time, performed polynomial regression (Figure \ref{fig:flumevol}), and calculated a definite integral ($V = \int_{t_{full}}^{t_{empty}}{-\frac{dV}{dt}dt}$) from when draining began to when the part of the flume involved in the experimental flows was empty . Because polynomials of second order and above fit well and yielded very similar volume estimates, we felt confident using \SI{2.43}{\metre\cubed} as the flume volume in our calculations (Table \ref{tbl:flumevol}).
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5in]{../pics/flumevol.png}
+\includegraphics[width=4.7in]{../pics/flumevol.png}
 \caption{Polynomial models predicting the rate at which the flume drained, to be integrated to estimate the volume in circulation during experiments.}
 \label{fig:flumevol}
 \end{figure}
