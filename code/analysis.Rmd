@@ -443,7 +443,8 @@ plotece1 <- final %>%
   scale_y_continuous(labels = scales::percent) +
   labs(y = "Effective Capture Efficiency", x = expression(paste("Collector Reynolds Number (",Re[c]," )")), color = expression(phi[c])) +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        legend.background = element_rect(colour = "black", size = .2))
 
 plotece2 <- final %>%
   filter(dowel_density != "0000") %>%
@@ -455,7 +456,8 @@ plotece2 <- final %>%
   scale_color_manual(values = c("purple","orange","brown")) +
   labs(y = "Effective Capture Efficiency", color = expression(Re[c]), x = expression(paste("Collector Solid Volume Fraction (",phi[c]," )"))) +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        legend.background = element_rect(colour = "black", size = .2))
 
 plotece <- plot_grid(plotece1, plotece2, labels = c("(a)","(b)"), scale = .9, align = "lrtb")
 
@@ -564,6 +566,8 @@ cplot <- c_over_phi %>%
   geom_line(data = c_phi_curve, aes(x = phi, y = C), inherit.aes = FALSE) +
   geom_point(size = 2) +
   theme_bw() +
+  theme(legend.background = element_rect(colour = "black", size = .2),
+        legend.title = element_blank()) +
   labs(x = expression(paste("Collector Solid Volume Fraction (", phi[c], " )" )), color = "", pch = "") +
   scale_color_manual(values = c("darkgreen","red")) +
   scale_x_continuous(labels = scales::percent)
