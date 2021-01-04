@@ -481,7 +481,7 @@ TKEplot <- final %>%
   geom_errorbar() +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "Effective Capture Efficiency", x = expression(paste("Turbulent Kinetic Energy (",mm^{2}/s^{2},")")))
+  labs(y = "Effective Capture Efficiency", x = expression(paste("Turbulence Kinetic Energy (",mm^{2}/s^{2},")")))
 
 ggsave("../pics/tke.png", TKEplot, dpi = 600, height = 3, width = 5)
 
