@@ -412,6 +412,23 @@ final %>%
   scale_y_continuous(labels = function(x) format(x, scientific = TRUE)) +
   labs(y = expression(paste(italic(k[c])," (",s^{-1},")")), x = expression(Re[c]), color = expression(italic(ad))) +
   theme_minimal()
+
+final %>%
+  filter(dowel_density != "0000") %>%
+  ggplot(aes(x = Re, y = k_c/(k_s+k_c), color = as.character(round(ad,5)))) +
+  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  geom_point(position = position_dodge(width = 10)) +
+  scale_color_manual(values = c("blue","green","red")) +
+  theme_minimal()
+
+final %>%
+  filter(dowel_density != "0000") %>%
+  ggplot(aes(x = Re, y = k_s+k_c, color = as.character(round(ad,5)))) +
+  geom_line(lty = "dotted", size = 2, alpha = .3) + 
+  geom_point(position = position_dodge(width = 10)) +
+  scale_color_manual(values = c("blue","green","red")) +
+  theme_minimal()
+
 ```
 
 ### eta
