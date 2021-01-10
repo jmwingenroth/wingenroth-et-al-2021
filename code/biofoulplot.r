@@ -26,7 +26,7 @@ tidypump <- lapply(seq_along(x), function(i) {
     mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
            mvc = as.numeric(mvc), 
            date = as.numeric(names(x)[[i]])) %>%
-    filter(mvc<80, mvc>8) #outliers were removed based on the residual graph
+    filter(mvc<80, mvc>1) #outliers were removed based on the residual graph
 }
 )
 
@@ -203,7 +203,7 @@ final <- final %>%
          deta = deta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
 
 biofilmplot <- final %>%
-  filter(pump_freq == 30, dowel_density!="0000",growth_days!=30) %>%
+  filter(pump_freq == 30, dowel_density!="0000",growth_days!=30) %>% #the 30-day growth period was not controlled correctly, invalidating that run's data
   ggplot(aes(x = growth_days, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = factor(ad, labels = c("0.22%","0.64%","1.17%")))) +
   geom_line() + 
   geom_point() +

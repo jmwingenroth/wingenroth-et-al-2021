@@ -75,7 +75,7 @@ tidypump <- lapply(seq_along(x), function(i) {
     mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
            mvc = as.numeric(mvc), 
            date = as.numeric(names(x)[[i]])) %>%
-    filter(mvc<80, mvc>8) #outliers were removed based on the residual graph
+    filter(mvc<80, mvc>1) #outliers were removed based on the residual graph
   }
   )
 
@@ -303,7 +303,7 @@ ANOVA:
 resids <- tibble(bind_rows(resids_lin)) %>%
   mutate(t = as.numeric(t))
 
-residmod <- aov(data = resids, formula = resid ~ loc * ht)
+residmod <- aov(data = resids, formula = resid ~ loc + ht)
 
 resids %>%
   group_by(ht) %>%
@@ -644,7 +644,7 @@ Each data point has a normal distribution associated with the estimate of eta (d
 
 Models:
 
-```{r message=FALSE, warning=FALSE, eval = FALSE}
+```{r message=FALSE, warning=FALSE}
 
 library(cowplot)
 
