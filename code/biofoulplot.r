@@ -1,4 +1,5 @@
 library(tidyverse)
+library(lme4)
 
 pumpfiles <- list.files("../data/peristaltic pumps/")
 trapfiles <- list.files("../data/sediment traps/")
@@ -97,8 +98,6 @@ mutate_with_error = function(.data, f) {
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # K_TOT
-
-library(lme4)
 
 fits <- lmList(data = pumpfinal, log(mvc)~t | date)
 
