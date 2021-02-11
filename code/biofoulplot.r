@@ -6,12 +6,10 @@ trapfiles <- list.files("../data/sediment traps/")
 pumpdate <- str_sub(pumpfiles,0,6)
 trapdate <- str_sub(trapfiles,0,6)
 
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #PERISTALTIC PUMPS
 
 pumpdata <- lapply(pumpfiles, function(x) read_csv(paste0("../data/peristaltic pumps/",x)))
-
 names(pumpdata) <- pumpdate
 
 x <- pumpdata
@@ -22,12 +20,12 @@ tidypump <- lapply(seq_along(x), function(i) {
          ht = Height,
          t = `time series`,
          mvc = contains("(ppm)")) %>%
-    filter(t < 21) %>% #filter a few timepoints outside the normal window 
-    mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
+  filter(t < 21) %>% #filter a few timepoints outside the normal window 
+  mutate(t = (t-min(t)+1)*300, #convert from timestep to seconds
            mvc = as.numeric(mvc), 
            date = as.numeric(names(x)[[i]])) %>%
-    filter(mvc<80, mvc>8) #outliers were removed based on the residual graph
-}
+    filter(mvc>8, mvc<80) #outliers were removed based on the residual graph
+  }
 )
 
 pump <- bind_rows(tidypump)
@@ -35,13 +33,10 @@ pump <- bind_rows(tidypump)
 pump <- pump %>%
   
   #first 3 runs had starting sediment mass of 100g rather than 200g
-  
   filter(date > 181005) %>%
   
   #we can't use runs without sediment mass
-  
   filter(as.character(date) %in% trapdate)
-
 
 metadata <- read_csv("../data/run_metadata.csv")
 
@@ -51,10 +46,9 @@ pumpfinal <- pump %>%
   filter(date != 190417,
          dowel_density != "0232")
 
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # SEDIMENT TRAPS
-
+                   
 trapdata <- lapply(trapfiles, function(x) read_csv(paste0("../data/sediment traps/",x)))
 
 names(trapdata) <- trapdate
@@ -75,8 +69,7 @@ trap <- bind_rows(tidytrap) %>%
 trapfinal <- left_join(trap, metadata, by = "date") %>%
   filter(date %in% pumpfinal$date)
 
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #ERROR PROPOGATION FUNCTION
 
 mutate_with_error = function(.data, f) {
@@ -102,6 +95,7 @@ mutate_with_error = function(.data, f) {
     mutate_(.dots=exprs)
 }
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # K_TOT
 
 library(lme4)
@@ -132,6 +126,7 @@ fitdata %>%
   labs(y = expression(paste(italic(k[t])," (",s^{-1},")")), x = "Biofilm growth (days)", color = expression(italic(ad))) +
   theme_minimal()
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # K_S
 
 final <- trapfinal %>%
@@ -154,6 +149,7 @@ final %>%
   labs(y = expression(paste(italic(k[s])," (",s^{-1},")")), x = "Biofilm growth (days)", color = expression(italic(ad))) +
   theme_minimal()
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # K_BG
 
 bgvals <- final %>%
@@ -166,6 +162,7 @@ bgvals
 
 final <- left_join(final, bgvals, by = "pump_freq")
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # K_C
 
 final <- final %>%
@@ -182,8 +179,8 @@ final %>%
   labs(y = expression(paste(italic(k[c])," (",s^{-1},")")), x = "Biofilm growth (days)", color = expression(italic(ad))) +
   theme_minimal()
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ETA
-
 
 #temp in flume measured at 22.2C with a calibrated thermometer
 #plugged into https://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html
@@ -202,6 +199,9 @@ final <- final %>%
   mutate(eta = eta * 2.43/(1.95*.4*.6),
          deta = deta * 2.43/(1.95*.4*.6)) # don't forget to correct for time out of test section!
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# PLOT                     
+                     
 biofilmplot <- final %>%
   filter(pump_freq == 30, dowel_density!="0000",growth_days!=30) %>%
   ggplot(aes(x = growth_days, y = eta, ymin = eta - 1.96*deta, ymax = eta + 1.96*deta, color = factor(ad, labels = c("0.22%","0.64%","1.17%")))) +
@@ -214,4 +214,3 @@ biofilmplot <- final %>%
   theme(legend.background = element_rect(colour = "black", size = .2))
 
 ggsave("../pics/biofilm.png",biofilmplot,dpi = 600, width = 7, height = 5)
-
