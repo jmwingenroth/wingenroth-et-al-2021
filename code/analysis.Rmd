@@ -288,28 +288,85 @@ p2 <- residplot(resids_lin, title = "Linear Model")
 p3 <- varplot(resids_exp)
 p4 <- varplot(resids_lin)
 
-
-
 heterosked_plot <- plot_grid(p1, p2, p3, p4, align = "h", labels = c("(a)","(b)","(c)","(d)"), scale = .9)
 
 ggsave("../pics/heterosked.png", heterosked_plot, dpi = 600, height = 5)
 
+#raw data plot
+
+plotstats <- bind_rows(lapply(r2mod,coef)) %>%
+  bind_cols(date = as.numeric(names(r2mod)), r2 = unlist(r2val)) %>%
+  left_join(metadata) %>%
+  rename(int = "(Intercept)", k = t)
+
+rawdataplot <- pumpfinal %>%
+  left_join(plotstats) %>%
+  mutate(pump_freq = factor(pump_freq, labels = c("Re[c] == 66", "Re[c] == 133", "Re[c] == 200")),
+         dowel_density = factor(dowel_density, labels = c("phi[c]==0~'%'", "phi[c] == 0.22~'%'","phi[c] == 0.64~'%'","phi[c] == 1.17~'%'")),
+         pred = exp(int + k * t)) %>%
+  ggplot(aes(x = t/60, y = mvc, label = round(r2,3))) +
+  geom_point() +
+  scale_y_log10(breaks = c(10,30,50)) +
+  scale_x_continuous(breaks = seq(0,100,by = 20)) +
+  facet_grid(pump_freq~dowel_density, labeller = label_parsed) +
+  theme_bw() +
+  theme(strip.text.y.right = element_text(angle = 0)) +
+  geom_line(aes(y = pred), color = "red") +
+  geom_text(aes(x = 40, y = 10), alpha = .02, size = 3.5) +
+  geom_text(aes(x = 16, y = 10.5, label = "R^2"), parse = TRUE, alpha = .02, size = 3.5) +
+  geom_text(aes(x = 25, y = 10, label = "="), alpha = .02, size = 3.5) +
+  labs(y = "Measured Concentration (ppm)", x = "Time (minutes)")
+
+ggsave("../pics/rawdata.png", rawdataplot, dpi = 600, height = 5)
+
 ```
 
-ANOVA:
+ANOVA and conc. profile:
 
 ```{r}
 
 resids <- tibble(bind_rows(resids_lin)) %>%
   mutate(t = as.numeric(t))
 
-residmod <- aov(data = resids, formula = resid ~ loc * ht)
+residmod <- aov(data = resids, formula = resid ~ ht)
 
 resids %>%
   group_by(ht) %>%
   summarise(mean(resid), mean(abs(resid)), n(), sd(resid))
 
 summary(residmod)
+
+library(ggridges)
+
+profdata <- pumpfinal %>%
+  filter(as.numeric(dowel_density)>0) %>%
+  select(date, t, ht, mvc) %>%
+  group_by(date, t) %>%
+  mutate(prop = mvc/mean(mvc))
+
+profmeans <- profdata %>%
+  group_by(ht) %>%
+  summarise(mean = round(mean(prop),6), n = n())
+
+profplot <- profdata %>%
+  ggplot(aes(x = prop, y = ht, group = factor(ht), fill = factor(ht))) +
+  geom_density_ridges(alpha = .7, scale = 1.5) +
+  theme_bw() +
+  xlim(.75,1.25) +
+  geom_vline(xintercept = 1, lty = 3) +
+  geom_segment(data = profmeans, aes(x= mean, y = ht, xend = mean, yend = ht + 15, color = factor(ht)), inherit.aes = FALSE, lty = 2, size = .6, alpha = .7) +
+  geom_point(data = profmeans, aes(x = mean, y = ht)) +
+  scale_color_hue(l = 30) +
+  geom_text(data = profmeans, aes(x = .81, y = ht-2, label = paste0("z=",ht,",       ",mean))) +
+  geom_text(data = profmeans, aes(x = .792, y = ht-2, label = "bar(x)"), parse = TRUE) +
+  geom_text(data = profmeans, aes(x = .8025, y = ht-2, label = "=")) +
+  geom_text(data = profmeans, aes(x = .888- c(.003,0,0), y = ht-2, label = paste0(", n=",n))) +
+  scale_y_continuous(breaks = c(0,5,14,27,40), minor_breaks = NULL, limits = c(0,45)) +
+  theme(legend.position = "none") +
+  labs(x = "Normalized Concentration Measurement", y = "Height (cm)", fill = "Height (cm)") +
+  coord_cartesian(clip = "off")
+
+ggsave("../pics/profplot.png",profplot,dpi = 600, height = 3, width = 7)
 
 ```
 
@@ -497,7 +554,7 @@ TKEplot <- final %>%
   geom_point() +
   geom_errorbar() +
   theme_bw() +
-  scale_y_continuous(labels = scales::percent) +
+  scale_y_log10(labels = scales::percent) +
   labs(y = "Effective Capture Efficiency", x = expression(paste("Turbulence Kinetic Energy (",mm^{2}/s^{2},")")))
 
 ggsave("../pics/tke.png", TKEplot, dpi = 600, height = 3, width = 5)
