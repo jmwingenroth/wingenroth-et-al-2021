@@ -35,6 +35,7 @@ library(tidyverse)
 library(broom)
 library(cowplot)
 library(lme4)
+library(signs)
 
 ```
 
@@ -283,8 +284,10 @@ dataset %>%
 }
 
 
-p1 <- residplot(resids_exp, title = "Exponential Model")
-p2 <- residplot(resids_lin, title = "Linear Model")
+p1 <- residplot(resids_exp, title = "Exponential Model") +
+  scale_y_continuous(labels = signs_format())
+p2 <- residplot(resids_lin, title = "Linear Model")+
+  scale_y_continuous(labels = signs_format(accuracy = .1))
 p3 <- varplot(resids_exp)
 p4 <- varplot(resids_lin)
 
@@ -701,7 +704,7 @@ Each data point has a normal distribution associated with the estimate of eta (d
 
 Models:
 
-```{r message=FALSE, warning=FALSE, eval = FALSE}
+```{r message=FALSE, warning=FALSE}
 
 library(cowplot)
 
@@ -751,7 +754,7 @@ lmsre
 
 Plots:
 
-```{r message=FALSE, warning=FALSE, eval = FALSE}
+```{r message=FALSE, warning=FALSE}
 
 p_phi <- lmsphi %>%
   ggplot(aes(x = paste0(100*as.numeric(phi),"%"), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
@@ -760,9 +763,9 @@ p_phi <- lmsphi %>%
   geom_hline(yintercept = 0, lty = 2) +
   theme_bw() +
   geom_text(aes(y = avg + 1.96*sd + 1, label = c("*",NA,"*")), fontface = "bold", size = 5) +
-  ylim(-3,1.5) +
   xlab(expression(paste("Collector Solid Volume Fraction (",phi[c]," )"))) +
-  ylab(expression(beta[log(Re[c])]))
+  ylab(expression(beta[log(Re[c])])) +
+  scale_y_continuous(labels = signs_format(accuracy = 1), limits = c(-3,1.5))
 
 p_re <- lmsre %>%
   ggplot(aes(x = as.factor(round(as.numeric(Re),0)), y = avg, ymin = avg-1.96*sd, ymax = avg+1.96*sd)) +
@@ -771,9 +774,9 @@ p_re <- lmsre %>%
   geom_hline(yintercept = 0, lty = 2) +
   theme_bw() +
   geom_text(aes(y = avg + 1.96*sd + 1, label = c(NA,"*","*")), fontface = "bold", size = 5) +
-  ylim(-3,1.5) +
   xlab(expression(paste("Collector Reynolds Number (",Re[c]," )"))) +
-  ylab(expression(beta[log(phi[c])]))
+  ylab(expression(beta[log(phi[c])])) +
+  scale_y_continuous(labels = signs_format(accuracy = 1), limits = c(-3,1.5))
 
 monteplot <- plot_grid(p_re, p_phi, labels = c("(a)","(b)"), scale = .9) 
 
