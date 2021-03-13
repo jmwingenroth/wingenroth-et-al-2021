@@ -34,7 +34,7 @@ names(estimates) <- c("linear", "quadratic", "cubic", "4th order")
 
 time2 <- (time - min(time))*3600
 
-plot(time2, flow, xlab = "Time (s)", ylab = "Flow (mL/s)")
+plot(time2, flow, xlab = "Time (s)", ylab = "Flow (mL/s)", xaxt = "n")
 lines(time2, coef(fits[[1]])[1] + coef(fits[[1]])[2]*time)
 lines(time2, coef(fits[[2]])[1] + coef(fits[[2]])[2]*time + coef(fits[[2]])[3]*(time^2), col = "red")
 lines(time2, coef(fits[[3]])[1] + coef(fits[[3]])[2]*time + coef(fits[[3]])[3]*(time^2) + coef(fits[[3]])[4]*(time^3), col = "green")
@@ -44,5 +44,6 @@ legend("bottomleft",
        col = c("black","black","red","green", "blue"),
        pch = c(1,NA,NA,NA,NA),
        lty = c(NA,1,1,1,1))
+axis(1, at = seq(0,20000,by = 5000), labels = formatC(seq(0,20000,by = 5000), big.mark = ",", format = "d"))
 
 estimates
